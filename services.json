@@ -1,0 +1,17 @@
+[
+  {
+    "name": "Heat-pump installation",
+    "description": "Residential heat-pump installation within the company's authorized scope.",
+    "published": true
+  },
+  {
+    "name": "System replacement",
+    "description": "Replacement planning and installation for eligible residential heat-pump systems.",
+    "published": true
+  },
+  {
+    "name": "System planning",
+    "description": "Project assessment and equipment recommendations based on the home and customer's goals.",
+    "published": true
+  }
+]
