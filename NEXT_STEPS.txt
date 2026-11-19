@@ -1,0 +1,13 @@
+BULL MOOSE CLIMATE SYSTEMS — FIRST WEBSITE DRAFT
+
+This is a first visual/site-structure draft, not a production launch.
+Do not deploy publicly until contact delivery, admin authentication, verified product specs,
+and final branding have been completed.
+
+Next:
+1. Review the design and content.
+2. Add the actual company logo and business phone number.
+3. Confirm service area wording.
+4. Build and secure the private editing dashboard.
+5. Connect form delivery.
+6. Upload the completed project to GitHub and deploy through Cloudflare Pages.
