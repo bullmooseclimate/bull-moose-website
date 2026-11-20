@@ -1,0 +1,78 @@
+{
+  "business": {
+    "name": "Bull Moose Climate Systems",
+    "email": "bullmooseclimate@gmail.com",
+    "phone": "",
+    "serviceArea": "Turner, Auburn, Lewiston, and surrounding communities in Maine"
+  },
+  "settings": {
+    "slideInterval": 6500,
+    "autoRotate": true,
+    "formspreeEndpoint": ""
+  },
+  "slides": [
+    {
+      "id": "hvac",
+      "label": "HVAC Solutions",
+      "eyebrow": "Home comfort, thoughtfully planned",
+      "title": "Comfort starts at home.",
+      "description": "Residential heat-pump solutions planned around your home, your comfort, and the way you live.",
+      "image": "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1800&q=85",
+      "buttonText": "Explore HVAC solutions",
+      "link": "#services",
+      "visible": true
+    },
+    {
+      "id": "efficiency",
+      "label": "Efficiency Maine",
+      "eyebrow": "Make your next step easier",
+      "title": "Explore Efficiency Maine incentives.",
+      "description": "Learn about available heat-pump incentives and financing, and what to consider before starting a project.",
+      "image": "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1800&q=85",
+      "buttonText": "Learn about incentives",
+      "link": "/efficiency-maine.html",
+      "visible": true
+    },
+    {
+      "id": "maintenance",
+      "label": "Maintenance & Cleaning",
+      "eyebrow": "Protect your comfort",
+      "title": "Keep your system performing.",
+      "description": "Learn about heat-pump care, cleaning, and maintenance considerations for dependable operation.",
+      "image": "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=1800&q=85",
+      "buttonText": "Maintenance information",
+      "link": "#maintenance",
+      "visible": true
+    }
+  ],
+  "services": [
+    {
+      "title": "Heat-pump installation",
+      "description": "Residential heat-pump installation and retrofit solutions, planned for your home's layout and comfort needs."
+    },
+    {
+      "title": "Ducted heat-pump systems",
+      "description": "Ducted system options for homes where a central distribution approach makes sense."
+    },
+    {
+      "title": "System consultation",
+      "description": "A practical conversation about your home, comfort goals, and possible system options."
+    }
+  ],
+  "products": [],
+  "projects": [],
+  "testimonials": [],
+  "maintenance": {
+    "title": "A little care goes a long way",
+    "description": "Keep filters clean and follow the manufacturer's maintenance guidance. Ask us about maintenance and cleaning options."
+  },
+  "efficiency": {
+    "title": "Efficiency Maine information",
+    "description": "Program details, eligibility, incentives, and contractor requirements can change. Confirm current information directly with Efficiency Maine.",
+    "url": "https://www.efficiencymaine.com/"
+  },
+  "about": {
+    "title": "Local service. Home-first thinking.",
+    "description": "Bull Moose Climate Systems focuses on residential heat-pump solutions in Maine. We take the time to understand the home and explain the options."
+  }
+}
