@@ -1,15 +1,57 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Residential heat-pump solutions from Bull Moose Climate Systems in Maine."><title>Bull Moose Climate Systems</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="/styles.css"></head><body>
-<header class="header"><a href="/" class="brand"><img src="/assets/logo.jpg" alt="Bull Moose Climate Systems logo"></a><button class="menu" aria-label="Toggle menu">☰</button><nav><a href="#services">Services</a><a href="#products">Heat pumps</a><a href="/efficiency-maine.html">Efficiency Maine</a><a href="#calculator">BTU calculator</a><a href="#about">About</a><a class="cta" href="#contact">Get an estimate</a></nav></header>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Residential heat-pump solutions from Bull Moose Climate Systems in Maine.">
+<title>Bull Moose Climate Systems</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<header class="header">
+  <a href="/" class="brand"><img src="/assets/logo.jpg" alt="Bull Moose Climate Systems logo"></a>
+  <button class="menu" aria-label="Toggle menu" aria-expanded="false">☰</button>
+  <nav>
+    <a href="#services">Services</a><a href="#products">Heat pumps</a>
+    <a href="/efficiency-maine.html">Efficiency Maine</a><a href="#projects">Projects</a>
+    <a href="#about">About</a><a class="cta" href="#contact">Get an estimate</a>
+  </nav>
+</header>
 <main>
-<section class="hero"><div class="hero-bg" id="heroBg"></div><div class="hero-overlay"></div><div class="hero-copy"><p class="eyebrow" id="slideEyebrow"></p><h1 id="slideTitle">Comfort starts at home.</h1><p id="slideDescription"></p><a class="button light" id="slideLink" href="#services">Explore solutions</a><div class="controls"><button id="prev" aria-label="Previous slide">←</button><span id="slideCount">01 / 03</span><button id="next" aria-label="Next slide">→</button><button id="pause" aria-label="Pause slideshow">Ⅱ</button></div></div></section>
-<div class="topic-nav" id="topicNav" aria-label="Featured topics"></div>
+<section class="hero" id="hero" aria-label="Featured topics">
+  <div class="hero-bg" id="heroBg"></div><div class="hero-overlay"></div>
+  <div class="hero-copy">
+    <p class="eyebrow" id="slideEyebrow"></p><h1 id="slideTitle">Comfort starts at home.</h1>
+    <p id="slideDescription"></p><a class="button light" id="slideLink" href="#services">Explore solutions</a>
+  </div>
+</section>
+<nav class="topic-nav" id="topicNav" aria-label="Featured categories"></nav>
+<section class="category-content section" id="categoryContent" aria-live="polite">
+  <div class="heading"><p class="eyebrow" id="categoryEyebrow">Explore</p><h2 id="categoryHeading">Solutions for your home</h2><p id="categoryDescription"></p></div>
+  <div class="category-items" id="categoryItems"></div>
+</section>
 <section class="intro section"><p class="eyebrow">Bull Moose Climate Systems</p><h2>Thoughtful heating and cooling for the place that matters most.</h2><p>Residential heat-pump solutions with clear communication and a focus on your home.</p></section>
 <section class="section white" id="services"><div class="heading"><p class="eyebrow">What we do</p><h2>Comfort solutions for your home</h2></div><div class="cards" id="servicesList"></div></section>
 <section class="section products" id="products"><div class="heading"><p class="eyebrow">Equipment options</p><h2>Heat-pump systems</h2><p>Product information can be added and maintained as details are confirmed.</p></div><div class="cards" id="productsList"></div></section>
-<section class="section calculator-wrap" id="calculator"><div><p class="eyebrow">A helpful starting point</p><h2>Estimate your home's heating needs.</h2><p>This quick estimator provides a preliminary range—not a Manual J load calculation or equipment selection.</p></div><form id="btuForm" class="panel"><label>Area to heat (sq. ft.)<input id="sqft" type="number" min="100" max="10000" value="1200" required></label><label>Ceiling height<select id="ceiling"><option value="1">8 ft</option><option value="1.08">9 ft</option><option value="1.16">10 ft</option><option value="1.25">11–12 ft</option></select></label><label>Insulation<select id="insulation"><option value="1.35">Poor / drafty</option><option value="1.1" selected>Average</option><option value=".9">Good</option></select></label><label>Window exposure<select id="windows"><option value=".9">Low</option><option value="1" selected>Average</option><option value="1.12">High / many large windows</option></select></label><button class="button" type="submit">Estimate BTU range</button><div id="btuResult" class="result" aria-live="polite">Enter your home's details to see a rough estimate.</div><p class="fine">Rule-of-thumb only. Actual load depends on local design temperature, air leakage, insulation, windows, room layout, and more. A room-by-room load calculation is required before equipment sizing.</p></form></section>
+<section class="section calculator-wrap" id="calculator"><div><p class="eyebrow">A helpful starting point</p><h2>Estimate your home's heating needs.</h2><p>This quick estimator provides a preliminary range—not a Manual J load calculation or equipment selection.</p></div>
+<form id="btuForm" class="panel">
+<label>Area to heat (sq. ft.)<input id="sqft" type="number" min="100" max="10000" value="1200" required></label>
+<label>Ceiling height<select id="ceiling"><option value="1">8 ft</option><option value="1.08">9 ft</option><option value="1.16">10 ft</option><option value="1.25">11–12 ft</option></select></label>
+<label>Insulation<select id="insulation"><option value="1.35">Poor / drafty</option><option value="1.1" selected>Average</option><option value=".9">Good</option></select></label>
+<label>Window exposure<select id="windows"><option value=".9">Low</option><option value="1" selected>Average</option><option value="1.12">High / many large windows</option></select></label>
+<button class="button" type="submit">Estimate BTU range</button><div id="btuResult" class="result" aria-live="polite">Enter your home's details to see a rough estimate.</div>
+<p class="fine">Rule-of-thumb only. Actual load depends on local design temperature, air leakage, insulation, windows, room layout, and more. A room-by-room load calculation is required before equipment sizing.</p>
+</form></section>
 <section class="section white split" id="maintenance"><div class="split-photo"></div><div><p class="eyebrow">Care for your system</p><h2 id="maintenanceTitle"></h2><p id="maintenanceText"></p><a href="#contact" class="textlink">Ask about maintenance →</a></div></section>
-<section class="section gallery"><div class="heading"><p class="eyebrow">Recent work</p><h2>Projects and installations</h2></div><div class="cards" id="projectsList"></div></section>
+<section class="section gallery" id="projects"><div class="heading"><p class="eyebrow">Recent work</p><h2>Projects and installations</h2></div><div class="cards" id="projectsList"></div></section>
 <section class="section reviews white" id="reviews"><div class="heading"><p class="eyebrow">Customer experiences</p><h2>What customers say</h2></div><div class="cards" id="reviewsList"></div></section>
 <section class="section about" id="about"><p class="eyebrow">A local business with a home-first approach</p><h2 id="aboutTitle"></h2><p id="aboutText"></p></section>
-<section class="section contact" id="contact"><div><p class="eyebrow">Start a conversation</p><h2>Tell us about your home.</h2><p>Share a little about your project and we'll follow up.</p><p id="contactDetails"></p></div><form id="contactForm" class="contact-form"><label>Your name<input name="name" required></label><label>Email<input name="email" type="email" required></label><label>Phone (optional)<input name="phone" type="tel"></label><label>What can we help with?<textarea name="message" rows="4" required></textarea></label><input type="hidden" name="btuEstimate" id="btuHidden"><button class="button" type="submit">Send estimate request</button><p class="fine" id="formNote">Your email app may open to send this request.</p></form></section>
-</main><footer><img src="/assets/logo.jpg" alt="Bull Moose Climate Systems"><p>Residential heat-pump solutions in Maine.</p><small>© <span id="year"></span> Bull Moose Climate Systems</small></footer><script src="/script.js"></script></body></html>
+<section class="section contact" id="contact"><div><p class="eyebrow">Start a conversation</p><h2>Tell us about your home.</h2><p>Share a little about your project and we'll follow up.</p><p id="contactDetails"></p></div>
+<form id="contactForm" class="contact-form"><label>Your name<input name="name" required></label><label>Email<input name="email" type="email" required></label><label>Phone (optional)<input name="phone" type="tel"></label><label>What can we help with?<textarea name="message" rows="4" required></textarea></label><input type="hidden" name="btuEstimate" id="btuHidden"><button class="button" type="submit">Send estimate request</button><p class="fine" id="formNote">Your email app may open to send this request.</p></form></section>
+</main>
+<footer><img src="/assets/logo.jpg" alt="Bull Moose Climate Systems"><p>Residential heat-pump solutions in Maine.</p><small>© <span id="year"></span> Bull Moose Climate Systems LLC</small></footer>
+<script src="/script.js"></script>
+</body></html>
