@@ -1,15 +1,16 @@
 
 (() => {
   const pageFor = {
-    "heat-pumps": "/heat-pumps.html",
-    "ducted-ductless": "/heat-pumps.html",
-    "installations": "/installation.html",
-    "efficiency-maine": "/efficiency-maine.html",
-    "maintenance": "/cleaning-maintenance.html"
+    "#heat-pumps": "/heat-pumps.html",
+    "#ducted-ductless": "/heat-pumps.html",
+    "#installations": "/installation.html",
+    "https://www.efficiencymaine.com/": "/efficiency-maine.html",
+    "#maintenance": "/cleaning-maintenance.html"
   };
 
-  const nav = `
+  const navigation = `
     <a href="/">Home</a>
+
     <div class="bm-nav-group">
       <a href="/heat-pumps.html">Heat Pumps <span>⌄</span></a>
       <div class="bm-dropdown">
@@ -19,6 +20,7 @@
         <a href="/multi-zone-systems.html">Multi-Zone Systems</a>
       </div>
     </div>
+
     <a href="/installation.html">Installation</a>
     <a href="/cleaning-maintenance.html">Cleaning &amp; Maintenance</a>
     <a href="/efficiency-maine.html">Efficiency Maine</a>
@@ -26,95 +28,82 @@
     <a class="cta" href="/contact.html">Get an estimate</a>
   `;
 
+  function getDestination() {
+    const slideLink = document.getElementById("slideLink");
+    if (!slideLink) return "/contact.html";
+
+    const originalLink = slideLink.getAttribute("href") || "";
+
+    return pageFor[originalLink] || "/contact.html";
+  }
+
+  function updateExploreLink() {
+    const categoryItems = document.getElementById("categoryItems");
+    const slideLink = document.getElementById("slideLink");
+
+    if (!categoryItems || !slideLink) return;
+
+    const destination = getDestination();
+    const label = slideLink.textContent.trim();
+
+    let explore = categoryItems.querySelector(".bm-category-page-link");
+
+    if (!explore) {
+      explore = document.createElement("div");
+      explore.className = "bm-category-page-link";
+
+      const link = document.createElement("a");
+      link.className = "button";
+
+      explore.appendChild(link);
+      categoryItems.appendChild(explore);
+    }
+
+    const link = explore.querySelector("a");
+
+    const topic = {
+      "/heat-pumps.html": "Heat Pumps",
+      "/installation.html": "Installation",
+      "/efficiency-maine.html": "Efficiency Maine",
+      "/cleaning-maintenance.html": "Cleaning & Maintenance"
+    };
+
+    link.href = destination;
+    link.textContent = `Explore ${topic[destination] || label || "this topic"}`;
+  }
+
   function install() {
     const headerNav = document.querySelector(".header nav");
 
-    if (headerNav) {
+    if (headerNav && !headerNav.dataset.bmInstalled) {
+      headerNav.innerHTML = navigation;
       headerNav.classList.add("bm-main-nav");
-      headerNav.innerHTML = nav;
-    }
-
-    const menu = document.querySelector(".menu");
-
-    if (menu && headerNav && !menu.dataset.bmBound) {
-      menu.dataset.bmBound = "1";
-
-      menu.addEventListener("click", () => {
-        headerNav.classList.toggle("open");
-
-        menu.setAttribute(
-          "aria-expanded",
-          String(headerNav.classList.contains("open"))
-        );
-      });
+      headerNav.dataset.bmInstalled = "true";
     }
 
     const slideLink = document.getElementById("slideLink");
-
-    function updateSlideLink() {
-      if (!slideLink) return;
-
-      const category =
-        window.data?.categories?.[window.activeCategory];
-
-      if (category) {
-        slideLink.href =
-          pageFor[category.id] || "/contact.html";
-      }
-    }
+    const categoryItems = document.getElementById("categoryItems");
 
     if (slideLink && !slideLink.dataset.bmObserved) {
-      slideLink.dataset.bmObserved = "1";
+      slideLink.dataset.bmObserved = "true";
 
-      new MutationObserver(updateSlideLink).observe(
-        slideLink,
-        {
-          attributes: true,
-          childList: true,
-          characterData: true,
-          subtree: true
-        }
-      );
-
-      updateSlideLink();
+      new MutationObserver(updateExploreLink).observe(slideLink, {
+        attributes: true,
+        childList: true,
+        characterData: true,
+        subtree: true
+      });
     }
-
-    const categoryItems =
-      document.getElementById("categoryItems");
 
     if (categoryItems && !categoryItems.dataset.bmObserved) {
-      categoryItems.dataset.bmObserved = "1";
+      categoryItems.dataset.bmObserved = "true";
 
-      function addPageButton() {
-        categoryItems
-          .querySelector(".bm-category-page-link")
-          ?.remove();
-
-        const category =
-          window.data?.categories?.[window.activeCategory];
-
-        if (!category) return;
-
-        const wrapper = document.createElement("div");
-        wrapper.className = "bm-category-page-link";
-
-        const link = document.createElement("a");
-        link.className = "button";
-        link.href = pageFor[category.id] || "/contact.html";
-        link.textContent =
-          `Explore ${category.label || "this topic"}`;
-
-        wrapper.appendChild(link);
-        categoryItems.appendChild(wrapper);
-      }
-
-      new MutationObserver(addPageButton).observe(
-        categoryItems,
-        { childList: true }
-      );
-
-      setTimeout(addPageButton, 250);
+      new MutationObserver(updateExploreLink).observe(categoryItems, {
+        childList: true
+      });
     }
+
+    updateExploreLink();
   }
 
   if (document.readyState === "loading") {
@@ -122,6 +111,5 @@
   } else {
     install();
   }
-
-  setTimeout(install, 300);
 })();
+
