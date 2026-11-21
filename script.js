@@ -2,6 +2,7 @@
 let data, current = 0, timer = null, paused = false;
 let pointerStart = null, wasRunningBeforePress = false;
 let activeCategory = 0, transitionTimer = null;
+let slideChangeToken = 0;
 
 const $ = id => document.getElementById(id);
 
@@ -140,7 +141,7 @@ function renderCategoryContent(category) {
     : '<p class="category-empty">More information and photos can be added here.</p>';
 }
 
-function showSlide(i) {
+async function showSlide(i) {
   const list = slides();
   if (!list.length) return;
 
@@ -149,13 +150,47 @@ function showSlide(i) {
 
   const s = list[current];
   const heroBg = $('heroBg');
+  const heroCopy = document.querySelector('.hero-copy');
+  const categoryContent = $('categoryContent');
+  const token = ++slideChangeToken;
 
   clearTimeout(transitionTimer);
-  heroBg.classList.add('photo-changing');
 
-  transitionTimer = setTimeout(() => {
-    heroBg.style.backgroundImage =
-      s.image ? `url("${s.image}")` : 'none';
+  // Preload the incoming image before starting the crossfade.
+  if (s.image) {
+    const preload = new Image();
+    preload.src = s.image;
+
+    try {
+      await preload.decode();
+    } catch (e) {
+      // Continue if the image cannot be decoded.
+    }
+  }
+
+  // Prevent an older transition from overwriting a newer selection.
+  if (token !== slideChangeToken) return;
+
+  // Place the incoming image on the fading overlay.
+  heroBg.style.setProperty(
+    '--next-slide-image',
+    s.image ? `url("${s.image}")` : 'none'
+  );
+
+  // Fade the image, text, and category content.
+  heroBg.classList.add('photo-changing');
+  heroCopy.classList.add('slide-copy-changing');
+  categoryContent.classList.add('content-changing');
+
+  // Update the selected button with a smooth color transition.
+  $('topicNav').querySelectorAll('.topic-button').forEach((button, index) => {
+    button.classList.toggle('active', index === current);
+    button.setAttribute('aria-pressed', String(index === current));
+  });
+
+  // Update text while it is faded out.
+  setTimeout(() => {
+    if (token !== slideChangeToken) return;
 
     $('slideEyebrow').textContent = s.eyebrow || '';
     $('slideTitle').textContent = s.title || '';
@@ -168,13 +203,22 @@ function showSlide(i) {
 
     renderCategoryContent(s);
 
-    $('topicNav').querySelectorAll('.topic-button').forEach((button, index) => {
-      button.classList.toggle('active', index === current);
-      button.setAttribute('aria-pressed', String(index === current));
-    });
+    heroCopy.classList.remove('slide-copy-changing');
+    categoryContent.classList.remove('content-changing');
+  }, 300);
 
+  // Finish the image crossfade after 650 milliseconds.
+  transitionTimer = setTimeout(() => {
+    if (token !== slideChangeToken) return;
+
+    // Make the incoming image the permanent background.
+    heroBg.style.backgroundImage =
+      s.image ? `url("${s.image}")` : 'none';
+
+    // Remove the temporary overlay smoothly.
     heroBg.classList.remove('photo-changing');
-  }, 110);
+    heroBg.style.removeProperty('--next-slide-image');
+  }, 650);
 }
 
 function stop() {
