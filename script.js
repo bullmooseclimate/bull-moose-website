@@ -1,7 +1,6 @@
-
 let data, current = 0, timer = null, paused = false;
 let pointerStart = null, wasRunningBeforePress = false;
-let activeCategory = 0;
+let activeCategory = 0, transitionTimer = null;
 
 const $ = id => document.getElementById(id);
 
@@ -148,25 +147,48 @@ function showSlide(i) {
   activeCategory = current;
 
   const s = list[current];
+  const heroBg = $('heroBg');
 
-  $('heroBg').style.backgroundImage =
-    s.image ? `url("${s.image}")` : 'none';
+  const fadeElements = [
+    heroBg,
+    $('slideEyebrow'),
+    $('slideTitle'),
+    $('slideDescription'),
+    $('slideLink'),
+    $('categoryEyebrow'),
+    $('categoryHeading'),
+    $('categoryDescription'),
+    $('categoryItems')
+  ];
 
-  $('slideEyebrow').textContent = s.eyebrow || '';
-  $('slideTitle').textContent = s.title || '';
-  $('slideDescription').textContent = s.description || '';
+  clearTimeout(transitionTimer);
 
-  $('slideLink').textContent = s.buttonText || 'Learn more';
-  $('slideLink').href = s.link || '#contact';
-  $('slideLink').style.display =
-    s.buttonText || s.link ? 'inline-block' : 'none';
-
-  renderCategoryContent(s);
+  fadeElements.forEach(el => el.classList.add('smooth-fade-out'));
 
   $('topicNav').querySelectorAll('.topic-button').forEach((button, index) => {
     button.classList.toggle('active', index === current);
     button.setAttribute('aria-pressed', String(index === current));
   });
+
+  transitionTimer = setTimeout(() => {
+    heroBg.style.backgroundImage =
+      s.image ? `url("${s.image}")` : 'none';
+
+    $('slideEyebrow').textContent = s.eyebrow || '';
+    $('slideTitle').textContent = s.title || '';
+    $('slideDescription').textContent = s.description || '';
+
+    $('slideLink').textContent = s.buttonText || 'Learn more';
+    $('slideLink').href = s.link || '#contact';
+    $('slideLink').style.display =
+      s.buttonText || s.link ? 'inline-block' : 'none';
+
+    renderCategoryContent(s);
+
+    requestAnimationFrame(() => {
+      fadeElements.forEach(el => el.classList.remove('smooth-fade-out'));
+    });
+  }, 180);
 }
 
 function stop() {
@@ -286,8 +308,9 @@ $('contactForm').onsubmit = async e => {
     [...fd.entries()].map(([k, v]) => `${k}: ${v}`).join('\n')
   );
 
+  const email = data.business?.email || '';
   location.href =
-    `mailto:${data.business.email}?subject=${subject}&body=${body}`;
+    `mailto:${email}?subject=${subject}&body=${body}`;
 };
 
 document.querySelector('.menu').onclick = () => {
