@@ -1,6 +1,7 @@
+
 let data, current = 0, timer = null, paused = false;
 let pointerStart = null, wasRunningBeforePress = false;
-let activeCategory = 0, transitionTimer = null;
+let activeCategory = 0;
 
 const $ = id => document.getElementById(id);
 
@@ -149,46 +150,24 @@ function showSlide(i) {
   const s = list[current];
   const heroBg = $('heroBg');
 
-  const fadeElements = [
-    heroBg,
-    $('slideEyebrow'),
-    $('slideTitle'),
-    $('slideDescription'),
-    $('slideLink'),
-    $('categoryEyebrow'),
-    $('categoryHeading'),
-    $('categoryDescription'),
-    $('categoryItems')
-  ];
+  heroBg.style.backgroundImage =
+    s.image ? `url("${s.image}")` : 'none';
 
-  clearTimeout(transitionTimer);
+  $('slideEyebrow').textContent = s.eyebrow || '';
+  $('slideTitle').textContent = s.title || '';
+  $('slideDescription').textContent = s.description || '';
 
-  fadeElements.forEach(el => el.classList.add('smooth-fade-out'));
+  $('slideLink').textContent = s.buttonText || 'Learn more';
+  $('slideLink').href = s.link || '#contact';
+  $('slideLink').style.display =
+    s.buttonText || s.link ? 'inline-block' : 'none';
+
+  renderCategoryContent(s);
 
   $('topicNav').querySelectorAll('.topic-button').forEach((button, index) => {
     button.classList.toggle('active', index === current);
     button.setAttribute('aria-pressed', String(index === current));
   });
-
-  transitionTimer = setTimeout(() => {
-    heroBg.style.backgroundImage =
-      s.image ? `url("${s.image}")` : 'none';
-
-    $('slideEyebrow').textContent = s.eyebrow || '';
-    $('slideTitle').textContent = s.title || '';
-    $('slideDescription').textContent = s.description || '';
-
-    $('slideLink').textContent = s.buttonText || 'Learn more';
-    $('slideLink').href = s.link || '#contact';
-    $('slideLink').style.display =
-      s.buttonText || s.link ? 'inline-block' : 'none';
-
-    renderCategoryContent(s);
-
-    requestAnimationFrame(() => {
-      fadeElements.forEach(el => el.classList.remove('smooth-fade-out'));
-    });
-  }, 700);
 }
 
 function stop() {
