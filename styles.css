@@ -17,7 +17,7 @@ nav a{text-decoration:none;font-size:12px;font-weight:600}
 .hero-bg::before{content:"";position:absolute;inset:0;background-image:var(--next-slide-image);background-size:cover;background-position:center;opacity:0;transition:opacity .65s ease}
 .hero-bg.photo-changing::before{opacity:1}
 .hero-overlay{background:linear-gradient(90deg,rgba(20,25,25,.76),rgba(20,25,25,.25) 72%,rgba(20,25,25,.05))}
-.hero-copy{position:relative;z-index:1;max-width:660px;margin-left:clamp(22px,9vw,135px);padding:38px 22px;pointer-events:none;transition:opacity .3s ease,transform .3s ease}
+.hero-copy{position:relative;z-index:1;max-width:660px;margin-left:clamp(22px,9vw,135px);padding:38px 22px;pointer-events:none;opacity:1;transition:opacity .4s ease,transform .4s ease}
 .hero-copy.slide-copy-changing{opacity:0;transform:translateY(8px)}
 .hero-copy a{pointer-events:auto}
 .eyebrow{text-transform:uppercase;letter-spacing:.17em;font-size:10px;font-weight:700;color:#286b9b}
