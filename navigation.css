@@ -1,6 +1,3 @@
-
-/* Bull Moose Climate Systems navigation */
-
 .header {
   position: relative;
   z-index: 100;
@@ -65,7 +62,6 @@
 .bm-dropdown a {
   display: block;
   padding: 11px 12px;
-  white-space: nowrap;
   text-decoration: none;
   font-size: 12px;
   font-weight: 600;
@@ -76,8 +72,6 @@
   background: #eef4f7;
   color: #1e557d;
 }
-
-/* Dedicated page content */
 
 .bm-page-hero {
   background: #ebe8df;
@@ -139,8 +133,38 @@
   line-height: 1.7;
 }
 
-.bm-page-card a {
+.bm-page-link {
+  display: inline-block;
+  margin-top: 10px;
+  color: #245b80;
+  text-decoration: none;
+  font-size: 13px;
   font-weight: 600;
+}
+
+.bm-action {
+  display: inline-block;
+  background: #245b80;
+  color: #fff;
+  padding: 13px 24px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.bm-action:hover {
+  background: #183f5b;
+}
+
+.bm-action-light {
+  background: #fff;
+  color: #245b80;
+}
+
+.bm-action-light:hover {
+  background: #eaf1f5;
+  color: #183f5b;
 }
 
 .bm-page-cta {
@@ -160,7 +184,26 @@
   color: #ddd;
 }
 
-/* Mobile navigation */
+.bm-footer {
+  text-align: center;
+  padding: 35px 20px;
+  background: #f5f3ee;
+  color: #625f58;
+  font-size: 13px;
+}
+
+.bm-footer img {
+  display: block;
+  width: 180px;
+  max-width: 65%;
+  height: auto;
+  margin: 0 auto 12px;
+}
+
+.bm-footer small {
+  display: block;
+  margin-top: 18px;
+}
 
 @media (max-width: 760px) {
   .header nav.bm-main-nav {
@@ -207,10 +250,6 @@
     border: 0;
     border-radius: 0;
     padding: 0 0 8px 14px;
-  }
-
-  .bm-dropdown a {
-    padding: 11px 12px;
   }
 
   .bm-page-hero {
