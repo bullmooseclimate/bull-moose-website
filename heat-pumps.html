@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Heat Pumps | Bull Moose Climate Systems</title>
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/navigation.css">
+</head>
+<body>
+
+  <header class="header">
+    <a href="/" class="brand">
+      <img src="/assets/logo.jpg" alt="Bull Moose Climate Systems">
+    </a>
+    <button class="menu" aria-label="Toggle menu">☰</button>
+    <nav aria-label="Main navigation"></nav>
+  </header>
+
+  <main>
+    <section class="bm-page-hero">
+      <p class="eyebrow">Home comfort solutions</p>
+      <h1>Heat Pumps for Your Home</h1>
+      <p>Efficient heating and cooling designed around your home's layout, comfort needs, and budget.</p>
+      <a class="bm-action" href="/contact.html">Request an Estimate</a>
+    </section>
+
+    <section class="bm-page-content">
+      <div class="bm-page-grid">
+
+        <article class="bm-page-card">
+          <h2>Ductless Heat Pumps</h2>
+          <p>Flexible heating and cooling for individual rooms and open living spaces.</p>
+          <a class="bm-page-link" href="/ductless-systems.html">Explore Ductless Systems →</a>
+        </article>
+
+        <article class="bm-page-card">
+          <h2>Ducted Heat Pumps</h2>
+          <p>Whole-home heating and cooling using an air handler and ductwork.</p>
+          <a class="bm-page-link" href="/ducted-systems.html">Explore Ducted Systems →</a>
+        </article>
+
+        <article class="bm-page-card">
+          <h2>Multi-Zone Systems</h2>
+          <p>One outdoor system connected to multiple indoor units for different areas of your home.</p>
+          <a class="bm-page-link" href="/multi-zone-systems.html">Explore Multi-Zone Systems →</a>
+        </article>
+
+      </div>
+    </section>
+
+    <section class="bm-page-cta">
+      <h2>Let's make your home more comfortable.</h2>
+      <p>Talk with Bull Moose Climate Systems about your project.</p>
+      <a class="bm-action bm-action-light" href="/contact.html">Get an Estimate</a>
+    </section>
+  </main>
+
+  <footer class="bm-footer">
+    <a href="/">
+      <img src="/assets/logo.jpg" alt="Bull Moose Climate Systems">
+    </a>
+    <p>Residential heat-pump solutions in Maine.</p>
+    <small>© Bull Moose Climate Systems LLC</small>
+  </footer>
+
+  <script src="/navigation.js"></script>
+  <script>
+    const menuButton = document.querySelector(".menu");
+    const navigation = document.querySelector(".header nav");
+
+    menuButton.addEventListener("click", () => {
+      const isOpen = navigation.classList.toggle("open");
+      menuButton.setAttribute("aria-expanded", String(isOpen));
+    });
+  </script>
+
+</body>
+</html>
