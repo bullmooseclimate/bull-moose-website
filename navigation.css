@@ -1,0 +1,184 @@
+/* Bull Moose Climate Systems navigation */
+
+.header nav.bm-main-nav {
+  display: flex;
+  align-items: center;
+  gap: clamp(9px, 1.35vw, 19px);
+}
+
+.bm-nav-group {
+  position: relative;
+}
+
+.bm-dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: -12px;
+  min-width: 220px;
+  padding: 8px;
+  background: #fff;
+  border: 1px solid #e8e3da;
+  border-radius: 6px;
+  box-shadow: 0 12px 28px rgba(0,0,0,.14);
+  z-index: 50;
+}
+
+.bm-dropdown a {
+  display: block;
+  padding: 11px 12px;
+  white-space: nowrap;
+  border-radius: 4px;
+}
+
+.bm-dropdown a:hover {
+  background: #eef4f7;
+  color: #1e557d;
+}
+
+.bm-nav-group:hover .bm-dropdown,
+.bm-nav-group:focus-within .bm-dropdown {
+  display: block;
+}
+
+.bm-category-page-link {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: center;
+  padding: 12px 0 4px;
+}
+
+.bm-page-hero {
+  background: #ebe8df;
+  text-align: center;
+  padding: 70px 22px;
+}
+
+.bm-page-hero .eyebrow {
+  color: #286b9b;
+  text-transform: uppercase;
+  letter-spacing: .17em;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.bm-page-hero h1 {
+  font: 600 clamp(42px,5vw,64px)/1.05 "Cormorant Garamond",serif;
+  margin: 12px auto;
+  max-width: 900px;
+}
+
+.bm-page-hero p {
+  max-width: 760px;
+  margin: 0 auto 22px;
+  color: #625f58;
+}
+
+.bm-page-content {
+  max-width: 1120px;
+  margin: auto;
+  padding: 58px clamp(22px,7vw,90px);
+}
+
+.bm-page-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(230px,1fr));
+  gap: 18px;
+  margin: 28px 0;
+}
+
+.bm-page-card {
+  background: #fff;
+  border: 1px solid #e8e3da;
+  padding: 24px;
+}
+
+.bm-page-card h3 {
+  font: 600 25px "Cormorant Garamond",serif;
+  margin: 0 0 8px;
+}
+
+.bm-page-card p {
+  font-size: 13px;
+  color: #69665f;
+}
+
+.bm-page-card a {
+  color: #286b9b;
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.bm-page-cta {
+  background: #292b29;
+  color: #fff;
+  text-align: center;
+  padding: 54px 22px;
+}
+
+.bm-page-cta h2 {
+  font: 600 38px "Cormorant Garamond",serif;
+  margin: 0 0 12px;
+}
+
+.bm-page-cta p {
+  color: #ddd;
+}
+
+.bm-breadcrumb {
+  font-size: 12px;
+  margin-bottom: 20px;
+}
+
+.bm-breadcrumb a {
+  color: #286b9b;
+}
+
+@media(max-width:760px) {
+  .header nav.bm-main-nav {
+    display: none;
+    position: absolute;
+    top: 78px;
+    left: 0;
+    right: 0;
+    background: #fff;
+    padding: 18px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    max-height: calc(100vh - 78px);
+    overflow: auto;
+  }
+
+  .header nav.bm-main-nav.open {
+    display: flex;
+  }
+
+  .header nav.bm-main-nav > a,
+  .bm-nav-group > a {
+    display: block;
+    padding: 13px 8px;
+    border-bottom: 1px solid #eee;
+  }
+
+  .bm-dropdown {
+    display: block;
+    position: static;
+    box-shadow: none;
+    border: 0;
+    padding: 0 0 8px 14px;
+  }
+
+  .bm-dropdown a {
+    padding: 9px 12px;
+  }
+
+  .bm-page-hero {
+    padding: 52px 22px;
+  }
+
+  .bm-page-content {
+    padding: 42px 22px;
+  }
+}
