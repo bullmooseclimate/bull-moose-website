@@ -7,7 +7,7 @@
     "serviceArea": "Turner, Auburn, Lewiston, and surrounding communities in Maine"
   },
   "settings": {
-    "slideInterval": 6500,
+    "slideInterval": 5000,
     "autoRotate": true,
     "formspreeEndpoint": ""
   },
