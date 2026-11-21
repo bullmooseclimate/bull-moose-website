@@ -12,7 +12,8 @@ nav a{text-decoration:none;font-size:12px;font-weight:600}
 .menu{display:none;background:none;border:0;font-size:24px}
 .hero{height:min(680px,70vw);min-height:500px;position:relative;display:flex;align-items:center;color:#fff;overflow:hidden;touch-action:pan-y;user-select:none}
 .hero-bg,.hero-overlay{position:absolute;inset:0}
-.hero-bg{background-size:cover;background-position:center;transition:none}
+.hero-bg{background-size:cover;background-position:center;opacity:1;transition:opacity .22s ease}
+.hero-bg.photo-changing{opacity:.72}
 .hero-overlay{background:linear-gradient(90deg,rgba(20,25,25,.76),rgba(20,25,25,.25) 72%,rgba(20,25,25,.05))}
 .hero-copy{position:relative;z-index:1;max-width:660px;margin-left:clamp(22px,9vw,135px);padding:38px 22px;pointer-events:none}
 .hero-copy a{pointer-events:auto}
@@ -22,9 +23,9 @@ nav a{text-decoration:none;font-size:12px;font-weight:600}
 .hero-copy>p:not(.eyebrow){max-width:500px;color:#f2eee8}
 .light{display:inline-block;background:#f6f2e9;color:#292925!important;margin-top:14px}
 .topic-nav{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);grid-template-columns:repeat(var(--topic-count,3),minmax(0,1fr));gap:clamp(5px,1.2vw,14px);padding:20px clamp(12px,4vw,56px);background:#fff;border-bottom:1px solid #e8e3da;align-items:stretch}
-.topic-button{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:12px clamp(5px,1.3vw,18px);background:#286b9b;border:2px solid #286b9b;border-radius:14px;color:#fff;font:600 clamp(8px,1.05vw,12px) "DM Sans",sans-serif;cursor:pointer;transition:background .2s ease,border-color .2s ease,color .2s ease,box-shadow .2s ease,transform .2s ease}
-.topic-button:hover{background:#347dad;border-color:#347dad}
-.topic-button.active{background:#b9dcf2;border-color:#1e557d;color:#123b56;box-shadow:inset 0 0 0 1px #1e557d,0 2px 7px rgba(30,85,125,.2)}
+.topic-button{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:12px clamp(5px,1.3vw,18px);background:#dcebf5;border:1px solid #b9d2e3;border-radius:14px;color:#31546b;font:600 clamp(8px,1.05vw,12px) "DM Sans",sans-serif;cursor:pointer;transition:background .22s ease,border-color .22s ease,color .22s ease,box-shadow .22s ease,transform .22s ease}
+.topic-button:hover{background:#c9e0ef;border-color:#a8c9df}
+.topic-button.active{background:#1e557d;border:1px solid #1e557d;color:#fff;box-shadow:none}
 .topic-button:active{transform:scale(.98)}
 .section{padding:82px clamp(22px,8vw,116px)}
 .category-content{padding-top:52px;padding-bottom:55px;background:#f7f5ef}
