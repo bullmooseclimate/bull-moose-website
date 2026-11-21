@@ -1,3 +1,4 @@
+
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{margin:0;background:#f7f5ef;color:#282925;font-family:"DM Sans",sans-serif;line-height:1.6}
@@ -6,23 +7,25 @@ a{color:inherit}
 .brand img{width:190px;height:76px;object-fit:contain}
 .header nav{display:flex;align-items:center;gap:clamp(12px,2vw,28px)}
 nav a{text-decoration:none;font-size:12px;font-weight:600}
-.cta,.button{background:#b95137;color:#fff!important;padding:13px 20px;border:0;border-radius:5px;text-decoration:none;font:600 13px "DM Sans";cursor:pointer}
+.cta,.button{background:#286b9b;color:#fff!important;padding:13px 20px;border:0;border-radius:5px;text-decoration:none;font:600 13px "DM Sans";cursor:pointer;transition:background .3s ease,transform .3s ease}
+.cta:hover,.button:hover{background:#1e557d;transform:translateY(-1px)}
 .menu{display:none;background:none;border:0;font-size:24px}
 .hero{height:min(680px,70vw);min-height:500px;position:relative;display:flex;align-items:center;color:#fff;overflow:hidden;touch-action:pan-y;user-select:none}
 .hero-bg,.hero-overlay{position:absolute;inset:0}
-.hero-bg{background-size:cover;background-position:center;transition:background-image .4s}
+.hero-bg{background-size:cover;background-position:center;transition:opacity .4s ease}
 .hero-overlay{background:linear-gradient(90deg,rgba(20,25,25,.76),rgba(20,25,25,.25) 72%,rgba(20,25,25,.05))}
 .hero-copy{position:relative;z-index:1;max-width:660px;margin-left:clamp(22px,9vw,135px);padding:38px 22px;pointer-events:none}
 .hero-copy a{pointer-events:auto}
-.eyebrow{text-transform:uppercase;letter-spacing:.17em;font-size:10px;font-weight:700;color:#b75a3e}
-.hero .eyebrow{color:#f4c4a7}
+.eyebrow{text-transform:uppercase;letter-spacing:.17em;font-size:10px;font-weight:700;color:#286b9b}
+.hero .eyebrow{color:#c4def0}
 .hero h1{font:600 clamp(46px,6.5vw,84px)/.98 "Cormorant Garamond",serif;margin:15px 0}
 .hero-copy>p:not(.eyebrow){max-width:500px;color:#f2eee8}
 .light{display:inline-block;background:#f6f2e9;color:#292925!important;margin-top:14px}
 .topic-nav{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);grid-template-columns:repeat(var(--topic-count,3),minmax(0,1fr));gap:clamp(5px,1.2vw,14px);padding:20px clamp(12px,4vw,56px);background:#fff;border-bottom:1px solid #e8e3da;align-items:stretch}
-.topic-button{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:12px clamp(5px,1.3vw,18px);background:#fff;border:1px solid #e4dfd6;border-radius:14px;color:#3d403d;font:600 clamp(8px,1.05vw,12px) "DM Sans",sans-serif;cursor:pointer;transition:background .2s,border-color .2s,color .2s,box-shadow .2s}
-.topic-button:hover{border-color:#d8c9bd;background:#fbf8f4}
-.topic-button.active{background:#f2e8dc;border-color:#d8c5ae;color:#51463b;box-shadow:inset 0 0 0 1px #d8c5ae}
+.topic-button{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:12px clamp(5px,1.3vw,18px);background:#fff;border:1px solid #dce5ed;border-radius:14px;color:#35424d;font:600 clamp(8px,1.05vw,12px) "DM Sans",sans-serif;cursor:pointer;transition:background .35s ease,border-color .35s ease,color .35s ease,box-shadow .35s ease,transform .35s ease}
+.topic-button:hover{border-color:#8eafc9;background:#f3f8fc}
+.topic-button.active{background:#e5f0f8;border-color:#6d9fc3;color:#245a80;box-shadow:inset 0 0 0 1px #6d9fc3}
+.topic-button:active{transform:scale(.98)}
 .section{padding:82px clamp(22px,8vw,116px)}
 .category-content{padding-top:52px;padding-bottom:55px;background:#f7f5ef}
 .heading{text-align:center;margin-bottom:34px}
@@ -34,13 +37,13 @@ nav a{text-decoration:none;font-size:12px;font-weight:600}
 .category-item .item-copy{padding:18px 20px 0}
 .category-item h3{font:600 25px "Cormorant Garamond";margin:0 0 7px}
 .category-item p{font-size:13px;color:#69665f;margin:0 0 12px}
-.category-item a{display:inline-block;font-size:12px;font-weight:700;color:#91442f;text-decoration:none;margin-top:5px}
+.category-item a{display:inline-block;font-size:12px;font-weight:700;color:#286b9b;text-decoration:none;margin-top:5px}
 .category-empty{text-align:center;color:#777;font-size:13px}
 .intro{text-align:center;max-width:920px;margin:auto}
 .intro>p:last-child{max-width:620px;margin:auto;color:#6d6962}
 .white{background:white}
 .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.card{background:#f7f5ef;padding:25px;border-top:3px solid #b95137}
+.card{background:#f7f5ef;padding:25px;border-top:3px solid #286b9b}
 .card h3{font:600 25px "Cormorant Garamond";margin:0 0 8px}
 .card p{font-size:13px;color:#69665f}
 .card img{display:block;height:190px;object-fit:cover;margin:-25px -25px 20px;width:calc(100% + 50px)}
@@ -57,7 +60,7 @@ nav a{text-decoration:none;font-size:12px;font-weight:600}
 .about{text-align:center;max-width:900px;margin:auto}
 .about p:last-child{color:#6d6962}
 .contact{background:#292b29;color:#fff;display:grid;grid-template-columns:1fr 1fr;gap:8vw}
-.contact .eyebrow{color:#e7a58a}
+.contact .eyebrow{color:#9fc9e5}
 .contact p{color:#d5d1c8}
 .contact-form{display:grid;gap:13px}
 .contact-form input,.contact-form textarea{background:#373a36;border-color:#555952;color:white}
@@ -65,6 +68,11 @@ nav a{text-decoration:none;font-size:12px;font-weight:600}
 footer{background:#202220;color:#ddd;text-align:center;padding:32px 20px}
 footer img{width:145px;height:100px;object-fit:contain;background:#fff}
 footer p,footer small{font-size:11px;color:#bbb}
+
+/* Smooth slideshow and category transitions */
+.smooth-fade-out{opacity:0;transition:opacity .25s ease}
+#slideEyebrow,#slideTitle,#slideDescription,#slideLink,#categoryEyebrow,#categoryHeading,#categoryDescription,#categoryItems{transition:opacity .35s ease}
+
 @media(max-width:760px){
 .header{min-height:78px}.brand img{width:145px;height:60px}.menu{display:block}
 .header nav{display:none;position:absolute;top:78px;left:0;right:0;background:white;padding:18px;flex-direction:column;align-items:stretch}
