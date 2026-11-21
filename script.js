@@ -42,7 +42,7 @@ function renderTopicButtons(){
   nav.innerHTML=list.map((c,i)=>`<button class="topic-button ${i===activeCategory?'active':''}" data-i="${i}" type="button" aria-pressed="${i===activeCategory}">${esc(c.label||c.title||'Category')}</button>`).join('');
   nav.querySelectorAll('.topic-button').forEach(button=>{
     button.addEventListener('click',()=>{
-      activeCategory=Number(button.dataset.i);
+      renderCategoryContent(list[activeCategory]);
       renderCategoryContent(list[activeCategory]);
       nav.querySelectorAll('.topic-button').forEach((b,i)=>{
         b.classList.toggle('active',i===activeCategory);
