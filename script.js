@@ -1,7 +1,7 @@
 
 let data, current = 0, timer = null, paused = false;
 let pointerStart = null, wasRunningBeforePress = false;
-let activeCategory = 0;
+let activeCategory = 0, transitionTimer = null;
 
 const $ = id => document.getElementById(id);
 
@@ -150,24 +150,31 @@ function showSlide(i) {
   const s = list[current];
   const heroBg = $('heroBg');
 
-  heroBg.style.backgroundImage =
-    s.image ? `url("${s.image}")` : 'none';
+  clearTimeout(transitionTimer);
+  heroBg.classList.add('photo-changing');
 
-  $('slideEyebrow').textContent = s.eyebrow || '';
-  $('slideTitle').textContent = s.title || '';
-  $('slideDescription').textContent = s.description || '';
+  transitionTimer = setTimeout(() => {
+    heroBg.style.backgroundImage =
+      s.image ? `url("${s.image}")` : 'none';
 
-  $('slideLink').textContent = s.buttonText || 'Learn more';
-  $('slideLink').href = s.link || '#contact';
-  $('slideLink').style.display =
-    s.buttonText || s.link ? 'inline-block' : 'none';
+    $('slideEyebrow').textContent = s.eyebrow || '';
+    $('slideTitle').textContent = s.title || '';
+    $('slideDescription').textContent = s.description || '';
 
-  renderCategoryContent(s);
+    $('slideLink').textContent = s.buttonText || 'Learn more';
+    $('slideLink').href = s.link || '#contact';
+    $('slideLink').style.display =
+      s.buttonText || s.link ? 'inline-block' : 'none';
 
-  $('topicNav').querySelectorAll('.topic-button').forEach((button, index) => {
-    button.classList.toggle('active', index === current);
-    button.setAttribute('aria-pressed', String(index === current));
-  });
+    renderCategoryContent(s);
+
+    $('topicNav').querySelectorAll('.topic-button').forEach((button, index) => {
+      button.classList.toggle('active', index === current);
+      button.setAttribute('aria-pressed', String(index === current));
+    });
+
+    heroBg.classList.remove('photo-changing');
+  }, 110);
 }
 
 function stop() {
