@@ -12,7 +12,8 @@ async function init(){
   $('year').textContent=new Date().getFullYear();
   bindSlideshowGestures();
 }
-const slides=()=>Array.isArray(data.slides)?data.slides.filter(s=>s.visible!==false):[];
+const categories=()=>Array.isArray(data.categories)?data.categories.filter(c=>c.visible!==false):[];
+const slides=()=>categories();
 const categories=()=>Array.isArray(data.categories)?data.categories.filter(c=>c.visible!==false):[];
 function render(){
   const slideList=slides();
