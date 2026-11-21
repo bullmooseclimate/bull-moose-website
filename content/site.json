@@ -1,92 +1,238 @@
-import json, os
 
-data = {
+{
   "business": {
     "name": "Bull Moose Climate Systems",
     "email": "bullmooseclimate@gmail.com",
     "phone": "",
     "serviceArea": "Turner, Auburn, Lewiston, and surrounding communities in Maine"
   },
-  "settings": {"slideInterval": 6500, "autoRotate": True, "formspreeEndpoint": ""},
+  "settings": {
+    "slideInterval": 6500,
+    "autoRotate": true,
+    "formspreeEndpoint": ""
+  },
   "slides": [
     {
-      "id": "heat-pumps", "label": "Heat Pumps", "eyebrow": "Comfort starts with the right system",
-      "title": "A better fit for your home.",
-      "description": "Explore residential heat-pump options selected around your home's layout, comfort needs, and goals.",
-      "image": "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1800&q=85",
-      "buttonText": "Explore heat-pump systems", "link": "#services", "visible": True,
-      "contentEyebrow": "Heat-pump systems", "contentTitle": "Find the right approach for your home",
-      "contentDescription": "We help homeowners understand their options and plan a system around the spaces they want to heat and cool.",
-      "contentItems": [
-        {"title": "Residential heat-pump installation", "description": "Installation and retrofit solutions planned around your home's layout, comfort needs, and equipment requirements.", "link": "#contact", "linkText": "Discuss your project", "visible": True},
-        {"title": "Equipment options", "description": "We can discuss equipment features, capacity, efficiency, and the differences between available system options before you decide.", "link": "https://www.samsung.com/us/business/climate/", "linkText": "Explore Samsung climate systems", "visible": True}
-      ]
-    },
-    {
-      "id": "ducted-ductless", "label": "Ducted & Ductless", "eyebrow": "Flexible solutions for different homes",
-      "title": "Comfort that fits your layout.",
-      "description": "Ductless and ducted heat-pump systems offer different ways to bring heating and cooling into your home.",
+      "id": "home-comfort",
+      "eyebrow": "Comfort built for Maine",
+      "title": "A more comfortable home starts with the right heat-pump solution.",
+      "description": "Thoughtful residential heat-pump installation, planned around your home and how you live.",
       "image": "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1800&q=85",
-      "buttonText": "Compare system styles", "link": "#services", "visible": True,
-      "contentEyebrow": "System styles", "contentTitle": "Ductless or ducted? It depends on your home.",
-      "contentDescription": "The right approach depends on the existing layout, room-by-room needs, and how you want the system to operate.",
-      "contentItems": [
-        {"title": "Ductless systems", "description": "A practical option for conditioning selected rooms or zones without adding conventional ductwork.", "link": "https://www.mitsubishicomfort.com/", "linkText": "Explore Mitsubishi systems", "visible": True},
-        {"title": "Ducted heat pumps", "description": "A central air-handler approach for homes where existing or planned ductwork is suitable for the system.", "link": "https://www.fujitsugeneral.com/us/", "linkText": "Explore Fujitsu systems", "visible": True}
-      ]
+      "buttonText": "Explore heat pumps",
+      "link": "#topics",
+      "visible": true
     },
     {
-      "id": "installations", "label": "Installations", "eyebrow": "Thoughtful work, from planning to startup",
-      "title": "Details matter in every installation.",
-      "description": "Good planning, careful placement, and a clear homeowner walkthrough are part of a successful project.",
+      "id": "heat-pump-options",
+      "eyebrow": "Find the right fit",
+      "title": "Heat-pump options for the way your home is built.",
+      "description": "Explore ducted and ductless systems, installation considerations, and comfort options.",
       "image": "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=1800&q=85",
-      "buttonText": "Talk about your home", "link": "#contact", "visible": True,
-      "contentEyebrow": "Our approach", "contentTitle": "A careful process, built around your home",
-      "contentDescription": "Every home is different. We focus on understanding the space and explaining the work before installation begins.",
-      "contentItems": [
-        {"title": "Planning and placement", "description": "Consider room layout, equipment location, line-set routing, service access, and the finished appearance before work begins.", "visible": True},
-        {"title": "Installation and startup", "description": "The system is installed, checked, and tested for proper operation, with attention to manufacturer requirements.", "visible": True},
-        {"title": "A homeowner walkthrough", "description": "We explain basic operation, filter care, and where to find the manufacturer's instructions for your equipment.", "visible": True}
-      ]
+      "buttonText": "Explore your options",
+      "link": "#topics",
+      "visible": true
     },
     {
-      "id": "efficiency", "label": "Efficiency Maine", "eyebrow": "Understand your options",
-      "title": "Explore Efficiency Maine programs.",
-      "description": "Learn where to find current heat-pump incentives, financing information, and program requirements.",
+      "id": "local-service",
+      "eyebrow": "Local service. Home-first thinking.",
+      "title": "Clear answers. Careful planning. Comfort that makes sense.",
+      "description": "We take time to understand your home, explain the options, and plan the work.",
+      "image": "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1800&q=85",
+      "buttonText": "Get in touch",
+      "link": "#contact",
+      "visible": true
+    }
+  ],
+  "categories": [
+    {
+      "id": "heat-pumps",
+      "label": "Heat Pumps",
+      "eyebrow": "Efficient home comfort",
+      "title": "Comfort for every season.",
+      "description": "Learn how modern heat pumps can provide efficient heating and cooling for Maine homes.",
       "image": "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1800&q=85",
-      "buttonText": "Learn about incentives", "link": "/efficiency-maine.html", "visible": True,
-      "contentEyebrow": "Efficiency Maine", "contentTitle": "Start with current program information",
-      "contentDescription": "Incentives, eligibility, and contractor requirements can change. Always confirm current details with Efficiency Maine before making a decision.",
+      "buttonText": "Explore heat pumps",
+      "link": "#heat-pumps",
+      "visible": true,
+      "contentEyebrow": "A practical approach to home comfort",
+      "contentTitle": "Understand your heat-pump options",
+      "contentDescription": "The right system depends on your home's layout, insulation, existing heating system, comfort goals, and budget. A careful assessment helps identify options that make sense for your home.",
       "contentItems": [
-        {"title": "Rebates and financing", "description": "Review current residential heat-pump incentives, financing options, and program details.", "link": "https://www.efficiencymaine.com/", "linkText": "Visit Efficiency Maine", "visible": True},
-        {"title": "Questions before you start", "description": "Check equipment eligibility, installation requirements, and the documentation needed for your specific project.", "link": "/efficiency-maine.html", "linkText": "Read our Efficiency Maine information", "visible": True}
+        {
+          "title": "How heat pumps work",
+          "description": "Heat pumps move heat rather than create it by combustion. They can provide heating in colder weather and cooling during warmer months.",
+          "image": "",
+          "link": "https://www.energy.gov/energysaver/heat-pump-systems",
+          "linkText": "Learn how heat pumps work",
+          "visible": true
+        },
+        {
+          "title": "Choosing a system",
+          "description": "System capacity, cold-weather performance, placement, and the home's layout all matter when choosing equipment.",
+          "image": "",
+          "link": "https://www.efficiencymaine.com/heat-pumps/",
+          "linkText": "Explore heat-pump information",
+          "visible": true
+        }
       ]
     },
     {
-      "id": "maintenance", "label": "Maintenance", "eyebrow": "Protect your comfort",
+      "id": "ducted-ductless",
+      "label": "Ducted & Ductless",
+      "eyebrow": "Two ways to deliver comfort",
+      "title": "The right distribution for your home.",
+      "description": "Compare ducted and ductless heat-pump approaches and learn what to consider before choosing.",
+      "image": "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=1800&q=85",
+      "buttonText": "Compare system types",
+      "link": "#ducted-ductless",
+      "visible": true,
+      "contentEyebrow": "Designed around your home's layout",
+      "contentTitle": "Ducted or ductless?",
+      "contentDescription": "Ductless systems use indoor units placed in selected rooms or zones. Ducted systems distribute conditioned air through ductwork. The best approach depends on the home and the existing infrastructure.",
+      "contentItems": [
+        {
+          "title": "Ductless systems",
+          "description": "A flexible option for heating and cooling individual rooms or zones, often without adding conventional ductwork.",
+          "image": "",
+          "link": "https://www.samsung.com/us/business/climate/",
+          "linkText": "Explore Samsung climate systems",
+          "visible": true
+        },
+        {
+          "title": "Ducted systems",
+          "description": "A central air-distribution approach that may work well where suitable ductwork is already in place.",
+          "image": "",
+          "link": "https://www.mitsubishicomfort.com/",
+          "linkText": "Explore Mitsubishi systems",
+          "visible": true
+        }
+      ]
+    },
+    {
+      "id": "installations",
+      "label": "Installations",
+      "eyebrow": "Planned for your home",
+      "title": "A careful installation makes a difference.",
+      "description": "Learn about the planning, equipment choices, and installation details behind a residential heat-pump project.",
+      "image": "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1800&q=85",
+      "buttonText": "What to expect",
+      "link": "#installations",
+      "visible": true,
+      "contentEyebrow": "From first conversation to finished system",
+      "contentTitle": "A straightforward installation process",
+      "contentDescription": "Every home is different. We discuss your comfort needs, review potential equipment locations and line-set routes, explain the proposed scope, and coordinate the work needed to complete the system.",
+      "contentItems": [
+        {
+          "title": "Home and system assessment",
+          "description": "We consider room layout, existing heating, insulation, electrical needs, equipment placement, and the goals you have for your home.",
+          "image": "",
+          "link": "",
+          "linkText": "",
+          "visible": true
+        },
+        {
+          "title": "Equipment and installation planning",
+          "description": "The proposed system and installation plan should reflect the home's needs, manufacturer requirements, and applicable program requirements.",
+          "image": "",
+          "link": "https://www.fujitsugeneral.com/us/",
+          "linkText": "Explore Fujitsu systems",
+          "visible": true
+        }
+      ]
+    },
+    {
+      "id": "efficiency-maine",
+      "label": "Efficiency Maine",
+      "eyebrow": "Understand your incentives",
+      "title": "Explore rebates and financing options.",
+      "description": "Program details, eligibility, incentives, and contractor requirements can change. Confirm current information directly with Efficiency Maine.",
+      "image": "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1800&q=85",
+      "buttonText": "Learn about incentives",
+      "link": "https://www.efficiencymaine.com/",
+      "visible": true,
+      "contentEyebrow": "Efficiency Maine",
+      "contentTitle": "Understand your incentives and options",
+      "contentDescription": "Program details, eligibility, incentives, and contractor requirements can change. Confirm current information directly with Efficiency Maine.",
+      "contentItems": [
+        {
+          "title": "Rebates and financing",
+          "description": "Learn about available programs and what to prepare before beginning a project.",
+          "image": "",
+          "link": "https://www.efficiencymaine.com/",
+          "linkText": "Visit Efficiency Maine",
+          "visible": true
+        },
+        {
+          "title": "Heat-pump program information",
+          "description": "Review current program requirements and confirm eligibility before making equipment or installation decisions.",
+          "image": "",
+          "link": "https://www.efficiencymaine.com/heat-pumps/",
+          "linkText": "View heat-pump programs",
+          "visible": true
+        }
+      ]
+    },
+    {
+      "id": "maintenance",
+      "label": "Maintenance",
+      "eyebrow": "Protect your comfort",
       "title": "Keep your system performing.",
-      "description": "Simple routine care and periodic professional attention can help your heat pump operate as intended.",
+      "description": "Learn about heat-pump care, cleaning, and maintenance considerations for dependable operation.",
       "image": "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=1800&q=85",
-      "buttonText": "Maintenance information", "link": "#maintenance", "visible": True,
-      "contentEyebrow": "Care for your system", "contentTitle": "A little care goes a long way",
-      "contentDescription": "Follow the maintenance schedule and cleaning instructions for your specific equipment.",
+      "buttonText": "Maintenance information",
+      "link": "#maintenance",
+      "visible": true,
+      "contentEyebrow": "Care for your system",
+      "contentTitle": "Keep your heat pump working well",
+      "contentDescription": "A little routine care helps support reliable operation. Follow the manufacturer's instructions for your specific equipment and arrange professional service when needed.",
       "contentItems": [
-        {"title": "Clean the filters", "description": "Check indoor-unit filters regularly and clean them as directed in the manufacturer's instructions. Restricted airflow can affect performance.", "visible": True},
-        {"title": "Keep the outdoor unit clear", "description": "Keep leaves, grass, snow, and other obstructions away from the outdoor unit. Follow the manufacturer's required clearances.", "visible": True},
-        {"title": "Schedule professional service", "description": "Have the system inspected or cleaned when needed, and address unusual noise, odors, leaks, or performance changes promptly.", "visible": True}
+        {
+          "title": "Clean the filters",
+          "description": "Check indoor-unit filters regularly and clean them as directed by the manufacturer. Restricted airflow can affect comfort and performance.",
+          "image": "",
+          "link": "",
+          "linkText": "",
+          "visible": true
+        },
+        {
+          "title": "Keep outdoor equipment clear",
+          "description": "Keep leaves, snow, and other obstructions away from the outdoor unit. Do not chip or scrape ice from the equipment; follow the manufacturer's guidance.",
+          "image": "",
+          "link": "",
+          "linkText": "",
+          "visible": true
+        },
+        {
+          "title": "Schedule professional maintenance",
+          "description": "Have the system inspected when performance changes or service is due. Consult the owner's manual for recommended maintenance intervals.",
+          "image": "",
+          "link": "",
+          "linkText": "",
+          "visible": true
+        }
       ]
     }
   ],
   "services": [
-    {"title": "Heat-pump installation", "description": "Residential heat-pump installation and retrofit solutions, planned for your home's layout and comfort needs."},
-    {"title": "Ductless heat-pump systems", "description": "Single-zone and multi-zone options for heating and cooling selected rooms or areas of the home."},
-    {"title": "Ducted heat-pump systems", "description": "Ducted system options for homes where a central air-handler and suitable ductwork make sense."},
-    {"title": "System consultation", "description": "A practical conversation about your home, comfort goals, and possible system options."}
+    {
+      "title": "Residential heat-pump installation",
+      "description": "Heat-pump installation and retrofit solutions planned around your home's layout, existing heating, and comfort needs."
+    },
+    {
+      "title": "Ducted heat-pump systems",
+      "description": "Ducted system options for homes where a central air-distribution approach makes sense."
+    },
+    {
+      "title": "System consultation",
+      "description": "A practical conversation about your home, comfort goals, and possible system options."
+    }
   ],
-  "products": [], "projects": [], "testimonials": [],
+  "products": [],
+  "projects": [],
+  "testimonials": [],
   "maintenance": {
     "title": "A little care goes a long way",
-    "description": "Check and clean indoor filters as directed by the manufacturer, keep the outdoor unit clear of debris and snow, and arrange professional service when needed. Always follow the instructions for your specific model."
+    "description": "Keep filters clean, keep outdoor equipment clear, and follow the manufacturer's maintenance guidance. Ask us about maintenance and cleaning options."
   },
   "efficiency": {
     "title": "Efficiency Maine information",
@@ -98,13 +244,3 @@ data = {
     "description": "Bull Moose Climate Systems focuses on residential heat-pump solutions in Maine. We take the time to understand the home and explain the options."
   }
 }
-
-path = "/mnt/data/site.json"
-with open(path, "w", encoding="utf-8") as f:
-    json.dump(data, f, ensure_ascii=False, indent=2)
-# Verify JSON and category content counts
-with open(path, encoding="utf-8") as f:
-    check = json.load(f)
-assert len(check["slides"]) == 5
-assert all(len(s["contentItems"]) > 0 for s in check["slides"])
-print(f"Created and validated {path} ({os.path.getsize(path)} bytes); {len(check['slides'])} categories, all with content.")
