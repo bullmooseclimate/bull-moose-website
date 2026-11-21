@@ -1,19 +1,15 @@
 
 (() => {
-  const pageFor = {
-    "#heat-pumps": "/heat-pumps.html",
-    "#ducted-ductless": "/heat-pumps.html",
-    "#installations": "/installation.html",
-    "https://www.efficiencymaine.com/": "/efficiency-maine.html",
-    "#maintenance": "/cleaning-maintenance.html"
-  };
-
-  const navigation = `
+  const menu = `
     <a href="/">Home</a>
 
     <div class="bm-nav-group">
-      <a href="/heat-pumps.html">Heat Pumps <span>⌄</span></a>
-      <div class="bm-dropdown">
+      <div class="bm-nav-line">
+        <a href="/heat-pumps.html">Heat Pumps</a>
+        <button class="bm-submenu-toggle" type="button"
+          aria-label="Open Heat Pumps submenu" aria-expanded="false">⌄</button>
+      </div>
+      <div class="bm-dropdown" hidden>
         <a href="/heat-pumps.html">Heat Pump Overview</a>
         <a href="/ductless-systems.html">Ductless Systems</a>
         <a href="/ducted-systems.html">Ducted Systems</a>
@@ -25,91 +21,55 @@
     <a href="/cleaning-maintenance.html">Cleaning &amp; Maintenance</a>
     <a href="/efficiency-maine.html">Efficiency Maine</a>
     <a href="/about.html">About</a>
-    <a class="cta" href="/contact.html">Get an estimate</a>
+    <a class="cta" href="/contact.html">Get an Estimate</a>
   `;
 
-  function getDestination() {
-    const slideLink = document.getElementById("slideLink");
-    if (!slideLink) return "/contact.html";
+  function installNavigation() {
+    const header = document.querySelector(".header");
+    const nav = header?.querySelector("nav");
+    if (!header || !nav) return;
 
-    const originalLink = slideLink.getAttribute("href") || "";
+    nav.innerHTML = menu;
+    nav.classList.add("bm-main-nav");
 
-    return pageFor[originalLink] || "/contact.html";
-  }
+    nav.querySelectorAll(".bm-submenu-toggle").forEach(button => {
+      button.addEventListener("click", event => {
+        event.preventDefault();
+        event.stopPropagation();
 
-  function updateExploreLink() {
-    const categoryItems = document.getElementById("categoryItems");
-    const slideLink = document.getElementById("slideLink");
+        const group = button.closest(".bm-nav-group");
+        const dropdown = group.querySelector(".bm-dropdown");
+        const opening = dropdown.hidden;
 
-    if (!categoryItems || !slideLink) return;
+        nav.querySelectorAll(".bm-dropdown").forEach(item => {
+          item.hidden = true;
+        });
 
-    const destination = getDestination();
-    const label = slideLink.textContent.trim();
+        nav.querySelectorAll(".bm-submenu-toggle").forEach(item => {
+          item.setAttribute("aria-expanded", "false");
+        });
 
-    let explore = categoryItems.querySelector(".bm-category-page-link");
-
-    if (!explore) {
-      explore = document.createElement("div");
-      explore.className = "bm-category-page-link";
-
-      const link = document.createElement("a");
-      link.className = "button";
-
-      explore.appendChild(link);
-      categoryItems.appendChild(explore);
-    }
-
-    const link = explore.querySelector("a");
-
-    const topic = {
-      "/heat-pumps.html": "Heat Pumps",
-      "/installation.html": "Installation",
-      "/efficiency-maine.html": "Efficiency Maine",
-      "/cleaning-maintenance.html": "Cleaning & Maintenance"
-    };
-
-    link.href = destination;
-    link.textContent = `Explore ${topic[destination] || label || "this topic"}`;
-  }
-
-  function install() {
-    const headerNav = document.querySelector(".header nav");
-
-    if (headerNav && !headerNav.dataset.bmInstalled) {
-      headerNav.innerHTML = navigation;
-      headerNav.classList.add("bm-main-nav");
-      headerNav.dataset.bmInstalled = "true";
-    }
-
-    const slideLink = document.getElementById("slideLink");
-    const categoryItems = document.getElementById("categoryItems");
-
-    if (slideLink && !slideLink.dataset.bmObserved) {
-      slideLink.dataset.bmObserved = "true";
-
-      new MutationObserver(updateExploreLink).observe(slideLink, {
-        attributes: true,
-        childList: true,
-        characterData: true,
-        subtree: true
+        dropdown.hidden = !opening;
+        button.setAttribute("aria-expanded", String(opening));
       });
-    }
+    });
 
-    if (categoryItems && !categoryItems.dataset.bmObserved) {
-      categoryItems.dataset.bmObserved = "true";
-
-      new MutationObserver(updateExploreLink).observe(categoryItems, {
-        childList: true
-      });
-    }
-
-    updateExploreLink();
+    document.addEventListener("click", event => {
+      if (!nav.contains(event.target)) {
+        nav.querySelectorAll(".bm-dropdown").forEach(item => {
+          item.hidden = true;
+        });
+        nav.querySelectorAll(".bm-submenu-toggle").forEach(item => {
+          item.setAttribute("aria-expanded", "false");
+        });
+      }
+    });
   }
 
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", install);
+    document.addEventListener("DOMContentLoaded", installNavigation);
   } else {
-    install();
+    installNavigation();
   }
 })();
 
