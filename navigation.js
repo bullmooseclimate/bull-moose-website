@@ -1,4 +1,3 @@
-
 (() => {
   const menu = `
     <a href="/">Home</a>
@@ -7,8 +6,10 @@
       <div class="bm-nav-line">
         <a href="/heat-pumps.html">Heat Pumps</a>
         <button class="bm-submenu-toggle" type="button"
-          aria-label="Open Heat Pumps submenu" aria-expanded="false">⌄</button>
+          aria-label="Open Heat Pumps submenu"
+          aria-expanded="false">⌄</button>
       </div>
+
       <div class="bm-dropdown" hidden>
         <a href="/heat-pumps.html">Heat Pump Overview</a>
         <a href="/ductless-systems.html">Ductless Systems</a>
@@ -27,6 +28,7 @@
   function installNavigation() {
     const header = document.querySelector(".header");
     const nav = header?.querySelector("nav");
+
     if (!header || !nav) return;
 
     nav.innerHTML = menu;
@@ -59,6 +61,7 @@
         nav.querySelectorAll(".bm-dropdown").forEach(item => {
           item.hidden = true;
         });
+
         nav.querySelectorAll(".bm-submenu-toggle").forEach(item => {
           item.setAttribute("aria-expanded", "false");
         });
@@ -72,4 +75,3 @@
     installNavigation();
   }
 })();
-
