@@ -188,7 +188,7 @@ function showSlide(i) {
     requestAnimationFrame(() => {
       fadeElements.forEach(el => el.classList.remove('smooth-fade-out'));
     });
-  }, 180);
+  }, 700);
 }
 
 function stop() {
@@ -202,7 +202,7 @@ function start() {
   if (slides().length > 1 && !paused && data.settings?.autoRotate !== false) {
     timer = setInterval(
       () => showSlide(current + 1),
-      Number(data.settings.slideInterval) || 6500
+      Number(data.settings.slideInterval) || 5000
     );
   }
 }
