@@ -41,7 +41,7 @@ function render() {
 
   if (slides().length) {
     current = 0;
-    showSlide(current);
+    showSlide(current, false);
   }
 
   $('servicesList').innerHTML = (data.services || [])
@@ -141,7 +141,7 @@ function renderCategoryContent(category) {
     : '<p class="category-empty">More information and photos can be added here.</p>';
 }
 
-async function showSlide(i) {
+async function showSlide(i, resetTimer = true) {
   const list = slides();
   if (!list.length) return;
 
@@ -156,7 +156,10 @@ async function showSlide(i) {
 
   clearTimeout(transitionTimer);
 
-  // Preload the incoming image before starting the crossfade.
+  // Reset the countdown after manual slide changes.
+  if (resetTimer) start();
+
+  // Preload the incoming photo before beginning the transition.
   if (s.image) {
     const preload = new Image();
     preload.src = s.image;
@@ -168,27 +171,29 @@ async function showSlide(i) {
     }
   }
 
-  // Prevent an older transition from overwriting a newer selection.
+  // Ignore an older request if another slide was selected.
   if (token !== slideChangeToken) return;
 
-  // Place the incoming image on the fading overlay.
+  // Prepare the incoming photograph.
   heroBg.style.setProperty(
     '--next-slide-image',
     s.image ? `url("${s.image}")` : 'none'
   );
 
-  // Fade the image, text, and category content.
+  // Start the photo fade.
   heroBg.classList.add('photo-changing');
+
+  // Fade out the previous text and category content.
   heroCopy.classList.add('slide-copy-changing');
   categoryContent.classList.add('content-changing');
 
-  // Update the selected button with a smooth color transition.
+  // Smoothly update the selected category button.
   $('topicNav').querySelectorAll('.topic-button').forEach((button, index) => {
     button.classList.toggle('active', index === current);
     button.setAttribute('aria-pressed', String(index === current));
   });
 
-  // Update text while it is faded out.
+  // Update the new slide's content after the photo begins appearing.
   setTimeout(() => {
     if (token !== slideChangeToken) return;
 
@@ -203,19 +208,18 @@ async function showSlide(i) {
 
     renderCategoryContent(s);
 
+    // Fade in the new text and category content.
     heroCopy.classList.remove('slide-copy-changing');
     categoryContent.classList.remove('content-changing');
-  }, 300);
+  }, 400);
 
-  // Finish the image crossfade after 650 milliseconds.
+  // Complete the photo crossfade.
   transitionTimer = setTimeout(() => {
     if (token !== slideChangeToken) return;
 
-    // Make the incoming image the permanent background.
     heroBg.style.backgroundImage =
       s.image ? `url("${s.image}")` : 'none';
 
-    // Remove the temporary overlay smoothly.
     heroBg.classList.remove('photo-changing');
     heroBg.style.removeProperty('--next-slide-image');
   }, 650);
@@ -231,7 +235,7 @@ function start() {
 
   if (slides().length > 1 && !paused && data.settings?.autoRotate !== false) {
     timer = setInterval(
-      () => showSlide(current + 1),
+      () => showSlide(current + 1, false),
       Number(data.settings.slideInterval) || 5000
     );
   }
