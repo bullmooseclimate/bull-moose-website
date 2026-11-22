@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Contact Bull Moose Climate Systems LLC about heat pump installation and home comfort in Maine.">
+  <title>Contact & Estimates | Bull Moose Climate Systems</title>
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/navigation.css">
+</head>
+<body>
+
+<header class="header">
+  <a href="/" class="logo" aria-label="Bull Moose Climate Systems home">
+    <img src="/assets/logo.jpg" alt="Bull Moose Climate Systems">
+  </a>
+
+  <button class="menu" type="button" aria-label="Open navigation menu">
+    <span></span><span></span><span></span>
+  </button>
+
+  <nav aria-label="Main navigation"></nav>
+</header>
+
+<main>
+
+  <section class="bm-page-hero">
+    <div class="bm-page-hero-content">
+      <p class="eyebrow">Let's make your home more comfortable</p>
+      <h1>Get an Estimate</h1>
+      <p>
+        Have a heat pump project in mind? Tell us a little about
+        your home and what you're looking to accomplish.
+      </p>
+      <a class="cta" href="#estimate-form">Tell Us About Your Project</a>
+    </div>
+  </section>
+
+  <section class="bm-page-content">
+    <div class="bm-page-intro">
+      <h2>Start with a conversation</h2>
+      <p>
+        Whether you're interested in a new ductless system, a
+        ducted heat pump, or improving comfort in a particular
+        part of your home, we'd like to hear about it.
+      </p>
+      <p>
+        The more we know about your project, the better we can
+        understand what you're looking for.
+      </p>
+    </div>
+  </section>
+
+  <section class="bm-page-content" id="estimate-form">
+    <div class="bm-page-intro">
+      <h2>Tell us about your project</h2>
+      <p>
+        Complete the information below and use the email button
+        to send your request.
+      </p>
+    </div>
+
+    <form id="estimateForm" class="bm-estimate-form">
+
+      <label for="customerName">Your Name</label>
+      <input type="text" id="customerName" name="name"
+        autocomplete="name" required>
+
+      <label for="customerEmail">Email Address</label>
+      <input type="email" id="customerEmail" name="email"
+        autocomplete="email" required>
+
+      <label for="customerPhone">Phone Number</label>
+      <input type="tel" id="customerPhone" name="phone"
+        autocomplete="tel">
+
+      <label for="propertyLocation">Project Address or Town</label>
+      <input type="text" id="propertyLocation" name="location"
+        autocomplete="street-address" required>
+
+      <label for="projectType">What are you interested in?</label>
+      <select id="projectType" name="project">
+        <option value="Ductless heat pump">Ductless heat pump</option>
+        <option value="Ducted heat pump">Ducted heat pump</option>
+        <option value="Multi-zone heat pump">Multi-zone heat pump</option>
+        <option value="Cleaning or maintenance">Cleaning or maintenance</option>
+        <option value="Other">Other / Not sure yet</option>
+      </select>
+
+      <label for="projectDetails">Tell us a little about your home and project</label>
+      <textarea id="projectDetails" name="details" rows="6"
+        placeholder="For example: number of rooms, approximate home size, existing heating system, or what you'd like to improve."></textarea>
+
+      <button type="submit" class="cta">Prepare Email Request</button>
+
+      <p id="formMessage" role="status" aria-live="polite"></p>
+
+    </form>
+  </section>
+
+  <section class="bm-page-content bm-page-cta">
+    <h2>Not sure what system you need?</h2>
+    <p>
+      That's okay. You don't need to know the answer before
+      reaching out. We can start by discussing your home's
+      comfort needs and exploring the options.
+    </p>
+    <a class="cta" href="/heat-pumps.html">Explore Heat Pump Options</a>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <a href="/" aria-label="Bull Moose Climate Systems home">
+    <img src="/assets/logo.jpg" alt="Bull Moose Climate Systems">
+  </a>
+  <p>Bull Moose Climate Systems LLC</p>
+  <p>Comfort starts at home.</p>
+</footer>
+
+<script src="/navigation.js"></script>
+
+<script>
+  const menuButton = document.querySelector(".menu");
+  const nav = document.querySelector(".header nav");
+
+  if (menuButton && nav) {
+    menuButton.addEventListener("click", () => {
+      nav.classList.toggle("open");
+    });
+  }
+
+  const estimateForm = document.getElementById("estimateForm");
+
+  estimateForm.addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    const data = new FormData(estimateForm);
+
+    const subject = encodeURIComponent(
+      "Heat Pump Estimate Request - " + data.get("name")
+    );
+
+    const body = encodeURIComponent(
+      "Name: " + data.get("name") + "\n" +
+      "Email: " + data.get("email") + "\n" +
+      "Phone: " + data.get("phone") + "\n" +
+      "Location: " + data.get("location") + "\n" +
+      "Project: " + data.get("project") + "\n\n" +
+      "Project Details:\n" + data.get("details")
+    );
+
+    document.getElementById("formMessage").textContent =
+      "Your email app will open with your project details. Please review and send the email.";
+
+    window.location.href =
+      "mailto:?subject=" + subject + "&body=" + body;
+  });
+</script>
+
+</body>
+</html>
