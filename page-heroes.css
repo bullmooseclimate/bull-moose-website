@@ -1,0 +1,197 @@
+/* Bull Moose Climate Systems - Interior page hero and image cards */
+
+.bm-photo-hero {
+  min-height: 470px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 70px clamp(24px, 9vw, 130px);
+  color: #fff;
+  background-image:
+    linear-gradient(90deg, rgba(20, 25, 25, .78), rgba(20, 25, 25, .34) 72%, rgba(20, 25, 25, .12)),
+    var(--page-hero-image);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.bm-photo-hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 680px;
+}
+
+.bm-photo-hero .eyebrow {
+  color: #c4def0;
+  text-transform: uppercase;
+  letter-spacing: .17em;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.bm-photo-hero h1 {
+  color: #fff;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(44px, 6vw, 76px);
+  font-weight: 600;
+  line-height: 1;
+  margin: 15px 0;
+}
+
+.bm-photo-hero p:not(.eyebrow) {
+  max-width: 570px;
+  color: #f3f1ec;
+  font-size: 16px;
+  line-height: 1.7;
+  margin-bottom: 25px;
+}
+
+.bm-photo-hero .cta {
+  display: inline-block;
+  background: #f6f2e9;
+  color: #292925 !important;
+  padding: 14px 24px;
+  border-radius: 5px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background .25s ease, transform .25s ease;
+}
+
+.bm-photo-hero .cta:hover {
+  background: #fff;
+  transform: translateY(-2px);
+}
+
+.bm-photo-hero .cta:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 4px;
+}
+
+.bm-photo-hero--center {
+  justify-content: center;
+  text-align: center;
+}
+
+.bm-photo-hero--center .bm-photo-hero-content {
+  margin: auto;
+}
+
+.bm-photo-hero--center p:not(.eyebrow) {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.bm-product-section {
+  max-width: 1160px;
+  margin: auto;
+  padding: 65px 28px;
+}
+
+.bm-product-heading {
+  max-width: 800px;
+  margin: 0 auto 32px;
+  text-align: center;
+}
+
+.bm-product-heading h2 {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(32px, 4vw, 46px);
+  line-height: 1.1;
+  margin: 8px 0 12px;
+}
+
+.bm-product-heading p {
+  color: #69665f;
+  font-size: 14px;
+}
+
+.bm-product-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+  margin-top: 30px;
+}
+
+.bm-product-card {
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid #e8e3da;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+}
+
+.bm-product-card img {
+  display: block;
+  width: 100%;
+  height: 235px;
+  object-fit: cover;
+  background: #f0eee8;
+}
+
+.bm-product-card-copy {
+  padding: 22px;
+  flex: 1;
+}
+
+.bm-product-card h3 {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 27px;
+  margin: 0 0 8px;
+}
+
+.bm-product-card p {
+  color: #69665f;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.bm-product-card a {
+  display: inline-block;
+  margin-top: 8px;
+  color: #245b80;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.bm-product-card a:hover {
+  text-decoration: underline;
+}
+
+.bm-photo-note {
+  color: #77736b;
+  font-size: 10px;
+  text-align: center;
+  margin-top: 18px;
+}
+
+@media (max-width: 760px) {
+  .bm-photo-hero {
+    min-height: 430px;
+    padding: 55px 25px;
+    background-position: center;
+  }
+
+  .bm-photo-hero h1 {
+    font-size: clamp(42px, 11vw, 58px);
+  }
+
+  .bm-photo-hero p:not(.eyebrow) {
+    font-size: 14px;
+  }
+
+  .bm-product-section {
+    padding: 42px 20px;
+  }
+
+  .bm-product-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .bm-product-card img {
+    height: 220px;
+  }
+}
