@@ -25,54 +25,40 @@ nav a{text-decoration:none;font-size:12px;font-weight:600}
 .hero-copy>p:not(.eyebrow){max-width:500px;color:#f2eee8}
 .light{display:inline-block;background:#f6f2e9;color:#292925!important;margin-top:14px}
 
-.topic-nav{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);grid-template-columns:repeat(var(--topic-count,3),minmax(0,1fr));gap:clamp(5px,1.2vw,14px);padding:20px clamp(12px,4vw,56px);background:#fff;border-bottom:1px solid #e8e3da;align-items:stretch}
-
-.topic-button{
-  min-width:0;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
-  padding:12px clamp(5px,1.3vw,18px);
-  background:#dcebf5;
-  border:1px solid #b9d2e3;
-  border-radius:14px;
-  color:#31546b;
-  font:600 clamp(8px,1.05vw,12px) "DM Sans",sans-serif;
-  cursor:pointer;
-  transition:background .25s ease,border-color .25s ease,color .25s ease,transform .18s ease;
+/* Prevent the slideshow link from staying highlighted after a tap or return. */
+#slideLink,
+#slideLink:link,
+#slideLink:visited,
+#slideLink:hover,
+#slideLink:active,
+#slideLink:focus{
+  background:#f6f2e9;
+  color:#292925!important;
+  transform:none;
+  outline:none;
   -webkit-tap-highlight-color:transparent;
 }
 
-/* Keep the selected slide button the same color as the other buttons. */
-.topic-button.active{
-  background:#dcebf5;
-  border:1px solid #b9d2e3;
-  color:#31546b;
-  box-shadow:none;
-}
-
-/* Only show hover styling on devices that actually support hovering. */
+/* Subtle hover feedback only on devices with a real mouse or trackpad. */
 @media (hover:hover) and (pointer:fine){
-  .topic-button:hover{
-    background:#c9e0ef;
-    border-color:#a8c9df;
+  #slideLink:hover{
+    background:#eee8dc;
+    transform:translateY(-1px);
   }
 }
 
-/* Brief feedback while the button is physically being pressed. */
-.topic-button:active{
-  transform:scale(.98);
-  background:#c9e0ef;
-}
-
-.topic-button:focus{
-  outline:none;
-}
-
-.topic-button:focus-visible{
-  outline:2px solid #286b9b;
+#slideLink:focus-visible{
+  outline:2px solid #fff;
   outline-offset:3px;
 }
+
+.topic-nav{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);grid-template-columns:repeat(var(--topic-count,3),minmax(0,1fr));gap:clamp(5px,1.2vw,14px);padding:20px clamp(12px,4vw,56px);background:#fff;border-bottom:1px solid #e8e3da;align-items:stretch}
+
+/* Original slideshow category button appearance and selected highlight. */
+.topic-button{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:12px clamp(5px,1.3vw,18px);background:#dcebf5;border:1px solid #b9d2e3;border-radius:14px;color:#31546b;font:600 clamp(8px,1.05vw,12px) "DM Sans",sans-serif;cursor:pointer;transition:background .55s ease,border-color .55s ease,color .55s ease,box-shadow .55s ease,transform .22s ease}
+.topic-button:hover{background:#c9e0ef;border-color:#a8c9df}
+.topic-button.active{background:#1e557d;border:1px solid #1e557d;color:#fff;box-shadow:none}
+.topic-button:active{transform:scale(.98)}
 
 .section{padding:82px clamp(22px,8vw,116px)}
 .category-content{padding-top:52px;padding-bottom:55px;background:#f7f5ef}
