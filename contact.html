@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,24 +15,18 @@
   <a href="/" class="logo" aria-label="Bull Moose Climate Systems home">
     <img src="/assets/logo.jpg" alt="Bull Moose Climate Systems">
   </a>
-
   <button class="menu" type="button" aria-label="Open navigation menu">
     <span></span><span></span><span></span>
   </button>
-
   <nav aria-label="Main navigation"></nav>
 </header>
 
 <main>
-
   <section class="bm-page-hero">
     <div class="bm-page-hero-content">
       <p class="eyebrow">Let's make your home more comfortable</p>
       <h1>Get an Estimate</h1>
-      <p>
-        Have a heat pump project in mind? Tell us a little about
-        your home and what you're looking to accomplish.
-      </p>
+      <p>Have a heat pump project in mind? Tell us a little about your home and what you're looking to accomplish.</p>
       <a class="cta" href="#estimate-form">Tell Us About Your Project</a>
     </div>
   </section>
@@ -39,44 +34,29 @@
   <section class="bm-page-content">
     <div class="bm-page-intro">
       <h2>Start with a conversation</h2>
-      <p>
-        Whether you're interested in a new ductless system, a
-        ducted heat pump, or improving comfort in a particular
-        part of your home, we'd like to hear about it.
-      </p>
-      <p>
-        The more we know about your project, the better we can
-        understand what you're looking for.
-      </p>
+      <p>Whether you're interested in a new ductless system, a ducted heat pump, or improving comfort in a particular part of your home, we'd like to hear about it.</p>
+      <p>The more we know about your project, the better we can understand what you're looking for.</p>
     </div>
   </section>
 
   <section class="bm-page-content" id="estimate-form">
     <div class="bm-page-intro">
       <h2>Tell us about your project</h2>
-      <p>
-        Complete the information below and use the email button
-        to send your request.
-      </p>
+      <p>Complete the information below and use the email button to send your request.</p>
     </div>
 
     <form id="estimateForm" class="bm-estimate-form">
-
       <label for="customerName">Your Name</label>
-      <input type="text" id="customerName" name="name"
-        autocomplete="name" required>
+      <input type="text" id="customerName" name="name" autocomplete="name" required>
 
       <label for="customerEmail">Email Address</label>
-      <input type="email" id="customerEmail" name="email"
-        autocomplete="email" required>
+      <input type="email" id="customerEmail" name="email" autocomplete="email" required>
 
       <label for="customerPhone">Phone Number</label>
-      <input type="tel" id="customerPhone" name="phone"
-        autocomplete="tel">
+      <input type="tel" id="customerPhone" name="phone" autocomplete="tel">
 
       <label for="propertyLocation">Project Address or Town</label>
-      <input type="text" id="propertyLocation" name="location"
-        autocomplete="street-address" required>
+      <input type="text" id="propertyLocation" name="location" autocomplete="street-address" required>
 
       <label for="projectType">What are you interested in?</label>
       <select id="projectType" name="project">
@@ -88,26 +68,18 @@
       </select>
 
       <label for="projectDetails">Tell us a little about your home and project</label>
-      <textarea id="projectDetails" name="details" rows="6"
-        placeholder="For example: number of rooms, approximate home size, existing heating system, or what you'd like to improve."></textarea>
+      <textarea id="projectDetails" name="details" rows="6" placeholder="For example: number of rooms, approximate home size, existing heating system, or what you'd like to improve."></textarea>
 
       <button type="submit" class="cta">Prepare Email Request</button>
-
       <p id="formMessage" role="status" aria-live="polite"></p>
-
     </form>
   </section>
 
   <section class="bm-page-content bm-page-cta">
     <h2>Not sure what system you need?</h2>
-    <p>
-      That's okay. You don't need to know the answer before
-      reaching out. We can start by discussing your home's
-      comfort needs and exploring the options.
-    </p>
+    <p>That's okay. You don't need to know the answer before reaching out. We can start by discussing your home's comfort needs and exploring the options.</p>
     <a class="cta" href="/heat-pumps.html">Explore Heat Pump Options</a>
   </section>
-
 </main>
 
 <footer class="footer">
@@ -119,7 +91,6 @@
 </footer>
 
 <script src="/navigation.js"></script>
-
 <script>
   const menuButton = document.querySelector(".menu");
   const nav = document.querySelector(".header nav");
@@ -154,9 +125,8 @@
       "Your email app will open with your project details. Please review and send the email.";
 
     window.location.href =
-      "mailto:?subject=" + subject + "&body=" + body;
+      "mailto:bullmooseclimate@gmail.com?subject=" + subject + "&body=" + body;
   });
 </script>
-
 </body>
 </html>
