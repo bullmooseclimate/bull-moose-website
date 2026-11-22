@@ -19,7 +19,7 @@
       "description": "Thoughtful residential heat-pump installation, planned around your home and how you live.",
       "image": "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1800&q=85",
       "buttonText": "Explore heat pumps",
-      "link": "#topics",
+      "link": "/heat-pumps.html",
       "visible": true
     },
     {
@@ -29,7 +29,7 @@
       "description": "Explore ducted and ductless systems, installation considerations, and comfort options.",
       "image": "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=1800&q=85",
       "buttonText": "Explore your options",
-      "link": "#topics",
+      "link": "/heat-pumps.html",
       "visible": true
     },
     {
@@ -39,7 +39,7 @@
       "description": "We take time to understand your home, explain the options, and plan the work.",
       "image": "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1800&q=85",
       "buttonText": "Get in touch",
-      "link": "#contact",
+      "link": "/contact.html",
       "visible": true
     }
   ],
@@ -52,7 +52,7 @@
       "description": "Learn how modern heat pumps can provide efficient heating and cooling for Maine homes.",
       "image": "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1800&q=85",
       "buttonText": "Explore heat pumps",
-      "link": "#heat-pumps",
+      "link": "/heat-pumps.html",
       "visible": true,
       "contentEyebrow": "A practical approach to home comfort",
       "contentTitle": "Understand your heat-pump options",
@@ -84,7 +84,7 @@
       "description": "Compare ducted and ductless heat-pump approaches and learn what to consider before choosing.",
       "image": "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=1800&q=85",
       "buttonText": "Compare system types",
-      "link": "#ducted-ductless",
+      "link": "/heat-pumps.html",
       "visible": true,
       "contentEyebrow": "Designed around your home's layout",
       "contentTitle": "Ducted or ductless?",
@@ -116,7 +116,7 @@
       "description": "Learn about the planning, equipment choices, and installation details behind a residential heat-pump project.",
       "image": "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1800&q=85",
       "buttonText": "What to expect",
-      "link": "#installations",
+      "link": "/installation.html",
       "visible": true,
       "contentEyebrow": "From first conversation to finished system",
       "contentTitle": "A straightforward installation process",
@@ -148,7 +148,7 @@
       "description": "Program details, eligibility, incentives, and contractor requirements can change. Confirm current information directly with Efficiency Maine.",
       "image": "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1800&q=85",
       "buttonText": "Learn about incentives",
-      "link": "https://www.efficiencymaine.com/",
+      "link": "/efficiency-maine.html",
       "visible": true,
       "contentEyebrow": "Efficiency Maine",
       "contentTitle": "Understand your incentives and options",
@@ -180,7 +180,7 @@
       "description": "Learn about heat-pump care, cleaning, and maintenance considerations for dependable operation.",
       "image": "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=1800&q=85",
       "buttonText": "Maintenance information",
-      "link": "#maintenance",
+      "link": "/cleaning-maintenance.html",
       "visible": true,
       "contentEyebrow": "Care for your system",
       "contentTitle": "Keep your heat pump working well",
