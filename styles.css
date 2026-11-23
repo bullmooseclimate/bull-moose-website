@@ -1,10 +1,9 @@
-
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{margin:0;background:#f7f5ef;color:#282925;font-family:"DM Sans",sans-serif;line-height:1.6}
 a{color:inherit}
 
-/* HEADER */
+/* HEADER AND BRANDING */
 .header{
   min-height:150px;
   padding:8px clamp(8px,1.5vw,24px);
@@ -20,7 +19,8 @@ a{color:inherit}
 .brand{
   display:flex;
   align-items:center;
-  gap:5px;
+  justify-content:flex-start;
+  gap:3px;
   flex-shrink:0;
   text-decoration:none;
   margin-right:auto;
@@ -31,20 +31,23 @@ a{color:inherit}
   width:250px;
   height:158px;
   object-fit:contain;
+  flex-shrink:0;
 }
 
 .brand-name{
   display:flex;
   flex-direction:column;
   justify-content:center;
+  align-items:flex-start;
   white-space:nowrap;
   color:#282925;
   line-height:1.08;
+  margin-left:0;
 }
 
 .brand-name strong{
   font-family:"Cormorant Garamond",Georgia,serif;
-  font-size:34px;
+  font-size:40px;
   font-weight:700;
   letter-spacing:.045em;
 }
@@ -52,7 +55,7 @@ a{color:inherit}
 .brand-name>span{
   margin-top:7px;
   font-family:"DM Sans",sans-serif;
-  font-size:12px;
+  font-size:14px;
   font-weight:600;
   letter-spacing:.18em;
 }
@@ -60,13 +63,16 @@ a{color:inherit}
 .header nav{
   display:flex;
   align-items:center;
+  justify-content:flex-end;
   gap:clamp(9px,1.3vw,19px);
+  margin-left:auto;
 }
 
-nav a{
+.header nav a{
   text-decoration:none;
   font-size:12px;
   font-weight:600;
+  white-space:nowrap;
 }
 
 .cta,.button{
@@ -347,12 +353,12 @@ footer img{
 
 footer p,footer small{font-size:11px;color:#bbb}
 
-/* MEDIUM SCREENS: prevent the logo and navigation from being squeezed */
+/* MEDIUM SCREENS */
 @media(max-width:1100px){
   .header{min-height:120px;padding:6px 12px}
   .brand img{width:190px;height:125px}
-  .brand-name strong{font-size:27px}
-  .brand-name>span{font-size:10px}
+  .brand-name strong{font-size:31px}
+  .brand-name>span{font-size:11px}
   .header nav{gap:9px}
   .header nav a{font-size:11px}
 }
@@ -362,13 +368,13 @@ footer p,footer small{font-size:11px;color:#bbb}
   .header{min-height:104px;padding:4px 8px}
   .brand{gap:3px}
   .brand img{width:150px;height:98px}
-  .brand-name strong{font-size:21px}
-  .brand-name>span{font-size:8px;letter-spacing:.12em}
+  .brand-name strong{font-size:25px}
+  .brand-name>span{font-size:9px;letter-spacing:.12em}
 
   .menu{display:block}
 
   .header nav.bm-main-nav{
-    display:none;
+    display:none!important;
     position:absolute;
     top:100%;
     left:0;
@@ -383,7 +389,7 @@ footer p,footer small{font-size:11px;color:#bbb}
     box-shadow:0 12px 20px rgba(0,0,0,.12);
   }
 
-  .header nav.bm-main-nav.open{display:flex}
+  .header nav.bm-main-nav.open{display:flex!important}
 
   .hero{height:75vh;min-height:540px}
   .hero-copy{margin:0;padding:25px}
@@ -400,7 +406,7 @@ footer p,footer small{font-size:11px;color:#bbb}
   .split-photo{min-height:250px}
 }
 
-/* LANDSCAPE PHONES: keep branding large and put navigation behind the menu */
+/* LANDSCAPE PHONES */
 @media(orientation:landscape) and (max-height:550px){
   .header{
     min-height:88px;
@@ -410,13 +416,13 @@ footer p,footer small{font-size:11px;color:#bbb}
 
   .brand{gap:3px}
   .brand img{width:132px;height:84px}
-  .brand-name strong{font-size:20px}
-  .brand-name>span{font-size:7px;letter-spacing:.12em}
+  .brand-name strong{font-size:24px}
+  .brand-name>span{font-size:9px;letter-spacing:.12em}
 
   .menu{display:block}
 
   .header nav.bm-main-nav{
-    display:none;
+    display:none!important;
     position:absolute;
     top:100%;
     left:0;
@@ -431,10 +437,10 @@ footer p,footer small{font-size:11px;color:#bbb}
     box-shadow:0 12px 20px rgba(0,0,0,.12);
   }
 
-  .header nav.bm-main-nav.open{display:flex}
+  .header nav.bm-main-nav.open{display:flex!important}
 }
 
-/* DESKTOP NAVIGATION */
+/* WIDE DESKTOP */
 @media(min-width:1101px){
   .header nav.bm-main-nav{margin-left:12px}
 }
