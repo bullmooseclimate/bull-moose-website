@@ -1,31 +1,188 @@
-<section class="bm-page-content">
-  <div class="bm-page-intro bm-spanish-note">
-    <h2>¿Habla español?</h2>
-    <p>
-      También ofrecemos atención completamente en español.
-      Será un placer ayudarle con sus preguntas y su proyecto.
-    </p>
-    <a class="bm-action" href="/espanol.html">
-      Servicios en español
-    </a>
-  </div>
-</section>
 
-<section class="bm-page-content">
-  <div class="bm-page-intro">
-    <h2>Contact Us</h2>
-    <p>
-      Phone: <a href="tel:+12078978780">207-897-8780</a>
-    </p>
-    <p>
-      Email:
-      <a href="mailto:bullmooseclimate@gmail.com">
-        bullmooseclimate@gmail.com
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Learn about Bull Moose Climate Systems LLC, residential heat pump installation and service in Maine.">
+  <title>About Us | Bull Moose Climate Systems</title>
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/navigation.css">
+  <link rel="stylesheet" href="/page-heroes.css">
+</head>
+<body>
+
+<header class="header">
+  <a href="/" class="logo" aria-label="Bull Moose Climate Systems home">
+    <img src="/assets/logo.jpg" alt="Bull Moose Climate Systems">
+  </a>
+
+  <button class="menu" type="button" aria-label="Open navigation menu">
+    <span></span><span></span><span></span>
+  </button>
+
+  <nav aria-label="Main navigation"></nav>
+</header>
+
+<main>
+
+  <section class="bm-page-hero">
+    <div class="bm-page-hero-content">
+      <p class="eyebrow">Local service. Home-first thinking.</p>
+      <h1>About Bull Moose Climate Systems</h1>
+      <p>
+        Residential heat-pump solutions in Maine, with careful
+        planning, straightforward communication, and a focus
+        on making your home more comfortable.
+      </p>
+      <a class="cta" href="/contact.html">Get an Estimate</a>
+    </div>
+  </section>
+
+  <section class="bm-page-content">
+    <div class="bm-page-intro">
+      <h2>Comfort starts at home.</h2>
+
+      <p>
+        Bull Moose Climate Systems LLC is focused on residential
+        heat-pump solutions for homeowners in Maine.
+      </p>
+
+      <p>
+        We believe choosing a heating and cooling system should
+        be a clear and comfortable process. Every home has its
+        own layout, existing equipment, and heating needs.
+        We take the time to understand those details and explain
+        the available options.
+      </p>
+
+      <p>
+        Our goal is to provide practical recommendations and
+        thoughtful installation work that make sense for your
+        home and the way you live.
+      </p>
+    </div>
+  </section>
+
+  <section class="bm-product-section">
+    <div class="bm-product-heading">
+      <p class="eyebrow">How we work</p>
+      <h2>A thoughtful approach to home comfort</h2>
+      <p>
+        Good results begin with understanding the home,
+        choosing suitable equipment, and planning the work carefully.
+      </p>
+    </div>
+
+    <div class="bm-content-grid">
+
+      <article class="bm-content-card">
+        <h3>Understanding Your Home</h3>
+        <p>
+          We consider your home's layout, existing heating system,
+          insulation, and the rooms where you want better comfort.
+        </p>
+      </article>
+
+      <article class="bm-content-card">
+        <h3>Clear Communication</h3>
+        <p>
+          We explain system options and installation considerations
+          so you can make an informed decision about your home.
+        </p>
+      </article>
+
+      <article class="bm-content-card">
+        <h3>Careful Installation</h3>
+        <p>
+          Proper equipment placement, installation practices,
+          and attention to manufacturer requirements all matter.
+        </p>
+      </article>
+
+      <article class="bm-content-card">
+        <h3>Comfort Throughout the Year</h3>
+        <p>
+          We focus on heat-pump solutions that provide both
+          heating and cooling for Maine homes.
+        </p>
+      </article>
+
+    </div>
+  </section>
+
+  <section class="bm-page-content">
+    <div class="bm-page-intro bm-spanish-note">
+      <h2>¿Habla español?</h2>
+      <p>
+        También ofrecemos atención completamente en español.
+        Será un placer ayudarle con sus preguntas y su proyecto.
+      </p>
+      <a class="bm-action" href="/espanol.html">
+        Servicios en español
       </a>
-    </p>
-    <p>
-      WhatsApp:
-      <a href="https://wa.me/12078978780">Message us on WhatsApp</a>
-    </p>
-  </div>
-</section>
+    </div>
+  </section>
+
+  <section class="bm-page-content">
+    <div class="bm-page-intro">
+      <h2>Contact Bull Moose Climate Systems</h2>
+
+      <p>
+        Have questions or want to discuss a heat-pump project?
+        We'd be happy to hear from you.
+      </p>
+
+      <p>
+        **Phone:** 
+        <a href="tel:+12078978780">207-897-8780</a>
+      </p>
+
+      <p>
+        **Email:**
+        <a href="mailto:bullmooseclimate@gmail.com">
+          bullmooseclimate@gmail.com
+        </a>
+      </p>
+
+      <p>
+        **WhatsApp:**
+        <a href="https://wa.me/12078978780">
+          Message us on WhatsApp
+        </a>
+      </p>
+
+      <p>
+        Serving Turner, Auburn, Lewiston, and surrounding
+        communities in Maine.
+      </p>
+
+      <div class="bm-page-links">
+        <a class="bm-action" href="/contact.html">Request an Estimate</a>
+        <a class="bm-action" href="/espanol.html">Servicios en español</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer"></footer>
+
+<script src="/navigation.js"></script>
+<script>
+  const menuButton = document.querySelector(".menu");
+  const nav = document.querySelector(".header nav");
+
+  if (menuButton && nav) {
+    menuButton.addEventListener("click", () => {
+      nav.classList.toggle("open");
+      menuButton.setAttribute(
+        "aria-expanded",
+        String(nav.classList.contains("open"))
+      );
+    });
+  }
+</script>
+
+</body>
+</html>
