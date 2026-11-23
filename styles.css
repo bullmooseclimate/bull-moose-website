@@ -1,3 +1,4 @@
+
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{margin:0;background:#f7f5ef;color:#282925;font-family:"DM Sans",sans-serif;line-height:1.6}
@@ -28,8 +29,8 @@ a{color:inherit}
 
 .brand img{
   display:block;
-  width:250px;
-  height:158px;
+  width:215px;
+  height:140px;
   object-fit:contain;
   flex-shrink:0;
 }
@@ -42,12 +43,11 @@ a{color:inherit}
   white-space:nowrap;
   color:#282925;
   line-height:1.08;
-  margin-left:0;
 }
 
 .brand-name strong{
   font-family:"Cormorant Garamond",Georgia,serif;
-  font-size:40px;
+  font-size:43px;
   font-weight:700;
   letter-spacing:.045em;
 }
@@ -55,7 +55,7 @@ a{color:inherit}
 .brand-name>span{
   margin-top:7px;
   font-family:"DM Sans",sans-serif;
-  font-size:16px;
+  font-size:17px;
   font-weight:600;
   letter-spacing:.18em;
 }
@@ -342,17 +342,18 @@ footer{
   background:#202220;
   color:#ddd;
   text-align:center;
-  padding:32px 20px;
+  padding:28px 20px;
 }
 
 footer img{
   display:block;
-  width:230px;
-  max-width:90%;
-  height:auto;
+  width:190px;
+  max-width:75%;
+  height:75px;
   object-fit:contain;
+  object-position:center;
   background:transparent;
-  margin:0 auto 12px;
+  margin:0 auto 10px;
 }
 
 footer p,footer small{font-size:11px;color:#bbb}
@@ -361,9 +362,9 @@ footer p,footer small{font-size:11px;color:#bbb}
 @media(max-width:1100px){
   .header{min-height:120px;padding:6px 12px}
   .brand{gap:10px}
-  .brand img{width:190px;height:125px}
-  .brand-name strong{font-size:31px}
-  .brand-name>span{font-size:13px}
+  .brand img{width:175px;height:115px}
+  .brand-name strong{font-size:34px}
+  .brand-name>span{font-size:14px}
   .header nav{gap:9px}
   .header nav a{font-size:11px}
 }
@@ -372,7 +373,7 @@ footer p,footer small{font-size:11px;color:#bbb}
 @media(max-width:760px){
   .header{min-height:104px;padding:4px 8px}
   .brand{gap:8px}
-  .brand img{width:150px;height:98px}
+  .brand img{width:140px;height:92px}
   .brand-name strong{font-size:25px}
   .brand-name>span{font-size:10px;letter-spacing:.12em}
 
@@ -420,7 +421,7 @@ footer p,footer small{font-size:11px;color:#bbb}
   }
 
   .brand{gap:8px}
-  .brand img{width:132px;height:84px}
+  .brand img{width:125px;height:80px}
   .brand-name strong{font-size:24px}
   .brand-name>span{font-size:10px;letter-spacing:.12em}
 
