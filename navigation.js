@@ -1,4 +1,6 @@
 (() => {
+  const logoPath = "/assets/grok_1791584076495~2-1.png";
+
   const menu = `
     <a href="/">Home</a>
 
@@ -24,6 +26,57 @@
     <a href="/about.html">About</a>
     <a class="cta" href="/contact.html">Get an Estimate</a>
   `;
+
+  function installBranding() {
+    const header = document.querySelector(".header");
+    const brand = header?.querySelector(".brand, .logo");
+
+    if (brand) {
+      brand.classList.remove("logo");
+      brand.classList.add("brand");
+      brand.setAttribute(
+        "aria-label",
+        "Bull Moose Climate Systems home"
+      );
+
+      brand.innerHTML = `
+        <img
+          src="${logoPath}"
+          alt="Bull Moose Climate Systems moose logo"
+        >
+        <span class="brand-name">
+          <strong>BULL MOOSE</strong>
+          <span>CLIMATE SYSTEMS LLC</span>
+        </span>
+      `;
+    }
+
+    const footer = document.querySelector("footer");
+
+    if (footer) {
+      footer.classList.add("footer");
+
+      footer.innerHTML = `
+        <a href="/" class="footer-brand"
+          aria-label="Bull Moose Climate Systems home">
+          <img
+            src="${logoPath}"
+            alt="Bull Moose Climate Systems moose logo"
+          >
+          <span class="footer-brand-name">
+            <strong>BULL MOOSE</strong>
+            <span>CLIMATE SYSTEMS LLC</span>
+          </span>
+        </a>
+
+        <p>Residential heat-pump solutions in Maine.</p>
+        <small>
+          &copy; ${new Date().getFullYear()}
+          Bull Moose Climate Systems LLC
+        </small>
+      `;
+    }
+  }
 
   function installNavigation() {
     const header = document.querySelector(".header");
@@ -69,9 +122,14 @@
     });
   }
 
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", installNavigation);
-  } else {
+  function initialize() {
+    installBranding();
     installNavigation();
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initialize);
+  } else {
+    initialize();
   }
 })();
