@@ -11,7 +11,6 @@
           aria-label="Open Heat Pumps submenu"
           aria-expanded="false">⌄</button>
       </div>
-
       <div class="bm-dropdown" hidden>
         <a href="/heat-pumps.html">Heat Pump Overview</a>
         <a href="/ductless-systems.html">Ductless Systems</a>
@@ -24,6 +23,7 @@
     <a href="/cleaning-maintenance.html">Cleaning &amp; Maintenance</a>
     <a href="/efficiency-maine.html">Efficiency Maine</a>
     <a href="/about.html">About</a>
+    <a href="/espanol.html">Español</a>
     <a class="cta" href="/contact.html">Get an Estimate</a>
   `;
 
@@ -34,16 +34,8 @@
     if (brand) {
       brand.classList.remove("logo");
       brand.classList.add("brand");
-      brand.setAttribute(
-        "aria-label",
-        "Bull Moose Climate Systems home"
-      );
-
       brand.innerHTML = `
-        <img
-          src="${logoPath}"
-          alt="Bull Moose Climate Systems moose logo"
-        >
+        <img src="${logoPath}" alt="Bull Moose Climate Systems moose logo">
         <span class="brand-name">
           <strong>BULL MOOSE</strong>
           <span>CLIMATE SYSTEMS LLC</span>
@@ -55,25 +47,23 @@
 
     if (footer) {
       footer.classList.add("footer");
-
       footer.innerHTML = `
-        <a href="/" class="footer-brand"
-          aria-label="Bull Moose Climate Systems home">
-          <img
-            src="${logoPath}"
-            alt="Bull Moose Climate Systems moose logo"
-          >
+        <a href="/" class="footer-brand">
+          <img src="${logoPath}" alt="Bull Moose Climate Systems moose logo">
           <span class="footer-brand-name">
             <strong>BULL MOOSE</strong>
             <span>CLIMATE SYSTEMS LLC</span>
           </span>
         </a>
-
         <p>Residential heat-pump solutions in Maine.</p>
-        <small>
-          &copy; ${new Date().getFullYear()}
-          Bull Moose Climate Systems LLC
-        </small>
+        <p>
+          <a href="tel:+12078978780">207-897-8780</a>
+          &nbsp;·&nbsp;
+          <a href="mailto:bullmooseclimate@gmail.com">Email</a>
+          &nbsp;·&nbsp;
+          <a href="https://wa.me/12078978780">WhatsApp</a>
+        </p>
+        <small>&copy; ${new Date().getFullYear()} Bull Moose Climate Systems LLC</small>
       `;
     }
   }
@@ -92,8 +82,8 @@
         event.preventDefault();
         event.stopPropagation();
 
-        const group = button.closest(".bm-nav-group");
-        const dropdown = group.querySelector(".bm-dropdown");
+        const dropdown = button.closest(".bm-nav-group")
+          .querySelector(".bm-dropdown");
         const opening = dropdown.hidden;
 
         nav.querySelectorAll(".bm-dropdown").forEach(item => {
@@ -113,10 +103,6 @@
       if (!nav.contains(event.target)) {
         nav.querySelectorAll(".bm-dropdown").forEach(item => {
           item.hidden = true;
-        });
-
-        nav.querySelectorAll(".bm-submenu-toggle").forEach(item => {
-          item.setAttribute("aria-expanded", "false");
         });
       }
     });
