@@ -1,5 +1,5 @@
 (() => {
-  const logoPath = "/assets/grok_1791584076495~2-1.png";
+  const logoPath = "/assets/bmcs%20tran.png";
 
   const menu = `
     <a href="/">Home</a>
