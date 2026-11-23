@@ -1,85 +1,340 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Contact Bull Moose Climate Systems LLC about heat pump installation and home comfort in Maine.">
-  <title>Contact & Estimates | Bull Moose Climate Systems</title>
+
+  <meta
+    name="description"
+    content="Request a residential heat-pump installation, cleaning, or maintenance estimate from Bull Moose Climate Systems in Maine.">
+
+  <title>Get an Estimate | Bull Moose Climate Systems</title>
+
   <link rel="stylesheet" href="/styles.css">
   <link rel="stylesheet" href="/navigation.css">
+
+  <style>
+    .estimate-area {
+      background: #f7f5ef;
+      color: #282925;
+    }
+
+    .estimate-area .bm-page-intro {
+      text-align: center;
+    }
+
+    .estimate-area .bm-page-intro p {
+      color: #69665f;
+    }
+
+    .estimate-form {
+      max-width: 780px;
+      margin: 25px auto 0;
+      padding: 30px;
+      display: grid;
+      gap: 10px;
+      background: #fff;
+      border: 1px solid #e8e3da;
+      border-radius: 6px;
+      box-shadow: 0 8px 28px rgba(0,0,0,.06);
+    }
+
+    .estimate-form h3 {
+      margin: 0;
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: 30px;
+      color: #282925;
+    }
+
+    .estimate-form .form-intro {
+      margin: 0 0 12px;
+      color: #69665f;
+      font-size: 13px;
+    }
+
+    .estimate-form label {
+      display: block;
+      margin-top: 9px;
+      color: #282925;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .estimate-form input,
+    .estimate-form select,
+    .estimate-form textarea {
+      display: block;
+      width: 100%;
+      min-height: 45px;
+      margin-top: 5px;
+      padding: 12px;
+      border: 1px solid #dedbd3;
+      border-radius: 4px;
+      background: #fff;
+      color: #282925;
+      font: 14px "DM Sans", sans-serif;
+    }
+
+    .estimate-form textarea {
+      resize: vertical;
+    }
+
+    .estimate-form button {
+      justify-self: stretch;
+      width: 100%;
+      margin-top: 18px;
+    }
+
+    .estimate-form .form-note {
+      color: #69665f;
+      font-size: 12px;
+      text-align: center;
+    }
+
+    .estimate-contact-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin: 25px auto;
+    }
+
+    .estimate-contact-links a {
+      display: inline-block;
+      padding: 12px 18px;
+      border: 1px solid #d9e1e5;
+      border-radius: 5px;
+      background: #fff;
+      color: #245b80;
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    @media(max-width:600px) {
+      .estimate-form {
+        padding: 20px;
+      }
+
+      .estimate-contact-links {
+        flex-direction: column;
+      }
+
+      .estimate-contact-links a {
+        text-align: center;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
 <header class="header">
   <a href="/" class="logo" aria-label="Bull Moose Climate Systems home">
     <img src="/assets/logo.jpg" alt="Bull Moose Climate Systems">
   </a>
+
   <button class="menu" type="button" aria-label="Open navigation menu">
     <span></span><span></span><span></span>
   </button>
+
   <nav aria-label="Main navigation"></nav>
 </header>
 
 <main>
+
   <section class="bm-page-hero">
     <div class="bm-page-hero-content">
       <p class="eyebrow">Let's make your home more comfortable</p>
       <h1>Get an Estimate</h1>
-      <p>Have a heat pump project in mind? Tell us a little about your home and what you're looking to accomplish.</p>
-      <a class="cta" href="#estimate-form">Tell Us About Your Project</a>
+      <p>
+        Tell us a little about your home and what you would like
+        to accomplish. We'll follow up to discuss your project
+        and possible solutions.
+      </p>
+      <a class="cta" href="#estimate-form">
+        Tell Us About Your Project
+      </a>
     </div>
   </section>
 
   <section class="bm-page-content">
     <div class="bm-page-intro">
       <h2>Start with a conversation</h2>
-      <p>Whether you're interested in a new ductless system, a ducted heat pump, or improving comfort in a particular part of your home, we'd like to hear about it.</p>
-      <p>The more we know about your project, the better we can understand what you're looking for.</p>
+      <p>
+        Whether you're interested in a new ductless system,
+        a ducted heat pump, a multi-zone installation,
+        or professional cleaning and maintenance,
+        we'd like to hear about it.
+      </p>
+      <p>
+        You don't need to know exactly what equipment you need.
+        The information below helps us understand your home
+        and what you're looking for.
+      </p>
     </div>
   </section>
 
-  <section class="bm-page-content" id="estimate-form">
+  <section class="bm-page-content estimate-area" id="estimate-form">
+
     <div class="bm-page-intro">
-      <h2>Tell us about your project</h2>
-      <p>Complete the information below and use the email button to send your request.</p>
+      <h2>Tell Us About Your Project</h2>
+      <p>
+        Complete the questions you can. If you're unsure about
+        something, you can leave it blank.
+      </p>
     </div>
 
-    <form id="estimateForm" class="bm-estimate-form">
+    <div class="estimate-contact-links">
+      <a href="tel:+12078978780">Call: 207-897-8780</a>
+      <a href="https://wa.me/12078978780">WhatsApp</a>
+      <a href="mailto:bullmooseclimate@gmail.com">Email Us</a>
+    </div>
+
+    <form id="estimateForm" class="estimate-form">
+
+      <h3>Estimate Request</h3>
+
+      <p class="form-intro">
+        Your information will be used to follow up about your project.
+      </p>
+
       <label for="customerName">Your Name</label>
-      <input type="text" id="customerName" name="name" autocomplete="name" required>
+      <input
+        type="text"
+        id="customerName"
+        name="Name"
+        autocomplete="name"
+        required>
 
       <label for="customerEmail">Email Address</label>
-      <input type="email" id="customerEmail" name="email" autocomplete="email" required>
+      <input
+        type="email"
+        id="customerEmail"
+        name="Email"
+        autocomplete="email"
+        required>
 
       <label for="customerPhone">Phone Number</label>
-      <input type="tel" id="customerPhone" name="phone" autocomplete="tel">
+      <input
+        type="tel"
+        id="customerPhone"
+        name="Phone"
+        autocomplete="tel">
 
       <label for="propertyLocation">Project Address or Town</label>
-      <input type="text" id="propertyLocation" name="location" autocomplete="street-address" required>
+      <input
+        type="text"
+        id="propertyLocation"
+        name="Project Address or Town"
+        autocomplete="street-address"
+        required>
 
-      <label for="projectType">What are you interested in?</label>
-      <select id="projectType" name="project">
-        <option value="Ductless heat pump">Ductless heat pump</option>
-        <option value="Ducted heat pump">Ducted heat pump</option>
-        <option value="Multi-zone heat pump">Multi-zone heat pump</option>
-        <option value="Cleaning or maintenance">Cleaning or maintenance</option>
-        <option value="Other">Other / Not sure yet</option>
+      <label for="projectType">What service are you interested in?</label>
+      <select id="projectType" name="Service">
+        <option value="">Select a service</option>
+        <option>Ductless single-zone heat pump</option>
+        <option>Ductless multi-zone heat pump</option>
+        <option>Ducted heat pump system</option>
+        <option>Heat-pump installation or replacement</option>
+        <option>Professional heat-pump cleaning</option>
+        <option>Maintenance or service consultation</option>
+        <option>Efficiency Maine program questions</option>
+        <option>Not sure yet — I'd like guidance</option>
+        <option>Other</option>
       </select>
 
-      <label for="projectDetails">Tell us a little about your home and project</label>
-      <textarea id="projectDetails" name="details" rows="6" placeholder="For example: number of rooms, approximate home size, existing heating system, or what you'd like to improve."></textarea>
+      <label for="propertyType">What type of home is this?</label>
+      <select id="propertyType" name="Property Type">
+        <option value="">Select a property type</option>
+        <option>Single-family home</option>
+        <option>Condominium or apartment</option>
+        <option>Mobile or manufactured home</option>
+        <option>Multi-family property</option>
+        <option>Other</option>
+      </select>
 
-      <button type="submit" class="cta">Prepare Email Request</button>
-      <p id="formMessage" role="status" aria-live="polite"></p>
+      <label for="homeSize">Approximate home size</label>
+      <select id="homeSize" name="Approximate Home Size">
+        <option value="">Select approximate size</option>
+        <option>Under 1,000 sq. ft.</option>
+        <option>1,000–1,500 sq. ft.</option>
+        <option>1,500–2,000 sq. ft.</option>
+        <option>2,000–2,500 sq. ft.</option>
+        <option>2,500–3,000 sq. ft.</option>
+        <option>Over 3,000 sq. ft.</option>
+        <option>Not sure</option>
+      </select>
+
+      <label for="rooms">How many rooms or areas need heating or cooling?</label>
+      <select id="rooms" name="Rooms or Areas">
+        <option value="">Select an option</option>
+        <option>One room</option>
+        <option>Two rooms</option>
+        <option>Three rooms</option>
+        <option>Four or more rooms</option>
+        <option>Most or all of the home</option>
+        <option>Not sure</option>
+      </select>
+
+      <label for="existingHeat">What is your current heating system?</label>
+      <select id="existingHeat" name="Existing Heating System">
+        <option value="">Select an option</option>
+        <option>Oil</option>
+        <option>Propane</option>
+        <option>Natural gas</option>
+        <option>Electric baseboard or electric heat</option>
+        <option>Wood or pellet stove</option>
+        <option>Existing heat pump</option>
+        <option>Other</option>
+        <option>Not sure</option>
+      </select>
+
+      <label for="projectTiming">When are you hoping to do the project?</label>
+      <select id="projectTiming" name="Project Timing">
+        <option value="">Select an option</option>
+        <option>As soon as possible</option>
+        <option>Within the next month</option>
+        <option>Within the next three months</option>
+        <option>Later this year</option>
+        <option>Just researching options</option>
+      </select>
+
+      <label for="projectDetails">
+        Tell us more about your home or project
+      </label>
+      <textarea
+        id="projectDetails"
+        name="Project Details"
+        rows="6"
+        placeholder="For example: which rooms you want to heat or cool, your current system, any comfort problems, or questions you have."></textarea>
+
+      <button type="submit" class="cta">
+        Prepare Email Request
+      </button>
+
+      <p class="form-note" id="formMessage" role="status" aria-live="polite">
+        Your email app will open with your project information.
+        Review the message and press Send.
+      </p>
+
     </form>
   </section>
 
-  <section class="bm-page-content bm-page-cta">
-    <h2>Not sure what system you need?</h2>
-    <p>That's okay. You don't need to know the answer before reaching out. We can start by discussing your home's comfort needs and exploring the options.</p>
-    <a class="cta" href="/heat-pumps.html">Explore Heat Pump Options</a>
+  <section class="bm-page-content">
+    <div class="bm-page-intro">
+      <h2>Not sure what system you need?</h2>
+      <p>
+        That's okay. You don't need to know the answer before reaching out.
+        We can start by discussing your home's comfort needs
+        and exploring the options.
+      </p>
+      <p>
+        <a href="/heat-pumps.html">Explore heat-pump options</a>
+      </p>
+    </div>
   </section>
+
 </main>
 
 <footer class="footer">
@@ -91,6 +346,7 @@
 </footer>
 
 <script src="/navigation.js"></script>
+
 <script>
   const menuButton = document.querySelector(".menu");
   const nav = document.querySelector(".header nav");
@@ -106,27 +362,28 @@
   estimateForm.addEventListener("submit", function(event) {
     event.preventDefault();
 
-    const data = new FormData(estimateForm);
+    const formData = new FormData(estimateForm);
 
     const subject = encodeURIComponent(
-      "Heat Pump Estimate Request - " + data.get("name")
+      "Website Estimate Request - " + formData.get("Name")
     );
 
     const body = encodeURIComponent(
-      "Name: " + data.get("name") + "\n" +
-      "Email: " + data.get("email") + "\n" +
-      "Phone: " + data.get("phone") + "\n" +
-      "Location: " + data.get("location") + "\n" +
-      "Project: " + data.get("project") + "\n\n" +
-      "Project Details:\n" + data.get("details")
+      [...formData.entries()]
+        .map(([key, value]) => key + ": " + value)
+        .join("\n")
     );
 
     document.getElementById("formMessage").textContent =
-      "Your email app will open with your project details. Please review and send the email.";
+      "Your email app will open with your project information. Review it and press Send.";
 
     window.location.href =
-      "mailto:bullmooseclimate@gmail.com?subject=" + subject + "&body=" + body;
+      "mailto:bullmooseclimate@gmail.com?subject=" +
+      subject +
+      "&body=" +
+      body;
   });
 </script>
+
 </body>
 </html>
