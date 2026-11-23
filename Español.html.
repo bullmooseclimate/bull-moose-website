@@ -1,0 +1,204 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Servicios de bombas de calor en Maine. Atención en español con Bull Moose Climate Systems LLC.">
+  <title>Servicios en Español | Bull Moose Climate Systems</title>
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/navigation.css">
+  <link rel="stylesheet" href="/page-heroes.css">
+</head>
+<body>
+
+<header class="header">
+  <a href="/" class="logo">
+    <img src="/assets/bmcs%20tran.png" alt="Bull Moose Climate Systems">
+  </a>
+  <button class="menu" type="button" aria-label="Abrir menú">
+    <span></span><span></span><span></span>
+  </button>
+  <nav aria-label="Navegación principal"></nav>
+</header>
+
+<main>
+
+<section class="bm-page-hero">
+  <div class="bm-page-hero-content">
+    <p class="eyebrow">Atención en español</p>
+    <h1>¡Bienvenidos a Bull Moose Climate Systems!</h1>
+    <p>
+      Ayudamos a los propietarios de viviendas en Maine
+      a encontrar soluciones de calefacción y aire acondicionado.
+      Puede comunicarse con nosotros completamente en español.
+    </p>
+    <a class="cta" href="#cotizacion">Solicitar un presupuesto</a>
+  </div>
+</section>
+
+<section class="bm-page-content">
+  <div class="bm-page-intro">
+    <h2>Soluciones para su hogar</h2>
+    <p>
+      Cada hogar es diferente. Le ayudamos a entender sus opciones
+      y encontrar un sistema que se adapte a sus necesidades,
+      su vivienda y su comodidad.
+    </p>
+  </div>
+
+  <div class="bm-product-grid">
+
+    <article class="bm-product-card">
+      <img src="https://strongheatingcooling.com/assets/mini-split-DFttqcpW.jpg"
+           alt="Sistema de bomba de calor sin conductos">
+      <div class="bm-product-card-copy">
+        <h3>Sistemas de una zona</h3>
+        <p>
+          Una unidad interior conectada a una unidad exterior.
+          Una buena opción para una habitación, una sala o una ampliación.
+        </p>
+        <a href="#cotizacion">Solicitar presupuesto →</a>
+      </div>
+    </article>
+
+    <article class="bm-product-card">
+      <img src="https://cdn11.bigcommerce.com/s-bgnp0pk0ti/images/stencil/1280x1280/products/40305/61990/FEn3FMmAAdHD9jKYPNpTVL1RBBCYurD61DCzyNi5Z4Fk7HBqnXe9ZA95CjXX1D8u__60842.1744322373.jpg?c=1"
+           alt="Sistema de bomba de calor multizona">
+      <div class="bm-product-card-copy">
+        <h3>Sistemas multizona</h3>
+        <p>
+          Varias unidades interiores conectadas a una unidad exterior
+          compatible para controlar la temperatura en diferentes espacios.
+        </p>
+        <a href="#cotizacion">Solicitar presupuesto →</a>
+      </div>
+    </article>
+
+    <article class="bm-product-card">
+      <img src="https://justheatpumpsllc.com/wp-content/uploads/2025/01/Bosch-IDS-Premium-Cold-Climate-Heat-Pump-5-ton-in-Golden-CO-1024x1024.jpg"
+           alt="Sistema de bomba de calor con conductos">
+      <div class="bm-product-card-copy">
+        <h3>Sistemas con conductos</h3>
+        <p>
+          Calefacción y aire acondicionado distribuidos por toda
+          la vivienda mediante conductos existentes adecuados.
+        </p>
+        <a href="#cotizacion">Solicitar presupuesto →</a>
+      </div>
+    </article>
+
+    <article class="bm-product-card">
+      <img src="/assets/20260718_092057.jpg"
+           alt="Limpieza profesional de una bomba de calor">
+      <div class="bm-product-card-copy">
+        <h3>Limpieza profesional</h3>
+        <p>
+          Limpieza profunda de los componentes interiores y exteriores
+          para ayudar a mantener el rendimiento del sistema.
+        </p>
+        <a href="#cotizacion">Solicitar presupuesto →</a>
+      </div>
+    </article>
+
+    <article class="bm-product-card">
+      <img src="https://www.firstclasshomeservices.com/images/gallery/air-handler-honeywell.jpg"
+           alt="Equipo interior de una bomba de calor">
+      <div class="bm-product-card-copy">
+        <h3>Instalación</h3>
+        <p>
+          Planificación e instalación de sistemas de bombas de calor
+          teniendo en cuenta las características de su hogar.
+        </p>
+        <a href="#cotizacion">Solicitar presupuesto →</a>
+      </div>
+    </article>
+
+    <article class="bm-product-card">
+      <img src="/assets/maintenance-blower-before.jpg"
+           alt="Componentes interiores de una bomba de calor">
+      <div class="bm-product-card-copy">
+        <h3>Mantenimiento y cuidado</h3>
+        <p>
+          El mantenimiento adecuado ayuda a conservar el flujo de aire,
+          la limpieza y el funcionamiento del equipo.
+        </p>
+        <a href="#cotizacion">Solicitar presupuesto →</a>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<section class="bm-page-content">
+  <div class="bm-page-intro">
+    <h2>Programas de Efficiency Maine</h2>
+    <p>
+      Algunos propietarios pueden calificar para incentivos
+      o programas relacionados con bombas de calor.
+      Los requisitos y beneficios pueden cambiar.
+      Le ayudamos a conversar sobre las opciones disponibles.
+    </p>
+  </div>
+</section>
+
+<section class="bm-page-content bm-page-cta" id="cotizacion">
+  <h2>Hablemos de su proyecto</h2>
+  <p>
+    Estamos aquí para responder sus preguntas y ayudarle
+    a encontrar una solución para su hogar.
+  </p>
+
+  <div class="bm-page-links">
+    <a class="bm-action" href="tel:+12078978780">Llamar: 207-897-8780</a>
+    <a class="bm-action" href="https://wa.me/12078978780">WhatsApp</a>
+    <a class="bm-action" href="mailto:bullmooseclimate@gmail.com">Enviar un correo</a>
+  </div>
+
+  <form class="bm-estimate-form"
+    action="mailto:bullmooseclimate@gmail.com"
+    method="post"
+    enctype="text/plain">
+
+    <label for="nombre">Nombre</label>
+    <input id="nombre" name="Nombre" required>
+
+    <label for="telefono">Teléfono</label>
+    <input id="telefono" name="Telefono" type="tel">
+
+    <label for="correo">Correo electrónico</label>
+    <input id="correo" name="Correo" type="email">
+
+    <label for="servicio">¿Qué servicio le interesa?</label>
+    <select id="servicio" name="Servicio">
+      <option>Instalación de una zona</option>
+      <option>Sistema multizona</option>
+      <option>Sistema con conductos</option>
+      <option>Limpieza y mantenimiento</option>
+      <option>Consulta sobre bombas de calor</option>
+      <option>Otro</option>
+    </select>
+
+    <label for="mensaje">Cuéntenos sobre su hogar y su proyecto</label>
+    <textarea id="mensaje" name="Mensaje" rows="5" required></textarea>
+
+    <button class="bm-action" type="submit">Enviar solicitud</button>
+    <p>También puede llamarnos o escribirnos por WhatsApp.</p>
+  </form>
+</section>
+
+</main>
+
+<footer class="footer"></footer>
+
+<script src="/navigation.js"></script>
+<script>
+  const menuButton = document.querySelector(".menu");
+  const nav = document.querySelector(".header nav");
+  if (menuButton && nav) {
+    menuButton.addEventListener("click", () => nav.classList.toggle("open"));
+  }
+</script>
+
+</body>
+</html>
