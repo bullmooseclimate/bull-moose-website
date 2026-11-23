@@ -1,10 +1,15 @@
-
 let data, current = 0, timer = null, paused = false;
 let pointerStart = null, wasRunningBeforePress = false;
 let activeCategory = 0, transitionTimer = null;
 let slideChangeToken = 0;
 
 const $ = id => document.getElementById(id);
+
+const FIRST_SLIDE_IMAGE =
+  "https://strongheatingcooling.com/assets/mini-split-DFttqcpW.jpg";
+
+const FOAMED_COIL_IMAGE =
+  "/assets/20260718_092057.jpg";
 
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({
   '&': '&amp;',
@@ -21,11 +26,15 @@ async function init() {
     data = await response.json();
   } catch (e) {
     console.error('Site content could not be loaded:', e);
-    data = { categories: [], services: [] };
+    data = { categories: [], slides: [], services: [] };
   }
 
   render();
-  $('year').textContent = new Date().getFullYear();
+
+  if ($('year')) {
+    $('year').textContent = new Date().getFullYear();
+  }
+
   bindSlideshowGestures();
 }
 
@@ -34,19 +43,54 @@ const categories = () =>
     ? data.categories.filter(c => c.visible !== false)
     : [];
 
-const slides = () => categories();
+/*
+  Combine the homepage slideshow settings with the category content.
+  This keeps all five category buttons while using the separate
+  slide images, titles, and descriptions saved in site.json.
+*/
+const slides = () => {
+  const categoryList = categories();
+
+  const slideList = Array.isArray(data.slides)
+    ? data.slides.filter(s => s.visible !== false)
+    : [];
+
+  return categoryList.map((category, index) => {
+    const slide = slideList[index] || {};
+
+    const combined = {
+      ...category,
+      ...slide,
+      _category: category
+    };
+
+    if (index === 0) {
+      combined.image = FIRST_SLIDE_IMAGE;
+    }
+
+    return combined;
+  });
+};
 
 function render() {
   renderTopicButtons();
 
-  if (slides().length) {
+  const firstSlide = slides();
+
+  if (firstSlide.length) {
     current = 0;
-    showSlide(current, false);
+    activeCategory = 0;
+    showSlide(0, false);
   }
 
   $('servicesList').innerHTML = (data.services || [])
     .filter(s => s.visible !== false)
-    .map(s => `<article class="card"><h3>${esc(s.title)}</h3><p>${esc(s.description)}</p></article>`)
+    .map(s => `
+      <article class="card">
+        <h3>${esc(s.title)}</h3>
+        <p>${esc(s.description)}</p>
+      </article>
+    `)
     .join('');
 
   $('productsList').innerHTML = cards(data.products);
@@ -54,19 +98,44 @@ function render() {
 
   $('reviewsList').innerHTML = (data.testimonials || [])
     .filter(x => x.visible !== false)
-    .map(t => `<article class="card"><p>“${esc(t.quote)}”</p><strong>${esc(t.name)}</strong></article>`)
+    .map(t => `
+      <article class="card">
+        <p>“${esc(t.quote)}”</p>
+        <strong>${esc(t.name)}</strong>
+      </article>
+    `)
     .join('');
 
-  $('maintenanceTitle').textContent = data.maintenance?.title || '';
-  $('maintenanceText').textContent = data.maintenance?.description || '';
+  $('maintenanceTitle').textContent =
+    data.maintenance?.title || '';
+
+  $('maintenanceText').textContent =
+    data.maintenance?.description || '';
+
+  /*
+    Use the actual foamed-coil cleaning photo from your own work
+    in the homepage maintenance section.
+  */
+  const maintenancePhoto = document.querySelector('.split-photo');
+
+  if (maintenancePhoto) {
+    maintenancePhoto.style.backgroundImage =
+      `url("${FOAMED_COIL_IMAGE}")`;
+    maintenancePhoto.style.backgroundPosition = 'center';
+    maintenancePhoto.style.backgroundSize = 'cover';
+  }
+
   $('aboutTitle').textContent = data.about?.title || '';
   $('aboutText').textContent = data.about?.description || '';
 
   const b = data.business || {};
+
   $('contactDetails').textContent =
     [b.phone, b.email, b.serviceArea].filter(Boolean).join(' · ');
 
-  if (data.settings?.autoRotate !== false) start();
+  if (data.settings?.autoRotate !== false) {
+    start();
+  }
 }
 
 function cards(arr) {
@@ -110,13 +179,21 @@ function renderCategoryContent(category) {
   if (!category) return;
 
   $('categoryEyebrow').textContent =
-    category.contentEyebrow || category.eyebrow || category.label || 'Explore';
+    category.contentEyebrow ||
+    category.eyebrow ||
+    category.label ||
+    'Explore';
 
   $('categoryHeading').textContent =
-    category.contentTitle || category.title || category.label || 'Explore';
+    category.contentTitle ||
+    category.title ||
+    category.label ||
+    'Explore';
 
   $('categoryDescription').textContent =
-    category.contentDescription || category.description || '';
+    category.contentDescription ||
+    category.description ||
+    '';
 
   const items = Array.isArray(category.contentItems)
     ? category.contentItems.filter(x => x.visible !== false)
@@ -125,13 +202,17 @@ function renderCategoryContent(category) {
   $('categoryItems').innerHTML = items.length
     ? items.map(item => `
         <article class="category-item">
-          ${item.image ? `<img src="${esc(item.image)}" alt="${esc(item.title || '')}">` : ''}
+          ${item.image
+            ? `<img src="${esc(item.image)}" alt="${esc(item.title || '')}">`
+            : ''}
           <div class="item-copy">
             <h3>${esc(item.title || '')}</h3>
             <p>${esc(item.description || '')}</p>
             ${item.link ? `
               <a href="${esc(item.link)}"
-                ${/^https?:/i.test(item.link) ? 'target="_blank" rel="noopener"' : ''}>
+                ${/^https?:/i.test(item.link)
+                  ? 'target="_blank" rel="noopener"'
+                  : ''}>
                 ${esc(item.linkText || 'Learn more')} →
               </a>
             ` : ''}
@@ -143,6 +224,7 @@ function renderCategoryContent(category) {
 
 async function showSlide(i, resetTimer = true) {
   const list = slides();
+
   if (!list.length) return;
 
   current = (i + list.length) % list.length;
@@ -156,10 +238,10 @@ async function showSlide(i, resetTimer = true) {
 
   clearTimeout(transitionTimer);
 
-  // Reset the countdown after manual slide changes.
-  if (resetTimer) start();
+  if (resetTimer) {
+    start();
+  }
 
-  // Preload the incoming photo before beginning the transition.
   if (s.image) {
     const preload = new Image();
     preload.src = s.image;
@@ -171,29 +253,23 @@ async function showSlide(i, resetTimer = true) {
     }
   }
 
-  // Ignore an older request if another slide was selected.
   if (token !== slideChangeToken) return;
 
-  // Prepare the incoming photograph.
   heroBg.style.setProperty(
     '--next-slide-image',
     s.image ? `url("${s.image}")` : 'none'
   );
 
-  // Start the photo fade.
   heroBg.classList.add('photo-changing');
 
-  // Fade out the previous text and category content.
   heroCopy.classList.add('slide-copy-changing');
   categoryContent.classList.add('content-changing');
 
-  // Smoothly update the selected category button.
   $('topicNav').querySelectorAll('.topic-button').forEach((button, index) => {
     button.classList.toggle('active', index === current);
     button.setAttribute('aria-pressed', String(index === current));
   });
 
-  // Update the new slide's content after the photo begins appearing.
   setTimeout(() => {
     if (token !== slideChangeToken) return;
 
@@ -206,14 +282,16 @@ async function showSlide(i, resetTimer = true) {
     $('slideLink').style.display =
       s.buttonText || s.link ? 'inline-block' : 'none';
 
-    renderCategoryContent(s);
+    /*
+      The slide controls the hero.
+      Its matching category controls the preview below it.
+    */
+    renderCategoryContent(s._category || s);
 
-    // Fade in the new text and category content.
     heroCopy.classList.remove('slide-copy-changing');
     categoryContent.classList.remove('content-changing');
   }, 400);
 
-  // Complete the photo crossfade.
   transitionTimer = setTimeout(() => {
     if (token !== slideChangeToken) return;
 
@@ -233,7 +311,11 @@ function stop() {
 function start() {
   stop();
 
-  if (slides().length > 1 && !paused && data.settings?.autoRotate !== false) {
+  if (
+    slides().length > 1 &&
+    !paused &&
+    data.settings?.autoRotate !== false
+  ) {
     timer = setInterval(
       () => showSlide(current + 1, false),
       Number(data.settings.slideInterval) || 5000
@@ -273,17 +355,26 @@ function bindSlideshowGestures() {
       !e.target.closest('.hero-copy')
     ) {
       const rect = hero.getBoundingClientRect();
-      showSlide(current + (e.clientX < rect.left + rect.width / 2 ? -1 : 1));
+
+      showSlide(
+        current +
+        (e.clientX < rect.left + rect.width / 2 ? -1 : 1)
+      );
     }
 
     pointerStart = null;
 
-    if (wasRunningBeforePress && !paused) start();
+    if (wasRunningBeforePress && !paused) {
+      start();
+    }
   });
 
   hero.addEventListener('pointercancel', () => {
     pointerStart = null;
-    if (wasRunningBeforePress && !paused) start();
+
+    if (wasRunningBeforePress && !paused) {
+      start();
+    }
   });
 
   hero.addEventListener('contextmenu', e => e.preventDefault());
@@ -325,7 +416,9 @@ $('contactForm').onsubmit = async e => {
 
       if (!response.ok) throw Error();
 
-      $('formNote').textContent = 'Thank you. Your request was submitted.';
+      $('formNote').textContent =
+        'Thank you. Your request was submitted.';
+
       e.target.reset();
       return;
     } catch (err) {
@@ -339,10 +432,13 @@ $('contactForm').onsubmit = async e => {
   );
 
   const body = encodeURIComponent(
-    [...fd.entries()].map(([k, v]) => `${k}: ${v}`).join('\n')
+    [...fd.entries()]
+      .map(([k, v]) => `${k}: ${v}`)
+      .join('\n')
   );
 
-  const email = data.business?.email || '';
+  const email = data.business?.email || 'bullmooseclimate@gmail.com';
+
   location.href =
     `mailto:${email}?subject=${subject}&body=${body}`;
 };
