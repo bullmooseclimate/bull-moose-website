@@ -1,32 +1,18 @@
 (() => {
   const logoPath = "/assets/bm%20tran.png";
-  const phoneNumber = "+12078987870";
+  const phoneNumber = "+12078978780";
   const phoneDisplay = "207-897-8780";
   const emailAddress = "bullmooseclimate@gmail.com";
   const whatsappUrl = "https://wa.me/12078978780";
 
-  // Standalone WhatsApp logo artwork.
+  // Original standalone WhatsApp image. No added background or border.
   const whatsappIcon = `
     <img
       class="bm-whatsapp-icon"
       src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
       alt="WhatsApp"
-      width="22"
-      height="22"
-      style="
-        display:inline-block;
-        width:22px;
-        height:22px;
-        min-width:22px;
-        object-fit:contain;
-        border:0;
-        outline:0;
-        background:none;
-        box-shadow:none;
-        padding:0;
-        margin:0;
-        vertical-align:middle;
-      "
+      width="23"
+      height="23"
     >
   `;
 
@@ -42,6 +28,49 @@
         <path d="m3 6 9 7 9-7"/>
       </svg>`
   };
+
+  // Keep WhatsApp image and text aligned with the other contact links.
+  function installContactStyles() {
+    if (document.getElementById("bm-contact-icon-fixes")) return;
+
+    const style = document.createElement("style");
+    style.id = "bm-contact-icon-fixes";
+
+    style.textContent = `
+      .bm-contact-link,
+      .bm-contact-inline a,
+      .footer-contact-icons a,
+      .bm-contact-options a,
+      .contact-links a {
+        align-items: center;
+      }
+
+      .bm-whatsapp-icon {
+        display: inline-block !important;
+        width: 23px !important;
+        height: 23px !important;
+        min-width: 23px !important;
+        max-width: 23px !important;
+        object-fit: contain !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        border: 0 !important;
+        outline: 0 !important;
+        background: none !important;
+        box-shadow: none !important;
+        vertical-align: middle !important;
+        flex: 0 0 23px !important;
+      }
+
+      .bm-contact-link,
+      .bm-contact-inline a,
+      .footer-contact-icons a {
+        gap: 8px;
+      }
+    `;
+
+    document.head.appendChild(style);
+  }
 
   const menu = `
     <a href="/">Home</a>
@@ -90,17 +119,13 @@
       'a[href^="tel:"], a[href^="mailto:"], a[href*="wa.me"], a[href*="whatsapp"]'
     ).forEach(link => {
       if (isWhatsApp(link)) {
-        link.querySelectorAll("svg, img.bm-whatsapp-icon")
-          .forEach(icon => icon.remove());
+        // Remove the old homemade SVG only.
+        link.querySelectorAll("svg").forEach(icon => icon.remove());
 
-        link.insertAdjacentHTML("afterbegin", whatsappIcon);
-
-        // No border or decorative styling around WhatsApp.
-        link.style.border = "0";
-        link.style.outline = "0";
-        link.style.boxShadow = "none";
-        link.style.background = "none";
-        link.style.padding = "0";
+        // Insert the real image only once.
+        if (!link.querySelector("img.bm-whatsapp-icon")) {
+          link.insertAdjacentHTML("afterbegin", whatsappIcon);
+        }
       } else if (!link.dataset.contactIconAdded) {
         const icon = iconForLink(link);
 
@@ -122,18 +147,18 @@
     ) {
       contactDetails.innerHTML = `
         <span class="bm-contact-inline">
-          <a href="tel:${phoneNumber}">
+          <a class="bm-contact-link" href="tel:${phoneNumber}">
             ${icons.phone}
             <span>${phoneDisplay}</span>
           </a>
 
-          <a href="${whatsappUrl}" target="_blank" rel="noopener"
-             style="border:0;outline:0;box-shadow:none;background:none;padding:0;">
+          <a class="bm-contact-link" href="${whatsappUrl}"
+             target="_blank" rel="noopener">
             ${whatsappIcon}
             <span>WhatsApp</span>
           </a>
 
-          <a href="mailto:${emailAddress}">
+          <a class="bm-contact-link" href="mailto:${emailAddress}">
             ${icons.email}
             <span>Email</span>
           </a>
@@ -153,7 +178,7 @@
       brand.classList.add("brand");
 
       brand.innerHTML = `
-        <img src="/assets/bm%20tran.png"
+        <img src="${logoPath}"
              alt="Bull Moose Climate Systems moose logo">
 
         <span class="brand-name">
@@ -170,7 +195,7 @@
 
       footer.innerHTML = `
         <a href="/" class="footer-brand">
-          <img src="/assets/bm%20tran.png"
+          <img src="${logoPath}"
                alt="Bull Moose Climate Systems moose logo">
 
           <span class="footer-brand-name">
@@ -187,8 +212,7 @@
             <span>${phoneDisplay}</span>
           </a>
 
-          <a href="${whatsappUrl}" target="_blank" rel="noopener"
-             style="border:0;outline:0;box-shadow:none;background:none;padding:0;">
+          <a href="${whatsappUrl}" target="_blank" rel="noopener">
             ${whatsappIcon}
             <span>WhatsApp</span>
           </a>
@@ -252,6 +276,7 @@
   }
 
   function initialize() {
+    installContactStyles();
     installBranding();
     installNavigation();
     addContactIcons();
