@@ -1,30 +1,41 @@
-
 (() => {
-  const logoPath = "/assets/bmcs%20tran.png";
-  const phoneNumber = "+12078978780";
+  const logoPath = "/assets/bm%20tran.png";
+  const phoneNumber = "+12078987870";
   const phoneDisplay = "207-897-8780";
   const emailAddress = "bullmooseclimate@gmail.com";
   const whatsappUrl = "https://wa.me/12078978780";
 
+  // Standalone WhatsApp logo artwork.
   const whatsappIcon = `
-    <svg class="bm-whatsapp-icon"
-      viewBox="0 0 24 24"
-      width="22" height="22"
-      aria-hidden="true"
-      style="width:22px;height:22px;min-width:22px;display:inline-block;vertical-align:middle;">
-      <circle cx="12" cy="12" r="12" fill="#25D366"/>
-      <path d="M6.2 19.1l.9-3.2A7.5 7.5 0 1 1 9.7 19l-3.5.1z"
-        fill="none" stroke="#fff" stroke-width="1.5"
-        stroke-linejoin="round"/>
-      <path d="M9.2 8.5c-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.4-.3.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.4 3.8 2.2.9 2.6.7 3.1.7.5-.1 1.6-.7 1.8-1.3.2-.6.2-1.1.1-1.2-.1-.1-.3-.2-.6-.4l-1.8-.9c-.2-.1-.4-.1-.6.2-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.4-2.2-1.3-.8-.7-1.3-1.6-1.5-1.9-.2-.3 0-.4.1-.6l.4-.5c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.8-1.9z"
-        fill="#fff"/>
-    </svg>`;
+    <img
+      class="bm-whatsapp-icon"
+      src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
+      alt="WhatsApp"
+      width="22"
+      height="22"
+      style="
+        display:inline-block;
+        width:22px;
+        height:22px;
+        min-width:22px;
+        object-fit:contain;
+        border:0;
+        outline:0;
+        background:none;
+        box-shadow:none;
+        padding:0;
+        margin:0;
+        vertical-align:middle;
+      "
+    >
+  `;
 
   const icons = {
     phone: `
       <svg viewBox="0 0 24 24" aria-hidden="true">
         <path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.4 19.4 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.2-1.3a2 2 0 0 1 2.1-.5c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.8 2.1z"/>
       </svg>`,
+
     email: `
       <svg viewBox="0 0 24 24" aria-hidden="true">
         <rect x="2.5" y="4.5" width="19" height="15" rx="2"/>
@@ -34,6 +45,7 @@
 
   const menu = `
     <a href="/">Home</a>
+
     <div class="bm-nav-group">
       <div class="bm-nav-line">
         <a href="/heat-pumps.html">Heat Pumps</a>
@@ -41,6 +53,7 @@
           aria-label="Open Heat Pumps submenu"
           aria-expanded="false">⌄</button>
       </div>
+
       <div class="bm-dropdown" hidden>
         <a href="/heat-pumps.html">Heat Pump Overview</a>
         <a href="/ductless-systems.html">Ductless Systems</a>
@@ -48,6 +61,7 @@
         <a href="/multi-zone-systems.html">Multi-Zone Systems</a>
       </div>
     </div>
+
     <a href="/installation.html">Installation</a>
     <a href="/cleaning-maintenance.html">Cleaning &amp; Maintenance</a>
     <a href="/efficiency-maine.html">Efficiency Maine</a>
@@ -63,9 +77,11 @@
 
   function iconForLink(link) {
     const href = (link.getAttribute("href") || "").toLowerCase();
+
     if (href.startsWith("tel:")) return icons.phone;
     if (href.startsWith("mailto:")) return icons.email;
     if (isWhatsApp(link)) return whatsappIcon;
+
     return "";
   }
 
@@ -73,14 +89,22 @@
     document.querySelectorAll(
       'a[href^="tel:"], a[href^="mailto:"], a[href*="wa.me"], a[href*="whatsapp"]'
     ).forEach(link => {
-      const icon = iconForLink(link);
-      if (!icon) return;
-
       if (isWhatsApp(link)) {
-        link.querySelectorAll("svg").forEach(oldIcon => oldIcon.remove());
+        link.querySelectorAll("svg, img.bm-whatsapp-icon")
+          .forEach(icon => icon.remove());
+
         link.insertAdjacentHTML("afterbegin", whatsappIcon);
+
+        // No border or decorative styling around WhatsApp.
+        link.style.border = "0";
+        link.style.outline = "0";
+        link.style.boxShadow = "none";
+        link.style.background = "none";
+        link.style.padding = "0";
       } else if (!link.dataset.contactIconAdded) {
-        if (!link.querySelector("svg")) {
+        const icon = iconForLink(link);
+
+        if (icon && !link.querySelector("svg")) {
           link.insertAdjacentHTML("afterbegin", icon);
         }
       }
@@ -99,16 +123,23 @@
       contactDetails.innerHTML = `
         <span class="bm-contact-inline">
           <a href="tel:${phoneNumber}">
-            ${icons.phone}<span>${phoneDisplay}</span>
+            ${icons.phone}
+            <span>${phoneDisplay}</span>
           </a>
-          <a href="${whatsappUrl}" target="_blank" rel="noopener">
-            ${whatsappIcon}<span>WhatsApp</span>
+
+          <a href="${whatsappUrl}" target="_blank" rel="noopener"
+             style="border:0;outline:0;box-shadow:none;background:none;padding:0;">
+            ${whatsappIcon}
+            <span>WhatsApp</span>
           </a>
+
           <a href="mailto:${emailAddress}">
-            ${icons.email}<span>Email</span>
+            ${icons.email}
+            <span>Email</span>
           </a>
         </span>
       `;
+
       contactDetails.dataset.contactLinksAdded = "true";
     }
   }
@@ -120,8 +151,11 @@
     if (brand) {
       brand.classList.remove("logo");
       brand.classList.add("brand");
+
       brand.innerHTML = `
-        <img src="${logoPath}" alt="Bull Moose Climate Systems moose logo">
+        <img src="/assets/bm%20tran.png"
+             alt="Bull Moose Climate Systems moose logo">
+
         <span class="brand-name">
           <strong>BULL MOOSE</strong>
           <span>CLIMATE SYSTEMS LLC</span>
@@ -133,26 +167,38 @@
 
     if (footer) {
       footer.classList.add("footer");
+
       footer.innerHTML = `
         <a href="/" class="footer-brand">
-          <img src="${logoPath}" alt="Bull Moose Climate Systems moose logo">
+          <img src="/assets/bm%20tran.png"
+               alt="Bull Moose Climate Systems moose logo">
+
           <span class="footer-brand-name">
             <strong>BULL MOOSE</strong>
             <span>CLIMATE SYSTEMS LLC</span>
           </span>
         </a>
+
         <p>Residential heat-pump solutions in Maine.</p>
+
         <div class="footer-contact-icons">
           <a href="tel:${phoneNumber}">
-            ${icons.phone}<span>${phoneDisplay}</span>
+            ${icons.phone}
+            <span>${phoneDisplay}</span>
           </a>
-          <a href="${whatsappUrl}" target="_blank" rel="noopener">
-            ${whatsappIcon}<span>WhatsApp</span>
+
+          <a href="${whatsappUrl}" target="_blank" rel="noopener"
+             style="border:0;outline:0;box-shadow:none;background:none;padding:0;">
+            ${whatsappIcon}
+            <span>WhatsApp</span>
           </a>
+
           <a href="mailto:${emailAddress}">
-            ${icons.email}<span>Email</span>
+            ${icons.email}
+            <span>Email</span>
           </a>
         </div>
+
         <small>
           &copy; ${new Date().getFullYear()} Bull Moose Climate Systems LLC
         </small>
@@ -163,6 +209,7 @@
   function installNavigation() {
     const header = document.querySelector(".header");
     const nav = header?.querySelector("nav");
+
     if (!header || !nav) return;
 
     nav.innerHTML = menu;
@@ -175,11 +222,13 @@
 
         const dropdown = button.closest(".bm-nav-group")
           .querySelector(".bm-dropdown");
+
         const opening = dropdown.hidden;
 
         nav.querySelectorAll(".bm-dropdown").forEach(item => {
           item.hidden = true;
         });
+
         nav.querySelectorAll(".bm-submenu-toggle").forEach(item => {
           item.setAttribute("aria-expanded", "false");
         });
@@ -194,6 +243,7 @@
         nav.querySelectorAll(".bm-dropdown").forEach(item => {
           item.hidden = true;
         });
+
         nav.querySelectorAll(".bm-submenu-toggle").forEach(button => {
           button.setAttribute("aria-expanded", "false");
         });
@@ -210,6 +260,7 @@
 
     if (contactDetails) {
       const observer = new MutationObserver(addContactIcons);
+
       observer.observe(contactDetails, {
         childList: true,
         characterData: true,
