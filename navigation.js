@@ -5,6 +5,31 @@
   const emailAddress = "bullmooseclimate@gmail.com";
   const whatsappUrl = "https://wa.me/12078978780";
 
+  // Actual WhatsApp brand icon asset.
+  // White brand symbol displayed on WhatsApp green.
+  const whatsappIcon = `
+    <img
+      class="bm-whatsapp-icon"
+      src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/svgs/brands/whatsapp.svg"
+      alt=""
+      aria-hidden="true"
+      width="22"
+      height="22"
+      style="
+        width:22px;
+        height:22px;
+        min-width:22px;
+        object-fit:contain;
+        background:#25D366;
+        border-radius:50%;
+        padding:3px;
+        box-sizing:border-box;
+        filter:brightness(0) invert(1);
+        display:inline-block;
+        vertical-align:middle;
+      ">
+  `;
+
   const icons = {
     phone: `
       <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -15,22 +40,6 @@
       <svg viewBox="0 0 24 24" aria-hidden="true">
         <rect x="2.5" y="4.5" width="19" height="15" rx="2"/>
         <path d="m3 6 9 7 9-7"/>
-      </svg>`,
-
-    whatsapp: `
-      <svg
-        class="bm-whatsapp-icon"
-        viewBox="0 0 24 24"
-        aria-hidden="true"
-        xmlns="http://www.w3.org/2000/svg">
-
-        <path
-          fill="#25D366"
-          d="M12 1.5C6.2 1.5 1.5 6.1 1.5 11.8c0 1.9.5 3.7 1.5 5.3L1.5 22l5.1-1.3c1.6.9 3.4 1.4 5.3 1.4 5.8 0 10.5-4.6 10.5-10.3S17.8 1.5 12 1.5z"/>
-
-        <path
-          fill="#FFFFFF"
-          d="M17.7 15.1c-.3-.2-1.8-.9-2.1-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7.1-.3-.2-1.3-.5-2.5-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.7l.5-.6c.2-.2.2-.3.3-.6.1-.2 0-.4 0-.6-.1-.2-.7-1.7-1-2.3-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.1 1.1-1.1 2.6s1.1 3 1.3 3.2c.2.2 2.2 3.4 5.3 4.6.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2.1-1.4.3-.7.3-1.3.2-1.4-.1-.1-.3-.2-.6-.3z"/>
       </svg>`
   };
 
@@ -61,15 +70,18 @@
     <a class="cta" href="/contact.html">Get an Estimate</a>
   `;
 
+  function isWhatsApp(link) {
+    const href = (link.getAttribute("href") || "").toLowerCase();
+
+    return href.includes("wa.me") || href.includes("whatsapp");
+  }
+
   function iconForLink(link) {
     const href = (link.getAttribute("href") || "").toLowerCase();
 
     if (href.startsWith("tel:")) return icons.phone;
     if (href.startsWith("mailto:")) return icons.email;
-
-    if (href.includes("wa.me") || href.includes("whatsapp")) {
-      return icons.whatsapp;
-    }
+    if (isWhatsApp(link)) return whatsappIcon;
 
     return "";
   }
@@ -78,18 +90,17 @@
     document.querySelectorAll(
       'a[href^="tel:"], a[href^="mailto:"], a[href*="wa.me"], a[href*="whatsapp"]'
     ).forEach(link => {
-      const href = (link.getAttribute("href") || "").toLowerCase();
-      const isWhatsApp =
-        href.includes("wa.me") || href.includes("whatsapp");
-
       const icon = iconForLink(link);
+
       if (!icon) return;
 
-      if (isWhatsApp) {
-        const oldIcon = link.querySelector("svg");
-        if (oldIcon) oldIcon.remove();
+      if (isWhatsApp(link)) {
+        // Remove the previous homemade WhatsApp SVG or image.
+        link.querySelectorAll("svg, img.bm-whatsapp-icon").forEach(oldIcon => {
+          oldIcon.remove();
+        });
 
-        link.insertAdjacentHTML("afterbegin", icon);
+        link.insertAdjacentHTML("afterbegin", whatsappIcon);
       } else if (!link.dataset.contactIconAdded) {
         if (!link.querySelector("svg")) {
           link.insertAdjacentHTML("afterbegin", icon);
@@ -115,7 +126,7 @@
           </a>
 
           <a href="${whatsappUrl}" target="_blank" rel="noopener">
-            ${icons.whatsapp}
+            ${whatsappIcon}
             <span>WhatsApp</span>
           </a>
 
@@ -172,7 +183,7 @@
           </a>
 
           <a href="${whatsappUrl}" target="_blank" rel="noopener">
-            ${icons.whatsapp}
+            ${whatsappIcon}
             <span>WhatsApp</span>
           </a>
 
