@@ -18,9 +18,19 @@
       </svg>`,
 
     whatsapp: `
-      <svg class="whatsapp-icon" viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M20.5 11.8a8.5 8.5 0 0 1-12.6 7.4L3 20.5l1.3-4.7a8.5 8.5 0 1 1 16.2-4z"/>
-        <path d="M8.5 7.5c-.3-.7-.6-.7-.9-.7h-.7c-.3 0-.7.2-.9.6-.3.3-1.1 1.1-1.1 2.7s1.1 3.1 1.3 3.3c.2.2 2.1 3.4 5.2 4.6 2.6 1 3.1.8 3.7.7.6-.1 1.9-.8 2.2-1.6.3-.8.3-1.5.2-1.6-.1-.2-.3-.3-.7-.5l-2.2-1.1c-.3-.1-.5-.2-.7.2-.2.3-.8 1.1-1 1.3-.2.2-.4.2-.7.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-2-1.8-2.3-.2-.3 0-.5.1-.7l.5-.6c.2-.2.3-.4.3-.6.1-.1 0-.5 0-.6z"/>
+      <svg
+        class="bm-whatsapp-icon"
+        viewBox="0 0 24 24"
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg">
+
+        <path
+          fill="#25D366"
+          d="M12 1.5C6.2 1.5 1.5 6.1 1.5 11.8c0 1.9.5 3.7 1.5 5.3L1.5 22l5.1-1.3c1.6.9 3.4 1.4 5.3 1.4 5.8 0 10.5-4.6 10.5-10.3S17.8 1.5 12 1.5z"/>
+
+        <path
+          fill="#FFFFFF"
+          d="M17.7 15.1c-.3-.2-1.8-.9-2.1-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7.1-.3-.2-1.3-.5-2.5-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.7l.5-.6c.2-.2.2-.3.3-.6.1-.2 0-.4 0-.6-.1-.2-.7-1.7-1-2.3-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.1 1.1-1.1 2.6s1.1 3 1.3 3.2c.2.2 2.2 3.4 5.3 4.6.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2.1-1.4.3-.7.3-1.3.2-1.4-.1-.1-.3-.2-.6-.3z"/>
       </svg>`
   };
 
@@ -68,13 +78,22 @@
     document.querySelectorAll(
       'a[href^="tel:"], a[href^="mailto:"], a[href*="wa.me"], a[href*="whatsapp"]'
     ).forEach(link => {
-      if (link.dataset.contactIconAdded === "true") return;
+      const href = (link.getAttribute("href") || "").toLowerCase();
+      const isWhatsApp =
+        href.includes("wa.me") || href.includes("whatsapp");
 
       const icon = iconForLink(link);
       if (!icon) return;
 
-      if (!link.querySelector("svg")) {
+      if (isWhatsApp) {
+        const oldIcon = link.querySelector("svg");
+        if (oldIcon) oldIcon.remove();
+
         link.insertAdjacentHTML("afterbegin", icon);
+      } else if (!link.dataset.contactIconAdded) {
+        if (!link.querySelector("svg")) {
+          link.insertAdjacentHTML("afterbegin", icon);
+        }
       }
 
       link.classList.add("bm-contact-link");
