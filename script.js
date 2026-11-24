@@ -3,7 +3,6 @@ let current = 0;
 let timer = null;
 let slideChangeToken = 0;
 let pointerStart = null;
-let wasRunningBeforePress = false;
 
 const $ = id => document.getElementById(id);
 
@@ -255,6 +254,7 @@ function startSlideshow() {
   }
 }
 
+/* Slideshow navigation without press-to-pause behavior */
 function bindSlideshowGestures() {
   const hero = $('hero');
   if (!hero) return;
@@ -267,9 +267,6 @@ function bindSlideshowGestures() {
       y: event.clientY,
       time: Date.now()
     };
-
-    wasRunningBeforePress = !!timer;
-    stopSlideshow();
   });
 
   hero.addEventListener('pointerup', event => {
@@ -297,18 +294,10 @@ function bindSlideshowGestures() {
     }
 
     pointerStart = null;
-
-    if (wasRunningBeforePress) {
-      startSlideshow();
-    }
   });
 
   hero.addEventListener('pointercancel', () => {
     pointerStart = null;
-
-    if (wasRunningBeforePress) {
-      startSlideshow();
-    }
   });
 
   hero.addEventListener('contextmenu', event => {
