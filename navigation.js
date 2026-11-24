@@ -1,11 +1,13 @@
 (() => {
-  const logoPath = "/assets/bm%20tran.png";
+  // Correct original logo filename in GitHub assets folder.
+  const logoPath = "/assets/bmcs%20tran.png";
+
   const phoneNumber = "+12078978780";
   const phoneDisplay = "207-897-8780";
   const emailAddress = "bullmooseclimate@gmail.com";
   const whatsappUrl = "https://wa.me/12078978780";
 
-  // Original standalone WhatsApp image. No added background or border.
+  // Standalone WhatsApp brand image.
   const whatsappIcon = `
     <img
       class="bm-whatsapp-icon"
@@ -28,49 +30,6 @@
         <path d="m3 6 9 7 9-7"/>
       </svg>`
   };
-
-  // Keep WhatsApp image and text aligned with the other contact links.
-  function installContactStyles() {
-    if (document.getElementById("bm-contact-icon-fixes")) return;
-
-    const style = document.createElement("style");
-    style.id = "bm-contact-icon-fixes";
-
-    style.textContent = `
-      .bm-contact-link,
-      .bm-contact-inline a,
-      .footer-contact-icons a,
-      .bm-contact-options a,
-      .contact-links a {
-        align-items: center;
-      }
-
-      .bm-whatsapp-icon {
-        display: inline-block !important;
-        width: 23px !important;
-        height: 23px !important;
-        min-width: 23px !important;
-        max-width: 23px !important;
-        object-fit: contain !important;
-        padding: 0 !important;
-        margin: 0 !important;
-        border: 0 !important;
-        outline: 0 !important;
-        background: none !important;
-        box-shadow: none !important;
-        vertical-align: middle !important;
-        flex: 0 0 23px !important;
-      }
-
-      .bm-contact-link,
-      .bm-contact-inline a,
-      .footer-contact-icons a {
-        gap: 8px;
-      }
-    `;
-
-    document.head.appendChild(style);
-  }
 
   const menu = `
     <a href="/">Home</a>
@@ -114,15 +73,61 @@
     return "";
   }
 
+  function installContactStyles() {
+    if (document.getElementById("bm-contact-icon-fixes")) return;
+
+    const style = document.createElement("style");
+    style.id = "bm-contact-icon-fixes";
+
+    style.textContent = `
+      .bm-whatsapp-icon {
+        display: inline-block !important;
+        width: 23px !important;
+        height: 23px !important;
+        min-width: 23px !important;
+        max-width: 23px !important;
+        object-fit: contain !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        border: 0 !important;
+        outline: 0 !important;
+        background: none !important;
+        box-shadow: none !important;
+        vertical-align: middle !important;
+        flex: 0 0 23px !important;
+      }
+
+      .bm-contact-inline a,
+      .footer-contact-icons a {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .bm-contact-inline svg,
+      .footer-contact-icons svg {
+        width: 23px;
+        height: 23px;
+        min-width: 23px;
+        flex: 0 0 23px;
+      }
+
+      .bm-contact-inline img,
+      .footer-contact-icons img {
+        vertical-align: middle;
+      }
+    `;
+
+    document.head.appendChild(style);
+  }
+
   function addContactIcons() {
     document.querySelectorAll(
       'a[href^="tel:"], a[href^="mailto:"], a[href*="wa.me"], a[href*="whatsapp"]'
     ).forEach(link => {
       if (isWhatsApp(link)) {
-        // Remove the old homemade SVG only.
         link.querySelectorAll("svg").forEach(icon => icon.remove());
 
-        // Insert the real image only once.
         if (!link.querySelector("img.bm-whatsapp-icon")) {
           link.insertAdjacentHTML("afterbegin", whatsappIcon);
         }
@@ -152,8 +157,10 @@
             <span>${phoneDisplay}</span>
           </a>
 
-          <a class="bm-contact-link" href="${whatsappUrl}"
-             target="_blank" rel="noopener">
+          <a class="bm-contact-link"
+             href="${whatsappUrl}"
+             target="_blank"
+             rel="noopener">
             ${whatsappIcon}
             <span>WhatsApp</span>
           </a>
@@ -178,8 +185,10 @@
       brand.classList.add("brand");
 
       brand.innerHTML = `
-        <img src="${logoPath}"
-             alt="Bull Moose Climate Systems moose logo">
+        <img
+          src="${logoPath}"
+          alt="Bull Moose Climate Systems original logo"
+        >
 
         <span class="brand-name">
           <strong>BULL MOOSE</strong>
@@ -195,8 +204,10 @@
 
       footer.innerHTML = `
         <a href="/" class="footer-brand">
-          <img src="${logoPath}"
-               alt="Bull Moose Climate Systems moose logo">
+          <img
+            src="${logoPath}"
+            alt="Bull Moose Climate Systems original logo"
+          >
 
           <span class="footer-brand-name">
             <strong>BULL MOOSE</strong>
@@ -258,7 +269,11 @@
         });
 
         dropdown.hidden = !opening;
-        button.setAttribute("aria-expanded", String(opening));
+
+        button.setAttribute(
+          "aria-expanded",
+          String(opening)
+        );
       });
     });
 
