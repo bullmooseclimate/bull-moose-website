@@ -1,4 +1,3 @@
-
 let data = {};
 let current = 0;
 let timer = null;
@@ -8,8 +7,8 @@ let wasRunningBeforePress = false;
 
 const $ = id => document.getElementById(id);
 
-const FIRST_SLIDE_IMAGE =
-  "https://strongheatingcooling.com/assets/mini-split-DFttqcpW.jpg";
+const SAMSUNG_LIVING_ROOM_IMAGE =
+  "/assets/Cozy%20Living%20Room%20with%20Samsung%20Air%20Conditioner(1).png";
 
 function escapeHTML(value) {
   return String(value ?? '').replace(/[&<>"']/g, character => ({
@@ -28,30 +27,21 @@ function getCategories() {
 }
 
 function getSlides() {
-  const categoryList = getCategories();
-
-  const savedSlides = Array.isArray(data.slides)
-    ? data.slides.filter(slide => slide.visible !== false)
-    : [];
-
-  return categoryList.map((category, index) => {
-    const savedSlide = savedSlides[index] || {};
-
-    const combined = {
+  return getCategories().map(category => {
+    const slide = {
       ...category,
-      ...savedSlide,
       _category: category
     };
 
-    if (index === 0) {
-      combined.image = FIRST_SLIDE_IMAGE;
+    if (category.id === 'heat-pumps') {
+      slide.image = SAMSUNG_LIVING_ROOM_IMAGE;
     }
 
     if (category.id === 'maintenance') {
-      combined.image = '/assets/20260718_092057.jpg';
+      slide.image = '/assets/20260718_092057.jpg';
     }
 
-    return combined;
+    return slide;
   });
 }
 
