@@ -26,11 +26,6 @@ function getCategories() {
     : [];
 }
 
-/*
-  Each topic button gets its own slideshow.
-  The original slide content takes priority where available.
-  The remaining topics use their saved category photos and text.
-*/
 function getSlides() {
   const categoryList = getCategories();
 
@@ -51,11 +46,32 @@ function getSlides() {
       combined.image = FIRST_SLIDE_IMAGE;
     }
 
+    // Restore the actual Bull Moose maintenance-cleaning photo.
+    if (category.id === 'maintenance') {
+      combined.image = '/assets/20260718_092057.jpg';
+    }
+
     return combined;
   });
 }
 
-/* Create the topic buttons directly below the slideshow. */
+function fixAboutLogo() {
+  document.querySelectorAll('.home-service-card').forEach(card => {
+    const heading = card.querySelector('h3');
+    const image = card.querySelector('img');
+
+    if (
+      heading &&
+      image &&
+      heading.textContent.trim() === 'About Bull Moose'
+    ) {
+      image.style.objectFit = 'contain';
+      image.style.padding = '16px';
+      image.style.backgroundColor = '#ffffff';
+    }
+  });
+}
+
 function createTopicButtons() {
   const hero = $('hero');
   if (!hero) return;
@@ -138,6 +154,7 @@ async function init() {
       [business.phone, business.email].filter(Boolean).join(' · ');
   }
 
+  fixAboutLogo();
   createTopicButtons();
 
   if (getSlides().length) {
@@ -151,12 +168,6 @@ async function init() {
   bindMenu();
 }
 
-/*
-  IMPORTANT:
-  This function changes ONLY the slideshow.
-  It does not change service cards, page sections,
-  descriptions, or any content below the topic buttons.
-*/
 async function showSlide(index, resetTimer = true) {
   const list = getSlides();
   if (!list.length) return;
