@@ -7,49 +7,8 @@ let wasRunningBeforePress = false;
 
 const $ = id => document.getElementById(id);
 
-function getSlides() {
-  return Array.isArray(data.slides)
-    ? data.slides.filter(slide => slide.visible !== false)
-    : [];
-}
-
-function createSlideButtons() {
-  const hero = $('hero');
-  if (!hero) return;
-
-  let nav = $('slideTopicButtons');
-
-  if (!nav) {
-    nav = document.createElement('div');
-    nav.id = 'slideTopicButtons';
-    nav.className = 'slide-topic-buttons';
-    hero.insertAdjacentElement('afterend', nav);
-  }
-
-  const slides = getSlides();
-
-  nav.innerHTML = slides.map((slide, index) => {
-    const label = slide.eyebrow || slide.title || `Slide ${index + 1}`;
-
-    return `
-      <button
-        type="button"
-        class="slide-topic-button"
-        data-slide="${index}"
-        aria-pressed="${index === current}">
-        ${escapeHTML(label)}
-      </button>
-    `;
-  }).join('');
-
-  nav.querySelectorAll('button').forEach(button => {
-    button.addEventListener('click', () => {
-      showSlide(Number(button.dataset.slide));
-    });
-  });
-
-  updateSlideButtons();
-}
+const FIRST_SLIDE_IMAGE =
+  "https://strongheatingcooling.com/assets/mini-split-DFttqcpW.jpg";
 
 function escapeHTML(value) {
   return String(value ?? '').replace(/[&<>"']/g, character => ({
@@ -61,71 +20,86 @@ function escapeHTML(value) {
   }[character]));
 }
 
-function addSlideButtonStyles() {
-  if ($('slideButtonStyles')) return;
-
-  const style = document.createElement('style');
-  style.id = 'slideButtonStyles';
-
-  style.textContent = `
-    .slide-topic-buttons {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 10px;
-      padding: 18px 16px;
-      background: #f7f5ef;
-    }
-
-    .slide-topic-button {
-      appearance: none;
-      border: 1px solid #c9c4b9;
-      background: #fff;
-      color: #343631;
-      border-radius: 4px;
-      padding: 11px 17px;
-      font-family: "DM Sans", sans-serif;
-      font-size: 12px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background .2s ease, color .2s ease,
-                  border-color .2s ease;
-    }
-
-    .slide-topic-button:hover {
-      border-color: #286b9b;
-      color: #286b9b;
-    }
-
-    .slide-topic-button.active {
-      background: #286b9b;
-      border-color: #286b9b;
-      color: #fff;
-    }
-
-    @media(max-width:560px) {
-      .slide-topic-buttons {
-        gap: 7px;
-        padding: 14px 10px;
-      }
-
-      .slide-topic-button {
-        padding: 10px 12px;
-        font-size: 11px;
-      }
-    }
-  `;
-
-  document.head.appendChild(style);
+function getCategories() {
+  return Array.isArray(data.categories)
+    ? data.categories.filter(category => category.visible !== false)
+    : [];
 }
 
-function updateSlideButtons() {
+/*
+  Each topic button gets its own slideshow.
+  The original slide content takes priority where available.
+  The remaining topics use their saved category photos and text.
+*/
+function getSlides() {
+  const categoryList = getCategories();
+
+  const savedSlides = Array.isArray(data.slides)
+    ? data.slides.filter(slide => slide.visible !== false)
+    : [];
+
+  return categoryList.map((category, index) => {
+    const savedSlide = savedSlides[index] || {};
+
+    const combined = {
+      ...category,
+      ...savedSlide,
+      _category: category
+    };
+
+    if (index === 0) {
+      combined.image = FIRST_SLIDE_IMAGE;
+    }
+
+    return combined;
+  });
+}
+
+/* Create the topic buttons directly below the slideshow. */
+function createTopicButtons() {
+  const hero = $('hero');
+  if (!hero) return;
+
+  let nav = $('slideTopicButtons');
+
+  if (!nav) {
+    nav = document.createElement('nav');
+    nav.id = 'slideTopicButtons';
+    nav.className = 'topic-nav';
+    nav.setAttribute('aria-label', 'Slideshow topics');
+    hero.insertAdjacentElement('afterend', nav);
+  }
+
+  const list = getSlides();
+
+  nav.style.setProperty('--topic-count', Math.max(1, list.length));
+
+  nav.innerHTML = list.map((slide, index) => `
+    <button
+      class="topic-button ${index === current ? 'active' : ''}"
+      data-slide="${index}"
+      type="button"
+      aria-pressed="${index === current}">
+      ${escapeHTML(slide._category.label || slide.eyebrow || slide.title)}
+    </button>
+  `).join('');
+
+  nav.querySelectorAll('.topic-button').forEach(button => {
+    button.addEventListener('click', () => {
+      showSlide(Number(button.dataset.slide));
+    });
+  });
+
+  updateTopicButtons();
+}
+
+function updateTopicButtons() {
   const nav = $('slideTopicButtons');
   if (!nav) return;
 
-  nav.querySelectorAll('button').forEach((button, index) => {
+  nav.querySelectorAll('.topic-button').forEach((button, index) => {
     const active = index === current;
+
     button.classList.toggle('active', active);
     button.setAttribute('aria-pressed', String(active));
   });
@@ -133,12 +107,24 @@ function updateSlideButtons() {
 
 async function init() {
   try {
-    const response = await fetch('/content/site.json', { cache: 'no-store' });
-    if (!response.ok) throw new Error('Could not load site content');
+    const response = await fetch('/content/site.json', {
+      cache: 'no-store'
+    });
+
+    if (!response.ok) {
+      throw new Error('Could not load site content');
+    }
+
     data = await response.json();
+
   } catch (error) {
     console.error('Could not load website content:', error);
-    data = { slides: [], settings: {}, business: {} };
+    data = {
+      categories: [],
+      slides: [],
+      settings: {},
+      business: {}
+    };
   }
 
   if ($('year')) {
@@ -152,8 +138,7 @@ async function init() {
       [business.phone, business.email].filter(Boolean).join(' · ');
   }
 
-  addSlideButtonStyles();
-  createSlideButtons();
+  createTopicButtons();
 
   if (getSlides().length) {
     await showSlide(0, false);
@@ -166,17 +151,26 @@ async function init() {
   bindMenu();
 }
 
+/*
+  IMPORTANT:
+  This function changes ONLY the slideshow.
+  It does not change service cards, page sections,
+  descriptions, or any content below the topic buttons.
+*/
 async function showSlide(index, resetTimer = true) {
   const list = getSlides();
   if (!list.length) return;
 
   current = (index + list.length) % list.length;
+
   const slide = list[current];
   const token = ++slideChangeToken;
 
-  if (resetTimer) startSlideshow();
+  if (resetTimer) {
+    startSlideshow();
+  }
 
-  updateSlideButtons();
+  updateTopicButtons();
 
   const heroBg = $('heroBg');
   const heroCopy = document.querySelector('.hero-copy');
@@ -220,8 +214,12 @@ async function showSlide(index, resetTimer = true) {
     }
 
     if ($('slideLink')) {
-      $('slideLink').textContent = slide.buttonText || 'Learn more';
-      $('slideLink').href = slide.link || '/heat-pumps.html';
+      $('slideLink').textContent =
+        slide.buttonText || 'Learn more';
+
+      $('slideLink').href =
+        slide.link || '/heat-pumps.html';
+
       $('slideLink').style.display =
         slide.buttonText || slide.link ? 'inline-block' : 'none';
     }
@@ -242,10 +240,10 @@ function stopSlideshow() {
 function startSlideshow() {
   stopSlideshow();
 
-  const slides = getSlides();
+  const list = getSlides();
 
   if (
-    slides.length > 1 &&
+    list.length > 1 &&
     data.settings?.autoRotate !== false
   ) {
     timer = setInterval(() => {
@@ -280,6 +278,7 @@ function bindSlideshowGestures() {
 
     if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) {
       showSlide(current + (dx < 0 ? 1 : -1));
+
     } else if (
       Math.abs(dx) < 12 &&
       Math.abs(dy) < 12 &&
@@ -289,18 +288,24 @@ function bindSlideshowGestures() {
       const rect = hero.getBoundingClientRect();
 
       showSlide(
-        current + (event.clientX < rect.left + rect.width / 2 ? -1 : 1)
+        current +
+        (event.clientX < rect.left + rect.width / 2 ? -1 : 1)
       );
     }
 
     pointerStart = null;
 
-    if (wasRunningBeforePress) startSlideshow();
+    if (wasRunningBeforePress) {
+      startSlideshow();
+    }
   });
 
   hero.addEventListener('pointercancel', () => {
     pointerStart = null;
-    if (wasRunningBeforePress) startSlideshow();
+
+    if (wasRunningBeforePress) {
+      startSlideshow();
+    }
   });
 
   hero.addEventListener('contextmenu', event => {
@@ -326,7 +331,9 @@ function bindContactForm() {
           headers: { Accept: 'application/json' }
         });
 
-        if (!response.ok) throw new Error('Submission failed');
+        if (!response.ok) {
+          throw new Error('Submission failed');
+        }
 
         if ($('formNote')) {
           $('formNote').textContent =
@@ -335,6 +342,7 @@ function bindContactForm() {
 
         form.reset();
         return;
+
       } catch (error) {
         if ($('formNote')) {
           $('formNote').textContent =
@@ -344,7 +352,8 @@ function bindContactForm() {
     }
 
     const subject = encodeURIComponent(
-      'Website estimate request - ' + (formData.get('name') || '')
+      'Website estimate request - ' +
+      (formData.get('name') || '')
     );
 
     const body = encodeURIComponent(
@@ -374,14 +383,20 @@ function bindBtuForm() {
     const windows = Number($('windows')?.value);
 
     const raw = squareFeet * 25 * ceiling * insulation * windows;
+
     const low = Math.round(raw * 0.85 / 1000) * 1000;
     const high = Math.round(raw * 1.15 / 1000) * 1000;
 
     const message =
       `Very rough planning estimate: ${low.toLocaleString()}–${high.toLocaleString()} BTU/hr. Not a heat-loss calculation or equipment recommendation.`;
 
-    if ($('btuResult')) $('btuResult').textContent = message;
-    if ($('btuHidden')) $('btuHidden').value = message;
+    if ($('btuResult')) {
+      $('btuResult').textContent = message;
+    }
+
+    if ($('btuHidden')) {
+      $('btuHidden').value = message;
+    }
   });
 }
 
