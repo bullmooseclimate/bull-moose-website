@@ -451,3 +451,95 @@ footer small {
     letter-spacing: .14em;
   }
 }
+/* SHARED CONTACT ICONS — ALL PAGES */
+
+.bm-contact-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+}
+
+.bm-contact-link svg,
+.bm-contact-inline svg {
+  width: 19px;
+  height: 19px;
+  flex: 0 0 19px;
+  fill: none;
+  stroke: #286b9b;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.bm-contact-link .whatsapp-icon,
+.bm-contact-inline .whatsapp-icon,
+.footer-contact-icons .whatsapp-icon {
+  fill: #25a85a;
+  stroke: #25a85a;
+}
+
+.bm-contact-inline {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 18px;
+}
+
+.bm-contact-inline a {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: #245b80;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.bm-contact-inline a:hover {
+  text-decoration: underline;
+}
+
+.footer-contact-icons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 22px;
+  margin: 16px auto;
+}
+
+.footer-contact-icons a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #e3e9ed;
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.footer-contact-icons svg {
+  width: 19px;
+  height: 19px;
+  flex: 0 0 19px;
+  fill: none;
+  stroke: #8fc1e2;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.footer-contact-icons a:hover {
+  color: #fff;
+}
+
+@media (max-width: 600px) {
+  .bm-contact-inline {
+    gap: 12px;
+  }
+
+  .footer-contact-icons {
+    gap: 14px;
+  }
+}
