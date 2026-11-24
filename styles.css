@@ -494,3 +494,48 @@ footer p,footer small{font-size:11px;color:#bbb}
 @media(min-width:1101px){
   .header nav.bm-main-nav{margin-left:12px}
 }
+/* CONTACT ICONS — SHARED FOOTER */
+.footer-contact-icons {
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:22px;
+  margin:16px auto;
+}
+
+.footer-contact-icons a {
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  color:#e3e9ed;
+  font-size:12px;
+  font-weight:600;
+  text-decoration:none;
+}
+
+.footer-contact-icons svg {
+  width:19px;
+  height:19px;
+  fill:none;
+  stroke:#8fc1e2;
+  stroke-width:2;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  flex-shrink:0;
+}
+
+.footer-contact-icons .whatsapp-icon {
+  fill:#25a85a;
+  stroke:#25a85a;
+}
+
+.footer-contact-icons a:hover {
+  color:#fff;
+}
+
+@media(max-width:560px) {
+  .footer-contact-icons {
+    gap:14px;
+  }
+}
