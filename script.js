@@ -1,349 +1,158 @@
-let data, current = 0, timer = null, paused = false;
-let pointerStart = null, wasRunningBeforePress = false;
-let activeCategory = 0, transitionTimer = null;
+
+let data = {};
+let current = 0;
+let timer = null;
 let slideChangeToken = 0;
+let pointerStart = null;
+let wasRunningBeforePress = false;
 
 const $ = id => document.getElementById(id);
 
-const FIRST_SLIDE_IMAGE =
-  "https://strongheatingcooling.com/assets/mini-split-DFttqcpW.jpg";
-
-const FOAMED_COIL_IMAGE =
-  "/assets/20260718_092057.jpg";
-
-const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({
-  '&': '&amp;',
-  '<': '&lt;',
-  '>': '&gt;',
-  '"': '&quot;',
-  "'": '&#39;'
-}[c]));
+function getSlides() {
+  return Array.isArray(data.slides)
+    ? data.slides.filter(slide => slide.visible !== false)
+    : [];
+}
 
 async function init() {
   try {
     const response = await fetch('/content/site.json', { cache: 'no-store' });
     if (!response.ok) throw new Error('Could not load site content');
     data = await response.json();
-  } catch (e) {
-    console.error('Site content could not be loaded:', e);
-    data = { categories: [], slides: [], services: [] };
+  } catch (error) {
+    console.error('Could not load website content:', error);
+    data = { slides: [], settings: {}, business: {} };
   }
-
-  render();
 
   if ($('year')) {
     $('year').textContent = new Date().getFullYear();
   }
 
+  const business = data.business || {};
+  if ($('contactDetails')) {
+    $('contactDetails').textContent =
+      [business.phone, business.email].filter(Boolean).join(' · ');
+  }
+
+  if (getSlides().length) {
+    await showSlide(0, false);
+    startSlideshow();
+  }
+
   bindSlideshowGestures();
+  bindContactForm();
+  bindBtuForm();
+  bindMenu();
 }
 
-const categories = () =>
-  Array.isArray(data.categories)
-    ? data.categories.filter(c => c.visible !== false)
-    : [];
-
-/*
-  Combine the homepage slideshow settings with the category content.
-  This keeps all five category buttons while using the separate
-  slide images, titles, and descriptions saved in site.json.
-*/
-const slides = () => {
-  const categoryList = categories();
-
-  const slideList = Array.isArray(data.slides)
-    ? data.slides.filter(s => s.visible !== false)
-    : [];
-
-  return categoryList.map((category, index) => {
-    const slide = slideList[index] || {};
-
-    const combined = {
-      ...category,
-      ...slide,
-      _category: category
-    };
-
-    if (index === 0) {
-      combined.image = FIRST_SLIDE_IMAGE;
-    }
-
-    return combined;
-  });
-};
-
-function render() {
-  renderTopicButtons();
-
-  const firstSlide = slides();
-
-  if (firstSlide.length) {
-    current = 0;
-    activeCategory = 0;
-    showSlide(0, false);
-  }
-
-  $('servicesList').innerHTML = (data.services || [])
-    .filter(s => s.visible !== false)
-    .map(s => `
-      <article class="card">
-        <h3>${esc(s.title)}</h3>
-        <p>${esc(s.description)}</p>
-      </article>
-    `)
-    .join('');
-
-  $('productsList').innerHTML = cards(data.products);
-  $('projectsList').innerHTML = cards(data.projects);
-
-  $('reviewsList').innerHTML = (data.testimonials || [])
-    .filter(x => x.visible !== false)
-    .map(t => `
-      <article class="card">
-        <p>“${esc(t.quote)}”</p>
-        <strong>${esc(t.name)}</strong>
-      </article>
-    `)
-    .join('');
-
-  $('maintenanceTitle').textContent =
-    data.maintenance?.title || '';
-
-  $('maintenanceText').textContent =
-    data.maintenance?.description || '';
-
-  /*
-    Use the actual foamed-coil cleaning photo from your own work
-    in the homepage maintenance section.
-  */
-  const maintenancePhoto = document.querySelector('.split-photo');
-
-  if (maintenancePhoto) {
-    maintenancePhoto.style.backgroundImage =
-      `url("${FOAMED_COIL_IMAGE}")`;
-    maintenancePhoto.style.backgroundPosition = 'center';
-    maintenancePhoto.style.backgroundSize = 'cover';
-  }
-
-  $('aboutTitle').textContent = data.about?.title || '';
-  $('aboutText').textContent = data.about?.description || '';
-
-  const b = data.business || {};
-
-  $('contactDetails').textContent =
-    [b.phone, b.email, b.serviceArea].filter(Boolean).join(' · ');
-
-  if (data.settings?.autoRotate !== false) {
-    start();
-  }
-}
-
-function cards(arr) {
-  return (arr || [])
-    .filter(x => x.visible !== false)
-    .map(x => `
-      <article class="card">
-        ${x.image ? `<img src="${esc(x.image)}" alt="">` : ''}
-        <h3>${esc(x.title || x.model || '')}</h3>
-        <p>${esc(x.description || '')}</p>
-        ${x.details ? `<p>${esc(x.details)}</p>` : ''}
-      </article>
-    `)
-    .join('');
-}
-
-function renderTopicButtons() {
-  const list = categories();
-  const nav = $('topicNav');
-
-  nav.style.setProperty('--topic-count', Math.max(1, list.length));
-
-  nav.innerHTML = list.map((c, i) => `
-    <button
-      class="topic-button ${i === activeCategory ? 'active' : ''}"
-      data-i="${i}"
-      type="button"
-      aria-pressed="${i === activeCategory}">
-      ${esc(c.label || c.title || 'Category')}
-    </button>
-  `).join('');
-
-  nav.querySelectorAll('.topic-button').forEach(button => {
-    button.addEventListener('click', () => {
-      showSlide(Number(button.dataset.i));
-    });
-  });
-}
-
-function renderCategoryContent(category) {
-  if (!category) return;
-
-  $('categoryEyebrow').textContent =
-    category.contentEyebrow ||
-    category.eyebrow ||
-    category.label ||
-    'Explore';
-
-  $('categoryHeading').textContent =
-    category.contentTitle ||
-    category.title ||
-    category.label ||
-    'Explore';
-
-  $('categoryDescription').textContent =
-    category.contentDescription ||
-    category.description ||
-    '';
-
-  const items = Array.isArray(category.contentItems)
-    ? category.contentItems.filter(x => x.visible !== false)
-    : [];
-
-  $('categoryItems').innerHTML = items.length
-    ? items.map(item => `
-        <article class="category-item">
-          ${item.image
-            ? `<img src="${esc(item.image)}" alt="${esc(item.title || '')}">`
-            : ''}
-          <div class="item-copy">
-            <h3>${esc(item.title || '')}</h3>
-            <p>${esc(item.description || '')}</p>
-            ${item.link ? `
-              <a href="${esc(item.link)}"
-                ${/^https?:/i.test(item.link)
-                  ? 'target="_blank" rel="noopener"'
-                  : ''}>
-                ${esc(item.linkText || 'Learn more')} →
-              </a>
-            ` : ''}
-          </div>
-        </article>
-      `).join('')
-    : '<p class="category-empty">More information and photos can be added here.</p>';
-}
-
-async function showSlide(i, resetTimer = true) {
-  const list = slides();
-
+async function showSlide(index, resetTimer = true) {
+  const list = getSlides();
   if (!list.length) return;
 
-  current = (i + list.length) % list.length;
-  activeCategory = current;
-
-  const s = list[current];
-  const heroBg = $('heroBg');
-  const heroCopy = document.querySelector('.hero-copy');
-  const categoryContent = $('categoryContent');
+  current = (index + list.length) % list.length;
+  const slide = list[current];
   const token = ++slideChangeToken;
 
-  clearTimeout(transitionTimer);
+  if (resetTimer) startSlideshow();
 
-  if (resetTimer) {
-    start();
-  }
+  const heroBg = $('heroBg');
+  const heroCopy = document.querySelector('.hero-copy');
 
-  if (s.image) {
+  if (slide.image) {
     const preload = new Image();
-    preload.src = s.image;
+    preload.src = slide.image;
 
     try {
       await preload.decode();
-    } catch (e) {
-      // Continue if the image cannot be decoded.
+    } catch (error) {
+      // Show the slide even if its image cannot be preloaded.
     }
   }
 
   if (token !== slideChangeToken) return;
 
-  heroBg.style.setProperty(
-    '--next-slide-image',
-    s.image ? `url("${s.image}")` : 'none'
-  );
+  if (heroBg) {
+    heroBg.style.backgroundImage = slide.image
+      ? `url("${slide.image}")`
+      : 'none';
+  }
 
-  heroBg.classList.add('photo-changing');
-
-  heroCopy.classList.add('slide-copy-changing');
-  categoryContent.classList.add('content-changing');
-
-  $('topicNav').querySelectorAll('.topic-button').forEach((button, index) => {
-    button.classList.toggle('active', index === current);
-    button.setAttribute('aria-pressed', String(index === current));
-  });
+  if (heroCopy) {
+    heroCopy.classList.add('slide-copy-changing');
+  }
 
   setTimeout(() => {
     if (token !== slideChangeToken) return;
 
-    $('slideEyebrow').textContent = s.eyebrow || '';
-    $('slideTitle').textContent = s.title || '';
-    $('slideDescription').textContent = s.description || '';
+    if ($('slideEyebrow')) {
+      $('slideEyebrow').textContent = slide.eyebrow || '';
+    }
 
-    $('slideLink').textContent = s.buttonText || 'Learn more';
-    $('slideLink').href = s.link || '#contact';
-    $('slideLink').style.display =
-      s.buttonText || s.link ? 'inline-block' : 'none';
+    if ($('slideTitle')) {
+      $('slideTitle').textContent = slide.title || '';
+    }
 
-    /*
-      The slide controls the hero.
-      Its matching category controls the preview below it.
-    */
-    renderCategoryContent(s._category || s);
+    if ($('slideDescription')) {
+      $('slideDescription').textContent = slide.description || '';
+    }
 
-    heroCopy.classList.remove('slide-copy-changing');
-    categoryContent.classList.remove('content-changing');
-  }, 400);
+    if ($('slideLink')) {
+      $('slideLink').textContent = slide.buttonText || 'Learn more';
+      $('slideLink').href = slide.link || '/heat-pumps.html';
+      $('slideLink').style.display =
+        slide.buttonText || slide.link ? 'inline-block' : 'none';
+    }
 
-  transitionTimer = setTimeout(() => {
-    if (token !== slideChangeToken) return;
-
-    heroBg.style.backgroundImage =
-      s.image ? `url("${s.image}")` : 'none';
-
-    heroBg.classList.remove('photo-changing');
-    heroBg.style.removeProperty('--next-slide-image');
-  }, 650);
+    if (heroCopy) {
+      heroCopy.classList.remove('slide-copy-changing');
+    }
+  }, 250);
 }
 
-function stop() {
-  clearInterval(timer);
-  timer = null;
+function stopSlideshow() {
+  if (timer) {
+    clearInterval(timer);
+    timer = null;
+  }
 }
 
-function start() {
-  stop();
+function startSlideshow() {
+  stopSlideshow();
+
+  const list = getSlides();
 
   if (
-    slides().length > 1 &&
-    !paused &&
+    list.length > 1 &&
     data.settings?.autoRotate !== false
   ) {
-    timer = setInterval(
-      () => showSlide(current + 1, false),
-      Number(data.settings.slideInterval) || 5000
-    );
+    timer = setInterval(() => {
+      showSlide(current + 1, false);
+    }, Number(data.settings?.slideInterval) || 5000);
   }
 }
 
 function bindSlideshowGestures() {
   const hero = $('hero');
+  if (!hero) return;
 
-  hero.addEventListener('pointerdown', e => {
-    if (e.target.closest('a')) return;
+  hero.addEventListener('pointerdown', event => {
+    if (event.target.closest('a')) return;
 
     pointerStart = {
-      x: e.clientX,
-      y: e.clientY,
+      x: event.clientX,
+      y: event.clientY,
       time: Date.now()
     };
 
     wasRunningBeforePress = !!timer;
-    stop();
+    stopSlideshow();
   });
 
-  hero.addEventListener('pointerup', e => {
+  hero.addEventListener('pointerup', event => {
     if (!pointerStart) return;
 
-    const dx = e.clientX - pointerStart.x;
-    const dy = e.clientY - pointerStart.y;
+    const dx = event.clientX - pointerStart.x;
+    const dy = event.clientY - pointerStart.y;
     const elapsed = Date.now() - pointerStart.time;
 
     if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) {
@@ -352,106 +161,139 @@ function bindSlideshowGestures() {
       Math.abs(dx) < 12 &&
       Math.abs(dy) < 12 &&
       elapsed < 500 &&
-      !e.target.closest('.hero-copy')
+      !event.target.closest('.hero-copy')
     ) {
       const rect = hero.getBoundingClientRect();
 
       showSlide(
-        current +
-        (e.clientX < rect.left + rect.width / 2 ? -1 : 1)
+        current + (event.clientX < rect.left + rect.width / 2 ? -1 : 1)
       );
     }
 
     pointerStart = null;
 
-    if (wasRunningBeforePress && !paused) {
-      start();
+    if (wasRunningBeforePress) {
+      startSlideshow();
     }
   });
 
   hero.addEventListener('pointercancel', () => {
     pointerStart = null;
 
-    if (wasRunningBeforePress && !paused) {
-      start();
+    if (wasRunningBeforePress) {
+      startSlideshow();
     }
   });
 
-  hero.addEventListener('contextmenu', e => e.preventDefault());
+  hero.addEventListener('contextmenu', event => {
+    event.preventDefault();
+  });
 }
 
-$('btuForm').onsubmit = e => {
-  e.preventDefault();
+function bindContactForm() {
+  const form = $('contactForm');
+  if (!form) return;
 
-  const raw =
-    +$('sqft').value *
-    25 *
-    +$('ceiling').value *
-    +$('insulation').value *
-    +$('windows').value;
+  form.addEventListener('submit', async event => {
+    event.preventDefault();
 
-  const lo = Math.round(raw * 0.85 / 1000) * 1000;
-  const hi = Math.round(raw * 1.15 / 1000) * 1000;
+    const formData = new FormData(form);
+    const endpoint = data.settings?.formspreeEndpoint;
 
-  const msg =
-    `Very rough planning estimate: ${lo.toLocaleString()}–${hi.toLocaleString()} BTU/hr. Not a heat-loss calculation or equipment recommendation.`;
+    if (endpoint) {
+      try {
+        const response = await fetch(endpoint, {
+          method: 'POST',
+          body: formData,
+          headers: { Accept: 'application/json' }
+        });
 
-  $('btuResult').textContent = msg;
-  $('btuHidden').value = msg;
-};
+        if (!response.ok) throw new Error('Submission failed');
 
-$('contactForm').onsubmit = async e => {
-  e.preventDefault();
+        if ($('formNote')) {
+          $('formNote').textContent =
+            'Thank you. Your request was submitted.';
+        }
 
-  const fd = new FormData(e.target);
-  const endpoint = data.settings?.formspreeEndpoint;
-
-  if (endpoint) {
-    try {
-      const response = await fetch(endpoint, {
-        method: 'POST',
-        body: fd,
-        headers: { Accept: 'application/json' }
-      });
-
-      if (!response.ok) throw Error();
-
-      $('formNote').textContent =
-        'Thank you. Your request was submitted.';
-
-      e.target.reset();
-      return;
-    } catch (err) {
-      $('formNote').textContent =
-        'Online submission failed. Opening an email draft instead.';
+        form.reset();
+        return;
+      } catch (error) {
+        if ($('formNote')) {
+          $('formNote').textContent =
+            'Online submission failed. Opening an email draft instead.';
+        }
+      }
     }
-  }
 
-  const subject = encodeURIComponent(
-    'Website estimate request - ' + fd.get('name')
-  );
+    const subject = encodeURIComponent(
+      'Website estimate request - ' + (formData.get('name') || '')
+    );
 
-  const body = encodeURIComponent(
-    [...fd.entries()]
-      .map(([k, v]) => `${k}: ${v}`)
-      .join('\n')
-  );
+    const body = encodeURIComponent(
+      [...formData.entries()]
+        .map(([key, value]) => `${key}: ${value}`)
+        .join('\n')
+    );
 
-  const email = data.business?.email || 'bullmooseclimate@gmail.com';
+    const email =
+      data.business?.email || 'bullmooseclimate@gmail.com';
 
-  location.href =
-    `mailto:${email}?subject=${subject}&body=${body}`;
-};
+    window.location.href =
+      `mailto:${email}?subject=${subject}&body=${body}`;
+  });
+}
 
-document.querySelector('.menu').onclick = () => {
+function bindBtuForm() {
+  const form = $('btuForm');
+  if (!form) return;
+
+  form.addEventListener('submit', event => {
+    event.preventDefault();
+
+    const squareFeet = Number($('sqft')?.value);
+    const ceiling = Number($('ceiling')?.value);
+    const insulation = Number($('insulation')?.value);
+    const windows = Number($('windows')?.value);
+
+    const raw = squareFeet * 25 * ceiling * insulation * windows;
+
+    const low = Math.round(raw * 0.85 / 1000) * 1000;
+    const high = Math.round(raw * 1.15 / 1000) * 1000;
+
+    const message =
+      `Very rough planning estimate: ${low.toLocaleString()}–${high.toLocaleString()} BTU/hr. Not a heat-loss calculation or equipment recommendation.`;
+
+    if ($('btuResult')) {
+      $('btuResult').textContent = message;
+    }
+
+    if ($('btuHidden')) {
+      $('btuHidden').value = message;
+    }
+  });
+}
+
+function bindMenu() {
+  const button = document.querySelector('.menu');
   const nav = document.querySelector('.header nav');
 
-  nav.classList.toggle('open');
+  if (!button || !nav) return;
 
-  document.querySelector('.menu').setAttribute(
-    'aria-expanded',
-    String(nav.classList.contains('open'))
-  );
-};
+  button.addEventListener('click', () => {
+    nav.classList.toggle('open');
+
+    button.setAttribute(
+      'aria-expanded',
+      String(nav.classList.contains('open'))
+    );
+  });
+
+  nav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      nav.classList.remove('open');
+      button.setAttribute('aria-expanded', 'false');
+    });
+  });
+}
 
 init();
