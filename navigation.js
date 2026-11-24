@@ -1,6 +1,23 @@
 (() => {
   const logoPath = "/assets/bmcs%20tran.png";
 
+  const phoneIcon = `
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.4 19.4 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.2-1.3a2 2 0 0 1 2.1-.5c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.8 2.1z"/>
+    </svg>`;
+
+  const emailIcon = `
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <rect x="2.5" y="4.5" width="19" height="15" rx="2"/>
+      <path d="m3 6 9 7 9-7"/>
+    </svg>`;
+
+  const whatsappIcon = `
+    <svg class="whatsapp-icon" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M20.5 11.8a8.5 8.5 0 0 1-12.6 7.4L3 20.5l1.3-4.7a8.5 8.5 0 1 1 16.2-4z"/>
+      <path d="M8.5 7.5c-.3-.7-.6-.7-.9-.7h-.7c-.3 0-.7.2-.9.6-.3.3-1.1 1.1-1.1 2.7s1.1 3.1 1.3 3.3c.2.2 2.1 3.4 5.2 4.6 2.6 1 3.1.8 3.7.7.6-.1 1.9-.8 2.2-1.6.3-.8.3-1.5.2-1.6-.1-.2-.3-.3-.7-.5l-2.2-1.1c-.3-.1-.5-.2-.7.2-.2.3-.8 1.1-1 1.3-.2.2-.4.2-.7.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-2-1.8-2.3-.2-.3 0-.5.1-.7l.5-.6c.2-.2.2-.4.3-.6.1-.2 0-.5 0-.6z"/>
+    </svg>`;
+
   const menu = `
     <a href="/">Home</a>
 
@@ -55,14 +72,26 @@
             <span>CLIMATE SYSTEMS LLC</span>
           </span>
         </a>
+
         <p>Residential heat-pump solutions in Maine.</p>
-        <p>
-          <a href="tel:+12078978780">207-897-8780</a>
-          &nbsp;·&nbsp;
-          <a href="mailto:bullmooseclimate@gmail.com">Email</a>
-          &nbsp;·&nbsp;
-          <a href="https://wa.me/12078978780">WhatsApp</a>
-        </p>
+
+        <div class="footer-contact-icons">
+          <a href="tel:+12078978780">
+            ${phoneIcon}
+            <span>207-897-8780</span>
+          </a>
+
+          <a href="https://wa.me/12078978780">
+            ${whatsappIcon}
+            <span>WhatsApp</span>
+          </a>
+
+          <a href="mailto:bullmooseclimate@gmail.com">
+            ${emailIcon}
+            <span>Email</span>
+          </a>
+        </div>
+
         <small>&copy; ${new Date().getFullYear()} Bull Moose Climate Systems LLC</small>
       `;
     }
