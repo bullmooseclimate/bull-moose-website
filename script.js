@@ -1,4 +1,3 @@
-
 let data = {};
 let current = 0;
 let timer = null;
@@ -12,6 +11,124 @@ function getSlides() {
   return Array.isArray(data.slides)
     ? data.slides.filter(slide => slide.visible !== false)
     : [];
+}
+
+function createSlideButtons() {
+  const hero = $('hero');
+  if (!hero) return;
+
+  let nav = $('slideTopicButtons');
+
+  if (!nav) {
+    nav = document.createElement('div');
+    nav.id = 'slideTopicButtons';
+    nav.className = 'slide-topic-buttons';
+    hero.insertAdjacentElement('afterend', nav);
+  }
+
+  const slides = getSlides();
+
+  nav.innerHTML = slides.map((slide, index) => {
+    const label = slide.eyebrow || slide.title || `Slide ${index + 1}`;
+
+    return `
+      <button
+        type="button"
+        class="slide-topic-button"
+        data-slide="${index}"
+        aria-pressed="${index === current}">
+        ${escapeHTML(label)}
+      </button>
+    `;
+  }).join('');
+
+  nav.querySelectorAll('button').forEach(button => {
+    button.addEventListener('click', () => {
+      showSlide(Number(button.dataset.slide));
+    });
+  });
+
+  updateSlideButtons();
+}
+
+function escapeHTML(value) {
+  return String(value ?? '').replace(/[&<>"']/g, character => ({
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#39;'
+  }[character]));
+}
+
+function addSlideButtonStyles() {
+  if ($('slideButtonStyles')) return;
+
+  const style = document.createElement('style');
+  style.id = 'slideButtonStyles';
+
+  style.textContent = `
+    .slide-topic-buttons {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 18px 16px;
+      background: #f7f5ef;
+    }
+
+    .slide-topic-button {
+      appearance: none;
+      border: 1px solid #c9c4b9;
+      background: #fff;
+      color: #343631;
+      border-radius: 4px;
+      padding: 11px 17px;
+      font-family: "DM Sans", sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background .2s ease, color .2s ease,
+                  border-color .2s ease;
+    }
+
+    .slide-topic-button:hover {
+      border-color: #286b9b;
+      color: #286b9b;
+    }
+
+    .slide-topic-button.active {
+      background: #286b9b;
+      border-color: #286b9b;
+      color: #fff;
+    }
+
+    @media(max-width:560px) {
+      .slide-topic-buttons {
+        gap: 7px;
+        padding: 14px 10px;
+      }
+
+      .slide-topic-button {
+        padding: 10px 12px;
+        font-size: 11px;
+      }
+    }
+  `;
+
+  document.head.appendChild(style);
+}
+
+function updateSlideButtons() {
+  const nav = $('slideTopicButtons');
+  if (!nav) return;
+
+  nav.querySelectorAll('button').forEach((button, index) => {
+    const active = index === current;
+    button.classList.toggle('active', active);
+    button.setAttribute('aria-pressed', String(active));
+  });
 }
 
 async function init() {
@@ -29,10 +146,14 @@ async function init() {
   }
 
   const business = data.business || {};
+
   if ($('contactDetails')) {
     $('contactDetails').textContent =
       [business.phone, business.email].filter(Boolean).join(' · ');
   }
+
+  addSlideButtonStyles();
+  createSlideButtons();
 
   if (getSlides().length) {
     await showSlide(0, false);
@@ -55,6 +176,8 @@ async function showSlide(index, resetTimer = true) {
 
   if (resetTimer) startSlideshow();
 
+  updateSlideButtons();
+
   const heroBg = $('heroBg');
   const heroCopy = document.querySelector('.hero-copy');
 
@@ -65,7 +188,7 @@ async function showSlide(index, resetTimer = true) {
     try {
       await preload.decode();
     } catch (error) {
-      // Show the slide even if its image cannot be preloaded.
+      // Continue if the image cannot be preloaded.
     }
   }
 
@@ -119,10 +242,10 @@ function stopSlideshow() {
 function startSlideshow() {
   stopSlideshow();
 
-  const list = getSlides();
+  const slides = getSlides();
 
   if (
-    list.length > 1 &&
+    slides.length > 1 &&
     data.settings?.autoRotate !== false
   ) {
     timer = setInterval(() => {
@@ -172,17 +295,12 @@ function bindSlideshowGestures() {
 
     pointerStart = null;
 
-    if (wasRunningBeforePress) {
-      startSlideshow();
-    }
+    if (wasRunningBeforePress) startSlideshow();
   });
 
   hero.addEventListener('pointercancel', () => {
     pointerStart = null;
-
-    if (wasRunningBeforePress) {
-      startSlideshow();
-    }
+    if (wasRunningBeforePress) startSlideshow();
   });
 
   hero.addEventListener('contextmenu', event => {
@@ -256,20 +374,14 @@ function bindBtuForm() {
     const windows = Number($('windows')?.value);
 
     const raw = squareFeet * 25 * ceiling * insulation * windows;
-
     const low = Math.round(raw * 0.85 / 1000) * 1000;
     const high = Math.round(raw * 1.15 / 1000) * 1000;
 
     const message =
       `Very rough planning estimate: ${low.toLocaleString()}–${high.toLocaleString()} BTU/hr. Not a heat-loss calculation or equipment recommendation.`;
 
-    if ($('btuResult')) {
-      $('btuResult').textContent = message;
-    }
-
-    if ($('btuHidden')) {
-      $('btuHidden').value = message;
-    }
+    if ($('btuResult')) $('btuResult').textContent = message;
+    if ($('btuHidden')) $('btuHidden').value = message;
   });
 }
 
