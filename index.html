@@ -5,42 +5,173 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="description" content="Residential heat-pump installation, cleaning, and maintenance from Bull Moose Climate Systems in Maine.">
 <title>Bull Moose Climate Systems</title>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
 <link rel="stylesheet" href="/styles.css">
 <link rel="stylesheet" href="/navigation.css">
+
 <style>
-#topicNav,#categoryContent,.legacy-home-sections{display:none!important}
-.home-services{padding:58px clamp(18px,6vw,84px) 66px;background:#f7f5ef}
-.home-services .heading{max-width:760px;margin:0 auto 30px}
-.home-services .heading p:last-child{margin:0 auto;max-width:620px}
-.home-service-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;max-width:1240px;margin:0 auto}
-.home-service-card{background:#fff;border:1px solid #e9e4dc;display:flex;flex-direction:column;min-width:0;overflow:hidden}
-.home-service-card img{display:block;width:100%;height:190px;object-fit:cover}
-.home-service-copy{padding:18px 19px 20px;display:flex;flex:1;flex-direction:column}
-.home-service-copy h3{font:600 26px/1.05 "Cormorant Garamond",Georgia,serif;margin:0 0 9px;color:#282925}
-.home-service-copy p{font-size:13px;line-height:1.55;color:#69665f;margin:0 0 17px}
-.home-service-actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:auto}
-.home-service-actions a{display:inline-flex;align-items:center;justify-content:center;text-align:center;text-decoration:none;font-size:11px;font-weight:700;padding:10px 13px;border-radius:4px}
-.home-service-learn{color:#286b9b;border:1px solid #b9d2e3;background:#f5f9fc}
-.home-service-quote{background:#286b9b;color:#fff}
-.home-service-actions a:hover{filter:brightness(.94)}
-.home-estimate-band{background:#292b29;color:#fff;text-align:center;padding:42px 20px}
-.home-estimate-band h2{font:600 clamp(30px,4vw,44px)/1.05 "Cormorant Garamond",Georgia,serif;margin:8px 0 10px}
-.home-estimate-band p{color:#dedbd4;font-size:14px;margin:0 0 18px}
-.home-estimate-band .button{display:inline-block}
-@media(max-width:900px){.home-service-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:560px){.home-services{padding:42px 15px}.home-service-grid{grid-template-columns:1fr;gap:15px}.home-service-card img{height:205px}.home-service-copy{padding:17px}.home-service-actions a{flex:1}}
+#topicNav,#categoryContent,.legacy-home-sections {
+  display:none!important;
+}
+
+.home-services {
+  padding:58px clamp(18px,6vw,84px) 66px;
+  background:#f7f5ef;
+}
+
+.home-services .heading {
+  max-width:760px;
+  margin:0 auto 30px;
+}
+
+.home-services .heading p:last-child {
+  margin:0 auto;
+  max-width:620px;
+}
+
+.home-service-grid {
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:20px;
+  max-width:1240px;
+  margin:0 auto;
+}
+
+.home-service-card {
+  background:#fff;
+  border:1px solid #e9e4dc;
+  display:flex;
+  flex-direction:column;
+  min-width:0;
+  overflow:hidden;
+}
+
+.home-service-card img {
+  display:block;
+  width:100%;
+  height:190px;
+  object-fit:cover;
+}
+
+.home-service-copy {
+  padding:18px 19px 20px;
+  display:flex;
+  flex:1;
+  flex-direction:column;
+}
+
+.home-service-copy h3 {
+  font:600 26px/1.05 "Cormorant Garamond",Georgia,serif;
+  margin:0 0 9px;
+  color:#282925;
+}
+
+.home-service-copy p {
+  font-size:13px;
+  line-height:1.55;
+  color:#69665f;
+  margin:0 0 17px;
+}
+
+.home-service-actions {
+  display:flex;
+  flex-wrap:wrap;
+  gap:9px;
+  margin-top:auto;
+}
+
+.home-service-actions a {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  text-decoration:none;
+  font-size:11px;
+  font-weight:700;
+  padding:10px 16px;
+  border-radius:4px;
+}
+
+.home-service-learn {
+  color:#286b9b;
+  border:1px solid #b9d2e3;
+  background:#f5f9fc;
+}
+
+.home-service-actions a:hover {
+  filter:brightness(.94);
+}
+
+.home-estimate-band {
+  background:#292b29;
+  color:#fff;
+  text-align:center;
+  padding:42px 20px;
+}
+
+.home-estimate-band h2 {
+  font:600 clamp(30px,4vw,44px)/1.05 "Cormorant Garamond",Georgia,serif;
+  margin:8px 0 10px;
+}
+
+.home-estimate-band p {
+  color:#dedbd4;
+  font-size:14px;
+  margin:0 0 18px;
+}
+
+.home-estimate-band .button {
+  display:inline-block;
+}
+
+@media(max-width:900px) {
+  .home-service-grid {
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+}
+
+@media(max-width:560px) {
+  .home-services {
+    padding:42px 15px;
+  }
+
+  .home-service-grid {
+    grid-template-columns:1fr;
+    gap:15px;
+  }
+
+  .home-service-card img {
+    height:205px;
+  }
+
+  .home-service-copy {
+    padding:17px;
+  }
+
+  .home-service-actions a {
+    flex:0 1 auto;
+  }
+}
 </style>
 </head>
+
 <body>
+
 <header class="header">
   <a href="/" class="brand">
     <img src="/assets/bmcs%20tran.png" alt="Bull Moose Climate Systems logo">
-    <span class="brand-name"><strong>BULL MOOSE</strong><span>CLIMATE SYSTEMS LLC</span></span>
+    <span class="brand-name">
+      <strong>BULL MOOSE</strong>
+      <span>CLIMATE SYSTEMS LLC</span>
+    </span>
   </a>
+
   <button class="menu" aria-label="Toggle menu" aria-expanded="false">☰</button>
+
   <nav>
     <a href="#home-services">Services</a>
     <a href="/heat-pumps.html">Heat pumps</a>
@@ -51,9 +182,11 @@
 </header>
 
 <main>
+
 <section class="hero" id="hero" aria-label="Featured topics">
   <div class="hero-bg" id="heroBg"></div>
   <div class="hero-overlay"></div>
+
   <div class="hero-copy">
     <p class="eyebrow" id="slideEyebrow"></p>
     <h1 id="slideTitle">Comfort starts at home.</h1>
@@ -63,10 +196,11 @@
 </section>
 
 <section class="home-services" id="home-services">
+
   <div class="heading">
     <p class="eyebrow">Explore our services</p>
     <h2>Comfort solutions for your home</h2>
-    <p>Find the information you need, or request a quote whenever you're ready.</p>
+    <p>Find the information you need and explore the options available for your home.</p>
   </div>
 
   <div class="home-service-grid">
@@ -77,8 +211,7 @@
         <h3>Ductless Heat Pumps</h3>
         <p>Flexible heating and cooling for individual rooms and living spaces, planned around your home.</p>
         <div class="home-service-actions">
-          <a class="home-service-learn" href="/ductless-systems.html">Learn more</a>
-          <a class="home-service-quote" href="#contact">Request a quote</a>
+          <a class="home-service-learn" href="/ductless-systems.html">Learn More</a>
         </div>
       </div>
     </article>
@@ -89,8 +222,7 @@
         <h3>Ducted Heat Pumps</h3>
         <p>Whole-home comfort using a central air-distribution system where ductwork is a good fit.</p>
         <div class="home-service-actions">
-          <a class="home-service-learn" href="/ducted-systems.html">Learn more</a>
-          <a class="home-service-quote" href="#contact">Request a quote</a>
+          <a class="home-service-learn" href="/ducted-systems.html">Learn More</a>
         </div>
       </div>
     </article>
@@ -101,20 +233,18 @@
         <h3>Multi-Zone Systems</h3>
         <p>Explore options for connecting multiple indoor units to help serve different rooms or areas.</p>
         <div class="home-service-actions">
-          <a class="home-service-learn" href="/multi-zone-systems.html">Learn more</a>
-          <a class="home-service-quote" href="#contact">Request a quote</a>
+          <a class="home-service-learn" href="/multi-zone-systems.html">Learn More</a>
         </div>
       </div>
     </article>
 
     <article class="home-service-card">
-      <img src="/assets/20260718_092057.jpg" alt="Heat-pump cleaning work performed by Bull Moose Climate Systems">
+      <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1000&q=85" alt="Comfortable home interior">
       <div class="home-service-copy">
         <h3>Professional Installation</h3>
         <p>Careful planning, clear communication, and installation details considered for your home.</p>
         <div class="home-service-actions">
-          <a class="home-service-learn" href="/installation.html">Learn more</a>
-          <a class="home-service-quote" href="#contact">Request a quote</a>
+          <a class="home-service-learn" href="/installation.html">Learn More</a>
         </div>
       </div>
     </article>
@@ -125,8 +255,7 @@
         <h3>Cleaning &amp; Maintenance</h3>
         <p>Professional cleaning and practical care to help keep your heat-pump system in good condition.</p>
         <div class="home-service-actions">
-          <a class="home-service-learn" href="/cleaning-maintenance.html">Learn more</a>
-          <a class="home-service-quote" href="#contact">Request a quote</a>
+          <a class="home-service-learn" href="/cleaning-maintenance.html">Learn More</a>
         </div>
       </div>
     </article>
@@ -137,8 +266,7 @@
         <h3>Efficiency Maine</h3>
         <p>Learn about heat-pump incentives, program information, and what to check before starting a project.</p>
         <div class="home-service-actions">
-          <a class="home-service-learn" href="/efficiency-maine.html">Learn more</a>
-          <a class="home-service-quote" href="#contact">Request a quote</a>
+          <a class="home-service-learn" href="/efficiency-maine.html">Learn More</a>
         </div>
       </div>
     </article>
@@ -149,8 +277,7 @@
         <h3>About Bull Moose</h3>
         <p>Get to know our home-first approach to residential heat-pump solutions in Maine.</p>
         <div class="home-service-actions">
-          <a class="home-service-learn" href="/about.html">Learn more</a>
-          <a class="home-service-quote" href="#contact">Request a quote</a>
+          <a class="home-service-learn" href="/about.html">Learn More</a>
         </div>
       </div>
     </article>
@@ -166,6 +293,7 @@
 </section>
 
 <section class="section contact" id="contact">
+
   <div>
     <p class="eyebrow">Start a conversation</p>
     <h2>Tell us about your home.</h2>
@@ -174,18 +302,33 @@
   </div>
 
   <form id="contactForm" class="contact-form">
-    <label>Your name<input name="name" required></label>
-    <label>Email<input name="email" type="email" required></label>
-    <label>Phone (optional)<input name="phone" type="tel"></label>
-    <label>What can we help with?<textarea name="message" rows="4" required></textarea></label>
+    <label>Your name
+      <input name="name" required>
+    </label>
+
+    <label>Email
+      <input name="email" type="email" required>
+    </label>
+
+    <label>Phone (optional)
+      <input name="phone" type="tel">
+    </label>
+
+    <label>What can we help with?
+      <textarea name="message" rows="4" required></textarea>
+    </label>
+
     <input type="hidden" name="btuEstimate" id="btuHidden">
+
     <button class="button" type="submit">Send estimate request</button>
     <p class="fine" id="formNote">Your email app may open to send this request.</p>
   </form>
+
 </section>
 
 <div class="legacy-home-sections" aria-hidden="true">
   <nav class="topic-nav" id="topicNav"></nav>
+
   <section class="category-content section" id="categoryContent">
     <div class="heading">
       <p id="categoryEyebrow"></p>
@@ -194,6 +337,7 @@
     </div>
     <div class="category-items" id="categoryItems"></div>
   </section>
+
   <div id="servicesList"></div>
   <div id="productsList"></div>
   <div id="projectsList"></div>
@@ -203,6 +347,7 @@
   <div class="split-photo"></div>
   <div id="aboutTitle"></div>
   <div id="aboutText"></div>
+
   <form id="btuForm">
     <input id="sqft">
     <select id="ceiling"></select>
@@ -210,6 +355,7 @@
     <select id="windows"></select>
     <button type="submit"></button>
   </form>
+
   <div id="btuResult"></div>
 </div>
 
@@ -219,6 +365,7 @@
   <p>Conozca nuestros servicios de calefacción y aire acondicionado en español.</p>
   <a href="/espanol.html" class="button">Ver página en español</a>
 </section>
+
 </main>
 
 <footer>
@@ -229,5 +376,6 @@
 
 <script src="/script.js"></script>
 <script src="/navigation.js"></script>
+
 </body>
 </html>
