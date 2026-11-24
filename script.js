@@ -1,3 +1,4 @@
+
 let data = {};
 let current = 0;
 let timer = null;
@@ -46,7 +47,6 @@ function getSlides() {
       combined.image = FIRST_SLIDE_IMAGE;
     }
 
-    // Restore the actual Bull Moose maintenance-cleaning photo.
     if (category.id === 'maintenance') {
       combined.image = '/assets/20260718_092057.jpg';
     }
@@ -66,7 +66,9 @@ function fixAboutLogo() {
       heading.textContent.trim() === 'About Bull Moose'
     ) {
       image.style.objectFit = 'contain';
-      image.style.padding = '16px';
+      image.style.height = '240px';
+      image.style.width = '100%';
+      image.style.padding = '0';
       image.style.backgroundColor = '#ffffff';
     }
   });
