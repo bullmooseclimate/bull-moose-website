@@ -150,12 +150,15 @@
   text-decoration: underline;
 }
 
+/* RESPONSIVE INFORMATION AND PAGE CARDS */
+
 .bm-content-grid,
 .bm-page-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 20px;
   margin: 28px 0;
+  width: 100%;
 }
 
 .bm-content-card,
@@ -164,6 +167,9 @@
   border: 1px solid #e8e3da;
   padding: 25px;
   border-radius: 5px;
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .bm-content-card h3 {
@@ -370,6 +376,8 @@ footer small {
   background: #282925;
 }
 
+/* MOBILE NAVIGATION */
+
 @media (max-width: 760px) {
   .header nav.bm-main-nav {
     display: none;
@@ -451,6 +459,7 @@ footer small {
     letter-spacing: .14em;
   }
 }
+
 /* SHARED CONTACT ICONS — ALL PAGES */
 
 .bm-contact-link {
@@ -541,5 +550,23 @@ footer small {
 
   .footer-contact-icons {
     gap: 14px;
+  }
+}
+
+/* TABLET INFORMATION CARD LAYOUT */
+
+@media (max-width: 900px) {
+  .bm-content-grid,
+  .bm-page-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* PHONE INFORMATION CARD LAYOUT */
+
+@media (max-width: 600px) {
+  .bm-content-grid,
+  .bm-page-grid {
+    grid-template-columns: 1fr;
   }
 }
