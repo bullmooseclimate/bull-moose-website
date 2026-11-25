@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -73,6 +74,7 @@
       background: #fff;
       color: #282925;
       font: 14px "DM Sans", sans-serif;
+      box-sizing: border-box;
     }
 
     .estimate-form textarea {
@@ -91,23 +93,58 @@
       text-align: center;
     }
 
+    /* CONTACT BUTTONS */
+
     .estimate-contact-links {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
+      align-items: center;
       gap: 12px;
       margin: 25px auto;
     }
 
-.estimate-contact-links a {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  vertical-align: middle;
-  line-height: 1.2;
+    .estimate-contact-links a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      min-height: 46px;
+      padding: 11px 20px;
+      border: 1px solid #245b80;
+      border-radius: 5px;
+      background: #fff;
+      color: #245b80;
+      font-size: 13px;
+      font-weight: 600;
+      line-height: 1.2;
+      text-decoration: none;
+      box-sizing: border-box;
+    }
 
-    @media(max-width:600px) {
+    .estimate-contact-links a:hover {
+      background: #eef4f7;
+      color: #183f5b;
+    }
+
+    .estimate-contact-links a svg,
+    .estimate-contact-links a img {
+      display: block;
+      width: 20px;
+      height: 20px;
+      flex: 0 0 20px;
+      object-fit: contain;
+    }
+
+    .estimate-contact-links a svg {
+      fill: none;
+      stroke: #245b80;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    @media (max-width: 600px) {
       .estimate-form {
         padding: 20px;
       }
@@ -117,7 +154,7 @@
       }
 
       .estimate-contact-links a {
-        text-align: center;
+        width: 100%;
       }
     }
   </style>
