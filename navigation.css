@@ -1,3 +1,4 @@
+
 .header {
   position: relative;
   z-index: 100;
@@ -514,33 +515,50 @@ footer small {
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  gap: 22px;
+  gap: 12px;
   margin: 16px auto;
 }
+
+/* OUTLINED FOOTER CONTACT BUTTONS */
 
 .footer-contact-icons a {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  justify-content: center;
+  gap: 9px;
+  min-height: 42px;
+  padding: 9px 16px;
+  border: 1px solid rgba(220, 230, 235, 0.55);
+  border-radius: 5px;
   color: #e3e9ed;
   font-size: 12px;
   font-weight: 600;
   text-decoration: none;
+  box-sizing: border-box;
+  transition: background 0.2s ease, border-color 0.2s ease;
 }
 
-.footer-contact-icons svg {
+.footer-contact-icons a:hover {
+  background: rgba(255, 255, 255, 0.09);
+  border-color: #ffffff;
+  color: #ffffff;
+}
+
+.footer-contact-icons svg,
+.footer-contact-icons img {
+  display: block;
   width: 19px;
   height: 19px;
   flex: 0 0 19px;
+  object-fit: contain;
+}
+
+.footer-contact-icons svg {
   fill: none;
   stroke: #8fc1e2;
   stroke-width: 2;
   stroke-linecap: round;
   stroke-linejoin: round;
-}
-
-.footer-contact-icons a:hover {
-  color: #fff;
 }
 
 @media (max-width: 600px) {
@@ -549,7 +567,12 @@ footer small {
   }
 
   .footer-contact-icons {
-    gap: 14px;
+    gap: 10px;
+  }
+
+  .footer-contact-icons a {
+    min-height: 42px;
+    padding: 9px 14px;
   }
 }
 
