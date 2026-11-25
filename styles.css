@@ -595,14 +595,17 @@ svg {
     row-gap: 8px;
   }
 }
-/* DESKTOP MODE ON PHONES — COMPACT RIGHT-SIDE MENU */
-@media (min-width: 761px) and (max-width: 1100px)
-       and (hover: none) and (pointer: coarse) {
+
+/* COMPACT MENU FOR PHONE DESKTOP MODE */
+@media (min-width: 761px) and (max-width: 1100px),
+       (min-width: 761px) and (orientation: landscape) and (max-height: 550px) {
 
   .header {
     position: relative;
-    flex-wrap: nowrap;
-    justify-content: space-between;
+    display: flex;
+    flex-wrap: nowrap !important;
+    align-items: center;
+    justify-content: space-between !important;
   }
 
   .header .brand {
@@ -621,11 +624,11 @@ svg {
     display: none !important;
     position: absolute;
     top: calc(100% + 6px);
-    left: auto;
-    right: 10px;
-    width: 280px;
+    left: auto !important;
+    right: 10px !important;
+    width: 280px !important;
     max-width: calc(100vw - 20px);
-    margin: 0;
+    margin: 0 !important;
     padding: 10px 14px;
     background: #fff;
     border: 1px solid #e8e3da;
@@ -633,9 +636,9 @@ svg {
     box-shadow: 0 10px 28px rgba(0,0,0,.18);
     flex-direction: column;
     align-items: stretch;
-    justify-content: flex-start;
+    justify-content: flex-start !important;
     gap: 0;
-    max-height: calc(100vh - 120px);
+    max-height: calc(100vh - 110px);
     overflow-y: auto;
     z-index: 301;
   }
@@ -651,18 +654,18 @@ svg {
     align-items: center;
     justify-content: space-between;
     padding: 12px 8px;
-    text-align: left;
+    text-align: left !important;
     border-bottom: 1px solid #eee;
-    white-space: normal;
   }
 
   .header nav.bm-main-nav > a {
+    justify-content: flex-start;
     font-size: 13px;
   }
 
   .header nav.bm-main-nav .bm-nav-line > a {
     flex: 1;
-    text-align: left;
+    text-align: left !important;
   }
 
   .header nav.bm-main-nav .bm-nav-group {
@@ -684,13 +687,12 @@ svg {
     display: block;
     padding: 10px;
     font-size: 12px;
-    text-align: left;
+    text-align: left !important;
   }
 
   .header nav.bm-main-nav .cta {
     justify-content: center;
     margin-top: 10px;
     border-bottom: 0;
-    text-align: center;
   }
 }
