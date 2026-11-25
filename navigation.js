@@ -480,3 +480,28 @@
     initialize();
   }
 })();
+/* Preserve the original appearance of clickable card titles */
+.home-service-card h2 .bm-card-title-link,
+.home-service-card h3 .bm-card-title-link,
+.home-service-card h4 .bm-card-title-link,
+.bm-product-card h2 .bm-card-title-link,
+.bm-product-card h3 .bm-card-title-link,
+.bm-product-card h4 .bm-card-title-link {
+  color: inherit !important;
+  font: inherit !important;
+  line-height: inherit !important;
+  letter-spacing: inherit !important;
+  text-transform: inherit !important;
+  text-decoration: none !important;
+  display: inline !important;
+}
+
+.home-service-card h2 .bm-card-title-link:hover,
+.home-service-card h3 .bm-card-title-link:hover,
+.home-service-card h4 .bm-card-title-link:hover,
+.bm-product-card h2 .bm-card-title-link:hover,
+.bm-product-card h3 .bm-card-title-link:hover,
+.bm-product-card h4 .bm-card-title-link:hover {
+  color: inherit !important;
+  text-decoration: none !important;
+}
