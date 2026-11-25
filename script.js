@@ -398,13 +398,29 @@ function bindMenu() {
 
   if (!button || !nav) return;
 
-  button.addEventListener('click', () => {
+  button.addEventListener('click', (event) => {
+    event.stopPropagation();
+
     nav.classList.toggle('open');
 
     button.setAttribute(
       'aria-expanded',
       String(nav.classList.contains('open'))
     );
+  });
+
+  nav.addEventListener('click', (event) => {
+    event.stopPropagation();
+  });
+
+  document.addEventListener('click', (event) => {
+    if (
+      !nav.contains(event.target) &&
+      !button.contains(event.target)
+    ) {
+      nav.classList.remove('open');
+      button.setAttribute('aria-expanded', 'false');
+    }
   });
 
   nav.querySelectorAll('a').forEach(link => {
@@ -414,5 +430,3 @@ function bindMenu() {
     });
   });
 }
-
-init();
