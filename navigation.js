@@ -277,17 +277,26 @@
       });
     });
 
-    document.addEventListener("click", event => {
-      if (!nav.contains(event.target)) {
-        nav.querySelectorAll(".bm-dropdown").forEach(item => {
-          item.hidden = true;
-        });
+    
+const menuButton = header.querySelector(".menu");
 
-        nav.querySelectorAll(".bm-submenu-toggle").forEach(button => {
-          button.setAttribute("aria-expanded", "false");
-        });
-      }
+document.addEventListener("pointerdown", event => {
+  if (
+    !nav.contains(event.target) &&
+    !menuButton?.contains(event.target)
+  ) {
+    nav.classList.remove("open");
+    menuButton?.setAttribute("aria-expanded", "false");
+
+    nav.querySelectorAll(".bm-dropdown").forEach(item => {
+      item.hidden = true;
     });
+
+    nav.querySelectorAll(".bm-submenu-toggle").forEach(button => {
+      button.setAttribute("aria-expanded", "false");
+    });
+  }
+}, true);
   }
 
   function initialize() {
