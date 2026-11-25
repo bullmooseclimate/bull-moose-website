@@ -56,8 +56,6 @@
     <a class="cta" href="/contact.html">Get an Estimate</a>
   `;
 
-  // Destinations for topic cards that do not already
-  // have their own link in the HTML.
   const cardDestinations = {
     "ductless heat pumps": "/ductless-systems.html",
     "ductless systems": "/ductless-systems.html",
@@ -66,9 +64,12 @@
 
     "ducted heat pumps": "/ducted-systems.html",
     "ducted systems": "/ducted-systems.html",
+    "indoor air handler": "/ducted-systems.html",
+    "outdoor equipment": "/ducted-systems.html",
 
     "multi-zone systems": "/multi-zone-systems.html",
     "multi zone systems": "/multi-zone-systems.html",
+    "multi-zone equipment": "/multi-zone-systems.html",
 
     "professional installation": "/installation.html",
     "installation": "/installation.html",
@@ -140,6 +141,7 @@
         vertical-align: middle;
       }
 
+      /* Clickable card pictures */
       .bm-card-image-link {
         display: block;
         cursor: pointer;
@@ -149,16 +151,23 @@
         cursor: pointer;
       }
 
+      /* Match the homepage card title exactly */
       .bm-card-title-link {
-        display: inline-block;
-        color: inherit;
-        text-decoration: none;
+        display: inline !important;
+        font-family: "Cormorant Garamond", Georgia, serif !important;
+        font-size: 26px !important;
+        font-weight: 600 !important;
+        line-height: 1.05 !important;
+        letter-spacing: normal !important;
+        color: #282925 !important;
+        text-decoration: none !important;
+        text-transform: none !important;
         cursor: pointer;
       }
 
       .bm-card-title-link:hover {
-        text-decoration: underline;
-        text-underline-offset: 4px;
+        color: #282925 !important;
+        text-decoration: none !important;
       }
 
       .bm-card-image-link:focus-visible,
@@ -180,21 +189,23 @@
   }
 
   function getCardDestination(card) {
-    const currentPage = window.location.pathname.replace(/\/$/, "") || "/";
+    const currentPage =
+      window.location.pathname.replace(/\/$/, "") || "/";
 
-    // Use the card's existing action link first.
-    const existingLink = card.querySelector("a[href]");
+    // Prefer the card's existing button/action link.
+    const actionLink = card.querySelector(
+      ".home-service-learn, .bm-page-link, .bm-action, .bm-page-card a[href], a[href]"
+    );
 
-    if (existingLink) {
-      const href = existingLink.getAttribute("href");
+    if (actionLink) {
+      const href = actionLink.getAttribute("href");
 
       if (href && href !== "#") {
-        // Keep same-page form links, such as #cotizacion.
         if (href.startsWith("#")) return href;
 
         const target = new URL(href, window.location.href);
 
-        // Never make a card link to its own page.
+        // Never link a card back to its own page.
         if (target.pathname.replace(/\/$/, "") === currentPage) {
           return null;
         }
@@ -203,7 +214,7 @@
       }
     }
 
-    // If the card has no action link, use its topic destination.
+    // Use the card heading when it has no existing action link.
     const heading = card.querySelector("h2, h3, h4");
 
     if (!heading) return null;
@@ -213,7 +224,6 @@
 
     if (!destination) return null;
 
-    // Prevent circular links.
     const target = new URL(destination, window.location.href);
 
     if (target.pathname.replace(/\/$/, "") === currentPage) {
@@ -244,7 +254,7 @@
         ? heading.textContent.trim()
         : "Learn more";
 
-      // Make the picture clickable.
+      // Make the picture independently clickable.
       if (image && !image.closest("a")) {
         const imageLink = document.createElement("a");
 
@@ -259,8 +269,8 @@
         imageLink.appendChild(image);
       }
 
-      // Make the title clickable.
-      if (heading && !heading.closest("a")) {
+      // Make the title independently clickable.
+      if (heading && !heading.querySelector(".bm-card-title-link")) {
         const titleLink = document.createElement("a");
 
         titleLink.href = destination;
@@ -273,6 +283,7 @@
         heading.appendChild(titleLink);
       }
 
+      // Leave all existing card buttons untouched.
       card.dataset.bmCardLinksReady = "true";
     });
   }
@@ -480,28 +491,3 @@
     initialize();
   }
 })();
-/* Preserve the original appearance of clickable card titles */
-.home-service-card h2 .bm-card-title-link,
-.home-service-card h3 .bm-card-title-link,
-.home-service-card h4 .bm-card-title-link,
-.bm-product-card h2 .bm-card-title-link,
-.bm-product-card h3 .bm-card-title-link,
-.bm-product-card h4 .bm-card-title-link {
-  color: inherit !important;
-  font: inherit !important;
-  line-height: inherit !important;
-  letter-spacing: inherit !important;
-  text-transform: inherit !important;
-  text-decoration: none !important;
-  display: inline !important;
-}
-
-.home-service-card h2 .bm-card-title-link:hover,
-.home-service-card h3 .bm-card-title-link:hover,
-.home-service-card h4 .bm-card-title-link:hover,
-.bm-product-card h2 .bm-card-title-link:hover,
-.bm-product-card h3 .bm-card-title-link:hover,
-.bm-product-card h4 .bm-card-title-link:hover {
-  color: inherit !important;
-  text-decoration: none !important;
-}
