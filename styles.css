@@ -539,3 +539,57 @@ footer p,footer small{font-size:11px;color:#bbb}
     gap:14px;
   }
 }
+/* RESPONSIVE WIDTH FIX */
+html,
+body {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+
+body {
+  overflow-x: clip;
+}
+
+main,
+header,
+footer,
+section {
+  width: 100%;
+  max-width: 100%;
+}
+
+img,
+video,
+iframe,
+svg {
+  max-width: 100%;
+}
+
+.home-service-grid > *,
+.cards > *,
+.split > *,
+.contact > *,
+.calculator-wrap > * {
+  min-width: 0;
+}
+
+/* Better navigation spacing on desktop and tablet */
+@media (min-width: 761px) and (max-width: 1100px) {
+  .header {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .header .brand {
+    margin-right: auto;
+  }
+
+  .header nav.bm-main-nav {
+    width: 100%;
+    margin-left: 0;
+    justify-content: center;
+    flex-wrap: wrap;
+    row-gap: 8px;
+  }
+}
