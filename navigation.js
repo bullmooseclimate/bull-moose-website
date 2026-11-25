@@ -1,5 +1,4 @@
 (() => {
-  // Correct original logo filename in GitHub assets folder.
   const logoPath = "/assets/bmcs%20tran.png";
 
   const phoneNumber = "+12078978780";
@@ -7,7 +6,6 @@
   const emailAddress = "bullmooseclimate@gmail.com";
   const whatsappUrl = "https://wa.me/12078978780";
 
-  // Standalone WhatsApp brand image.
   const whatsappIcon = `
     <img
       class="bm-whatsapp-icon"
@@ -116,9 +114,74 @@
       .footer-contact-icons img {
         vertical-align: middle;
       }
+
+      .bm-clickable-card {
+        cursor: pointer;
+      }
+
+      .bm-clickable-card:focus-visible {
+        outline: 3px solid #286b9b;
+        outline-offset: 3px;
+      }
     `;
 
     document.head.appendChild(style);
+  }
+
+  function installCardLinks() {
+    const cards = document.querySelectorAll(
+      ".home-service-card, .bm-product-card, .bm-content-card"
+    );
+
+    cards.forEach(card => {
+      if (card.dataset.bmCardLinkReady) return;
+
+      const link = card.querySelector("a[href]");
+
+      if (!link) return;
+
+      const destination = link.getAttribute("href");
+
+      if (!destination || destination === "#") return;
+
+      const heading = card.querySelector("h2, h3, h4");
+
+      card.classList.add("bm-clickable-card");
+      card.dataset.bmCardLinkReady = "true";
+      card.setAttribute("role", "link");
+      card.setAttribute("tabindex", "0");
+
+      if (heading) {
+        card.setAttribute(
+          "aria-label",
+          `Open ${heading.textContent.trim()}`
+        );
+      }
+
+      card.addEventListener("click", event => {
+        if (
+          event.target.closest(
+            "a, button, input, select, textarea, label"
+          )
+        ) {
+          return;
+        }
+
+        window.location.href = link.href;
+      });
+
+      card.addEventListener("keydown", event => {
+        if (
+          event.target !== card ||
+          (event.key !== "Enter" && event.key !== " ")
+        ) {
+          return;
+        }
+
+        event.preventDefault();
+        link.click();
+      });
+    });
   }
 
   function addContactIcons() {
@@ -277,32 +340,32 @@
       });
     });
 
-    
-const menuButton = header.querySelector(".menu");
+    const menuButton = header.querySelector(".menu");
 
-document.addEventListener("pointerdown", event => {
-  if (
-    !nav.contains(event.target) &&
-    !menuButton?.contains(event.target)
-  ) {
-    nav.classList.remove("open");
-    menuButton?.setAttribute("aria-expanded", "false");
+    document.addEventListener("pointerdown", event => {
+      if (
+        !nav.contains(event.target) &&
+        !menuButton?.contains(event.target)
+      ) {
+        nav.classList.remove("open");
+        menuButton?.setAttribute("aria-expanded", "false");
 
-    nav.querySelectorAll(".bm-dropdown").forEach(item => {
-      item.hidden = true;
-    });
+        nav.querySelectorAll(".bm-dropdown").forEach(item => {
+          item.hidden = true;
+        });
 
-    nav.querySelectorAll(".bm-submenu-toggle").forEach(button => {
-      button.setAttribute("aria-expanded", "false");
-    });
-  }
-}, true);
+        nav.querySelectorAll(".bm-submenu-toggle").forEach(button => {
+          button.setAttribute("aria-expanded", "false");
+        });
+      }
+    }, true);
   }
 
   function initialize() {
     installContactStyles();
     installBranding();
     installNavigation();
+    installCardLinks();
     addContactIcons();
 
     const contactDetails = document.getElementById("contactDetails");
