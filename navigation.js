@@ -56,6 +56,31 @@
     <a class="cta" href="/contact.html">Get an Estimate</a>
   `;
 
+  // Destinations for topic cards that do not already
+  // have their own link in the HTML.
+  const cardDestinations = {
+    "ductless heat pumps": "/ductless-systems.html",
+    "ductless systems": "/ductless-systems.html",
+    "single-zone systems": "/ductless-systems.html",
+    "wall-mounted units": "/ductless-systems.html",
+
+    "ducted heat pumps": "/ducted-systems.html",
+    "ducted systems": "/ducted-systems.html",
+
+    "multi-zone systems": "/multi-zone-systems.html",
+    "multi zone systems": "/multi-zone-systems.html",
+
+    "professional installation": "/installation.html",
+    "installation": "/installation.html",
+
+    "cleaning & maintenance": "/cleaning-maintenance.html",
+    "cleaning and maintenance": "/cleaning-maintenance.html",
+    "maintenance and care": "/cleaning-maintenance.html",
+
+    "efficiency maine": "/efficiency-maine.html",
+    "about bull moose": "/about.html"
+  };
+
   function isWhatsApp(link) {
     const href = (link.getAttribute("href") || "").toLowerCase();
     return href.includes("wa.me") || href.includes("whatsapp");
@@ -146,6 +171,58 @@
     document.head.appendChild(style);
   }
 
+  function normalizeTitle(title) {
+    return title
+      .toLowerCase()
+      .replace(/&amp;/g, "&")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
+  function getCardDestination(card) {
+    const currentPage = window.location.pathname.replace(/\/$/, "") || "/";
+
+    // Use the card's existing action link first.
+    const existingLink = card.querySelector("a[href]");
+
+    if (existingLink) {
+      const href = existingLink.getAttribute("href");
+
+      if (href && href !== "#") {
+        // Keep same-page form links, such as #cotizacion.
+        if (href.startsWith("#")) return href;
+
+        const target = new URL(href, window.location.href);
+
+        // Never make a card link to its own page.
+        if (target.pathname.replace(/\/$/, "") === currentPage) {
+          return null;
+        }
+
+        return href;
+      }
+    }
+
+    // If the card has no action link, use its topic destination.
+    const heading = card.querySelector("h2, h3, h4");
+
+    if (!heading) return null;
+
+    const title = normalizeTitle(heading.textContent);
+    const destination = cardDestinations[title];
+
+    if (!destination) return null;
+
+    // Prevent circular links.
+    const target = new URL(destination, window.location.href);
+
+    if (target.pathname.replace(/\/$/, "") === currentPage) {
+      return null;
+    }
+
+    return destination;
+  }
+
   function installCardLinks() {
     const cards = document.querySelectorAll(
       ".home-service-card, .bm-product-card"
@@ -154,12 +231,9 @@
     cards.forEach(card => {
       if (card.dataset.bmCardLinksReady) return;
 
-      const destinationLink = card.querySelector("a[href]");
-      if (!destinationLink) return;
+      const destination = getCardDestination(card);
 
-      const destination = destinationLink.getAttribute("href");
-
-      if (!destination || destination === "#") return;
+      if (!destination) return;
 
       const heading = card.querySelector("h2, h3, h4");
       const image = card.querySelector("img");
@@ -170,7 +244,7 @@
         ? heading.textContent.trim()
         : "Learn more";
 
-      // Make the picture independently clickable.
+      // Make the picture clickable.
       if (image && !image.closest("a")) {
         const imageLink = document.createElement("a");
 
@@ -185,7 +259,7 @@
         imageLink.appendChild(image);
       }
 
-      // Make the title independently clickable.
+      // Make the title clickable.
       if (heading && !heading.closest("a")) {
         const titleLink = document.createElement("a");
 
