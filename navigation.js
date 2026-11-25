@@ -115,11 +115,29 @@
         vertical-align: middle;
       }
 
-      .bm-clickable-card {
+      .bm-card-image-link {
+        display: block;
         cursor: pointer;
       }
 
-      .bm-clickable-card:focus-visible {
+      .bm-card-image-link img {
+        cursor: pointer;
+      }
+
+      .bm-card-title-link {
+        display: inline-block;
+        color: inherit;
+        text-decoration: none;
+        cursor: pointer;
+      }
+
+      .bm-card-title-link:hover {
+        text-decoration: underline;
+        text-underline-offset: 4px;
+      }
+
+      .bm-card-image-link:focus-visible,
+      .bm-card-title-link:focus-visible {
         outline: 3px solid #286b9b;
         outline-offset: 3px;
       }
@@ -130,57 +148,58 @@
 
   function installCardLinks() {
     const cards = document.querySelectorAll(
-      ".home-service-card, .bm-product-card, .bm-content-card"
+      ".home-service-card, .bm-product-card"
     );
 
     cards.forEach(card => {
-      if (card.dataset.bmCardLinkReady) return;
+      if (card.dataset.bmCardLinksReady) return;
 
-      const link = card.querySelector("a[href]");
+      const destinationLink = card.querySelector("a[href]");
+      if (!destinationLink) return;
 
-      if (!link) return;
-
-      const destination = link.getAttribute("href");
+      const destination = destinationLink.getAttribute("href");
 
       if (!destination || destination === "#") return;
 
       const heading = card.querySelector("h2, h3, h4");
+      const image = card.querySelector("img");
 
-      card.classList.add("bm-clickable-card");
-      card.dataset.bmCardLinkReady = "true";
-      card.setAttribute("role", "link");
-      card.setAttribute("tabindex", "0");
+      if (!heading && !image) return;
 
-      if (heading) {
-        card.setAttribute(
+      const headingText = heading
+        ? heading.textContent.trim()
+        : "Learn more";
+
+      // Make the picture independently clickable.
+      if (image && !image.closest("a")) {
+        const imageLink = document.createElement("a");
+
+        imageLink.href = destination;
+        imageLink.className = "bm-card-image-link";
+        imageLink.setAttribute(
           "aria-label",
-          `Open ${heading.textContent.trim()}`
+          `Learn more about ${headingText}`
         );
+
+        image.parentNode.insertBefore(imageLink, image);
+        imageLink.appendChild(image);
       }
 
-      card.addEventListener("click", event => {
-        if (
-          event.target.closest(
-            "a, button, input, select, textarea, label"
-          )
-        ) {
-          return;
+      // Make the title independently clickable.
+      if (heading && !heading.closest("a")) {
+        const titleLink = document.createElement("a");
+
+        titleLink.href = destination;
+        titleLink.className = "bm-card-title-link";
+
+        while (heading.firstChild) {
+          titleLink.appendChild(heading.firstChild);
         }
 
-        window.location.href = link.href;
-      });
+        heading.appendChild(titleLink);
+      }
 
-      card.addEventListener("keydown", event => {
-        if (
-          event.target !== card ||
-          (event.key !== "Enter" && event.key !== " ")
-        ) {
-          return;
-        }
-
-        event.preventDefault();
-        link.click();
-      });
+      card.dataset.bmCardLinksReady = "true";
     });
   }
 
