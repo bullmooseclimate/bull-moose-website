@@ -424,3 +424,4 @@ function bindMenu() {
     link.addEventListener('click', closeMenu);
   });
 }
+init();
