@@ -1,3 +1,4 @@
+
 (() => {
   const logoPath = "/assets/bmcs%20tran.png";
 
@@ -141,7 +142,6 @@
         vertical-align: middle;
       }
 
-      /* Clickable card pictures */
       .bm-card-image-link {
         display: block;
         cursor: pointer;
@@ -151,7 +151,6 @@
         cursor: pointer;
       }
 
-      /* Match the homepage card title exactly */
       .bm-card-title-link {
         display: inline !important;
         font-family: "Cormorant Garamond", Georgia, serif !important;
@@ -192,7 +191,6 @@
     const currentPage =
       window.location.pathname.replace(/\/$/, "") || "/";
 
-    // Prefer the card's existing button/action link.
     const actionLink = card.querySelector(
       ".home-service-learn, .bm-page-link, .bm-action, .bm-page-card a[href], a[href]"
     );
@@ -205,7 +203,6 @@
 
         const target = new URL(href, window.location.href);
 
-        // Never link a card back to its own page.
         if (target.pathname.replace(/\/$/, "") === currentPage) {
           return null;
         }
@@ -214,7 +211,6 @@
       }
     }
 
-    // Use the card heading when it has no existing action link.
     const heading = card.querySelector("h2, h3, h4");
 
     if (!heading) return null;
@@ -254,7 +250,6 @@
         ? heading.textContent.trim()
         : "Learn more";
 
-      // Make the picture independently clickable.
       if (image && !image.closest("a")) {
         const imageLink = document.createElement("a");
 
@@ -269,7 +264,6 @@
         imageLink.appendChild(image);
       }
 
-      // Make the title independently clickable.
       if (heading && !heading.querySelector(".bm-card-title-link")) {
         const titleLink = document.createElement("a");
 
@@ -283,7 +277,6 @@
         heading.appendChild(titleLink);
       }
 
-      // Leave all existing card buttons untouched.
       card.dataset.bmCardLinksReady = "true";
     });
   }
@@ -370,19 +363,16 @@
       footer.classList.add("footer");
 
       footer.innerHTML = `
-        <a href="/" class="footer-brand">
+        <a href="/" class="footer-logo" aria-label="Bull Moose Climate Systems home">
           <img
             src="${logoPath}"
-            alt="Bull Moose Climate Systems original logo"
+            alt="Bull Moose Climate Systems"
           >
-
-          <span class="footer-brand-name">
-            <strong>BULL MOOSE</strong>
-            <span>CLIMATE SYSTEMS LLC</span>
-          </span>
         </a>
 
-        <p>Residential heat-pump solutions in Maine.</p>
+        <p class="footer-tagline">
+          Residential heat-pump solutions in Maine.
+        </p>
 
         <div class="footer-contact-icons">
           <a href="tel:${phoneNumber}">
@@ -401,7 +391,13 @@
           </a>
         </div>
 
-        <small>
+        <a class="footer-spanish-link" href="/espanol.html">
+          <span>¿Habla español?</span>
+          <strong>Servicios en español</strong>
+          <span aria-hidden="true">→</span>
+        </a>
+
+        <small class="footer-copyright">
           &copy; ${new Date().getFullYear()} Bull Moose Climate Systems LLC
         </small>
       `;
