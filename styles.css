@@ -157,7 +157,7 @@ a{color:inherit}
 }
 
 .hero .eyebrow{color:#c4def0}
-.hero h1{font:600 clamp(46px,6.5vw,84px)/.98 "Cormorant Garamond",serif;margin:15px 0}
+..hero h1{font:600 clamp(46px,6.5vw,84px)/.98 "Cormorant Garamond",serif;margin:15px 0;color:#fff}
 .hero-copy>p:not(.eyebrow){max-width:500px;color:#f2eee8}
 .light{display:inline-block;background:#f6f2e9;color:#292925!important;margin-top:14px}
 
