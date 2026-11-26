@@ -1,8 +1,95 @@
+/* LOAD THE SAME FONTS USED BY THE HOMEPAGE */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap');
+
+/* SITE-WIDE TYPOGRAPHY */
+html,
+body {
+  font-family: "DM Sans", sans-serif;
+  color: #282925;
+}
+
+body {
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+h1,
+h2,
+h3,
+h4,
+.bm-page-hero h1,
+.bm-page-intro h2,
+.bm-product-heading h2,
+.bm-content-card h3,
+.bm-page-card h2,
+.bm-page-cta h2 {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-weight: 600;
+  color: #282925;
+}
+
+p,
+li,
+label,
+input,
+select,
+textarea,
+button {
+  font-family: "DM Sans", sans-serif;
+}
+
+/* CONSISTENT COMPANY HEADER */
 .header {
   position: relative;
   z-index: 100;
 }
 
+.header .brand {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+  flex-shrink: 0;
+  text-decoration: none;
+  margin-right: auto;
+}
+
+.header .brand img {
+  display: block;
+  width: 215px;
+  height: 140px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.header .brand-name {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  white-space: nowrap;
+  color: #282925;
+  line-height: 1.08;
+}
+
+.header .brand-name strong {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 43px;
+  font-weight: 700;
+  letter-spacing: .045em;
+  color: #282925;
+}
+
+.header .brand-name > span {
+  margin-top: 7px;
+  font-family: "DM Sans", sans-serif;
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: .18em;
+  color: #282925;
+}
+
+/* NAVIGATION */
 .header nav.bm-main-nav {
   display: flex;
   align-items: center;
@@ -11,6 +98,7 @@
 
 .header nav.bm-main-nav > a,
 .bm-nav-line > a {
+  font-family: "DM Sans", sans-serif;
   text-decoration: none;
   font-size: 12px;
   font-weight: 600;
@@ -63,6 +151,7 @@
   display: block;
   padding: 11px 12px;
   text-decoration: none;
+  font-family: "DM Sans", sans-serif;
   font-size: 12px;
   font-weight: 600;
   border-radius: 4px;
@@ -73,6 +162,7 @@
   color: #1e557d;
 }
 
+/* PAGE HEROES */
 .bm-page-hero {
   background: #ebe8df;
   text-align: center;
@@ -93,20 +183,21 @@
 }
 
 .bm-page-hero h1 {
-  font-family: "Cormorant Garamond", Georgia, serif;
   font-size: clamp(42px, 5vw, 64px);
-  font-weight: 600;
   line-height: 1.05;
   margin: 12px auto;
+  color: #282925;
 }
 
 .bm-page-hero p {
   max-width: 740px;
   margin: 0 auto 22px;
   color: #625f58;
+  font-size: 14px;
   line-height: 1.7;
 }
 
+/* INTERIOR PAGE CONTENT */
 .bm-page-content {
   max-width: 1120px;
   margin: auto;
@@ -120,7 +211,6 @@
 
 .bm-page-intro h2,
 .bm-content-card h3 {
-  font-family: "Cormorant Garamond", Georgia, serif;
   font-weight: 600;
 }
 
@@ -150,8 +240,7 @@
   text-decoration: underline;
 }
 
-/* RESPONSIVE INFORMATION AND PAGE CARDS */
-
+/* INFORMATION AND PAGE CARDS */
 .bm-content-grid,
 .bm-page-grid {
   display: grid;
@@ -185,7 +274,6 @@
 }
 
 .bm-page-card h2 {
-  font-family: "Cormorant Garamond", Georgia, serif;
   font-size: 27px;
   margin: 0 0 10px;
 }
@@ -213,12 +301,13 @@
   border: 1px solid #e8e3da;
   border-radius: 5px;
   padding: 13px 18px;
+  font-size: 13px;
 }
 
 .bm-action {
   display: inline-block;
   background: #245b80;
-  color: #fff;
+  color: #fff !important;
   padding: 13px 24px;
   border-radius: 4px;
   text-decoration: none;
@@ -232,14 +321,15 @@
 
 .bm-action-light {
   background: #fff;
-  color: #245b80;
+  color: #245b80 !important;
 }
 
 .bm-action-light:hover {
   background: #eaf1f5;
-  color: #183f5b;
+  color: #183f5b !important;
 }
 
+/* PAGE CALL TO ACTION */
 .bm-page-cta {
   background: #292b29;
   color: white;
@@ -248,15 +338,17 @@
 }
 
 .bm-page-cta h2 {
-  font-family: "Cormorant Garamond", Georgia, serif;
   font-size: clamp(29px, 4vw, 38px);
   margin: 0 0 12px;
+  color: #fff;
 }
 
 .bm-page-cta p {
   color: #ddd;
+  font-size: 14px;
 }
 
+/* ESTIMATE FORMS */
 .bm-estimate-form {
   max-width: 760px;
   margin: 25px auto 0;
@@ -300,8 +392,7 @@
   color: #286b9b;
 }
 
-/* CONSISTENT FOOTER BRANDING */
-
+/* FOOTER */
 footer,
 .bm-footer,
 .footer {
@@ -309,6 +400,7 @@ footer,
   padding: 32px 20px;
   background: #202220;
   color: #ddd;
+  font-family: "DM Sans", sans-serif;
   font-size: 13px;
 }
 
@@ -366,240 +458,6 @@ footer small {
 footer small {
   display: block;
   margin-top: 8px;
-}
-
-.menu span {
-  display: block;
-  width: 23px;
-  height: 2px;
-  margin: 5px auto;
-  background: #282925;
-}
-
-/* MOBILE NAVIGATION */
-
-@media (max-width: 760px) {
-  .header nav.bm-main-nav {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background: #fff;
-    padding: 14px 18px;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0;
-    max-height: calc(100vh - 80px);
-    overflow-y: auto;
-    box-shadow: 0 12px 20px rgba(0,0,0,.12);
-  }
-
-  .header nav.bm-main-nav.open {
-    display: flex;
-  }
-
-  .header nav.bm-main-nav > a,
-  .bm-nav-line {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 13px 8px;
-    border-bottom: 1px solid #eee;
-  }
-
-  .bm-nav-line > a {
-    flex: 1;
-  }
-
-  .bm-submenu-toggle {
-    padding: 8px 14px;
-  }
-
-  .bm-dropdown {
-    position: static;
-    min-width: 0;
-    box-shadow: none;
-    border: 0;
-    border-radius: 0;
-    padding: 0 0 8px 14px;
-  }
-
-  .bm-page-hero {
-    padding: 52px 22px;
-  }
-
-  .bm-page-content {
-    padding: 40px 22px;
-  }
-
-  .bm-estimate-form {
-    padding: 20px;
-  }
-
-  .bm-page-links {
-    flex-direction: column;
-  }
-
-  .footer-brand {
-    gap: 9px;
-  }
-
-  .footer-brand img {
-    width: 65px;
-    height: 56px;
-  }
-
-  .footer-brand-name strong {
-    font-size: 23px;
-  }
-
-  .footer-brand-name > span {
-    font-size: 8px;
-    letter-spacing: .14em;
-  }
-}
-
-/* SHARED CONTACT ICONS — ALL PAGES */
-
-.bm-contact-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  text-decoration: none;
-}
-
-.bm-contact-link svg,
-.bm-contact-inline svg {
-  width: 19px;
-  height: 19px;
-  flex: 0 0 19px;
-  fill: none;
-  stroke: #286b9b;
-  stroke-width: 2;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-.bm-contact-link .whatsapp-icon,
-.bm-contact-inline .whatsapp-icon,
-.footer-contact-icons .whatsapp-icon {
-  fill: #25a85a;
-  stroke: #25a85a;
-}
-
-.bm-contact-inline {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 18px;
-}
-
-.bm-contact-inline a {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  color: #245b80;
-  text-decoration: none;
-  font-size: 13px;
-  font-weight: 600;
-}
-
-.bm-contact-inline a:hover {
-  text-decoration: underline;
-}
-
-.footer-contact-icons {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin: 16px auto;
-}
-
-/* OUTLINED FOOTER CONTACT BUTTONS */
-
-.footer-contact-icons a {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 9px;
-  min-height: 42px;
-  padding: 9px 16px;
-  border: 1px solid rgba(220, 230, 235, 0.55);
-  border-radius: 5px;
-  color: #e3e9ed;
-  font-size: 12px;
-  font-weight: 600;
-  text-decoration: none;
-  box-sizing: border-box;
-  transition: background 0.2s ease, border-color 0.2s ease;
-}
-
-.footer-contact-icons a:hover {
-  background: rgba(255, 255, 255, 0.09);
-  border-color: #ffffff;
-  color: #ffffff;
-}
-
-.footer-contact-icons svg,
-.footer-contact-icons img {
-  display: block;
-  width: 19px;
-  height: 19px;
-  flex: 0 0 19px;
-  object-fit: contain;
-}
-
-.footer-contact-icons svg {
-  fill: none;
-  stroke: #8fc1e2;
-  stroke-width: 2;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-@media (max-width: 600px) {
-  .bm-contact-inline {
-    gap: 12px;
-  }
-
-  .footer-contact-icons {
-    gap: 10px;
-  }
-
-  .footer-contact-icons a {
-    min-height: 42px;
-    padding: 9px 14px;
-  }
-}
-
-/* TABLET INFORMATION CARD LAYOUT */
-
-@media (max-width: 900px) {
-  .bm-content-grid,
-  .bm-page-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-/* PHONE INFORMATION CARD LAYOUT */
-
-@media (max-width: 600px) {
-  .bm-content-grid,
-  .bm-page-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* REFINED SHARED FOOTER */
-
-footer.footer {
-  padding: 26px 20px 18px;
-  text-align: center;
-  background: #202220;
-  color: #ddd;
 }
 
 .footer-logo {
@@ -710,19 +568,186 @@ footer.footer {
   line-height: 1.4;
 }
 
-@media (max-width: 600px) {
-  footer.footer {
-    padding: 22px 14px 16px;
+/* CONTACT LINKS AND ICONS */
+.bm-contact-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+}
+
+.bm-contact-link svg,
+.bm-contact-inline svg {
+  width: 19px;
+  height: 19px;
+  flex: 0 0 19px;
+  fill: none;
+  stroke: #286b9b;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.bm-contact-inline {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 18px;
+}
+
+.bm-contact-inline a {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: #245b80;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.bm-contact-inline a:hover {
+  text-decoration: underline;
+}
+
+/* MENU ICON */
+.menu span {
+  display: block;
+  width: 23px;
+  height: 2px;
+  margin: 5px auto;
+  background: #282925;
+}
+
+/* TABLET */
+@media (min-width: 761px) and (max-width: 1100px) {
+  .header .brand {
+    gap: 10px;
   }
 
-  .footer-logo img {
-    width: 185px;
-    height: 74px;
+  .header .brand img {
+    width: 175px;
+    height: 115px;
   }
 
-  .footer-tagline {
-    font-size: 12px;
-    margin-bottom: 12px;
+  .header .brand-name strong {
+    font-size: 34px;
+  }
+
+  .header .brand-name > span {
+    font-size: 14px;
+  }
+
+  .header nav.bm-main-nav {
+    gap: 9px;
+  }
+
+  .header nav.bm-main-nav > a {
+    font-size: 11px;
+  }
+}
+
+/* MOBILE NAVIGATION */
+@media (max-width: 760px) {
+  .header .brand {
+    gap: 8px;
+  }
+
+  .header .brand img {
+    width: 140px;
+    height: 92px;
+  }
+
+  .header .brand-name strong {
+    font-size: 25px;
+  }
+
+  .header .brand-name > span {
+    font-size: 10px;
+    letter-spacing: .12em;
+  }
+
+  .header nav.bm-main-nav {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: #fff;
+    padding: 14px 18px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    max-height: calc(100vh - 80px);
+    overflow-y: auto;
+    box-shadow: 0 12px 20px rgba(0,0,0,.12);
+  }
+
+  .header nav.bm-main-nav.open {
+    display: flex;
+  }
+
+  .header nav.bm-main-nav > a,
+  .bm-nav-line {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 13px 8px;
+    border-bottom: 1px solid #eee;
+  }
+
+  .bm-nav-line > a {
+    flex: 1;
+  }
+
+  .bm-submenu-toggle {
+    padding: 8px 14px;
+  }
+
+  .bm-dropdown {
+    position: static;
+    min-width: 0;
+    box-shadow: none;
+    border: 0;
+    border-radius: 0;
+    padding: 0 0 8px 14px;
+  }
+
+  .bm-page-hero {
+    padding: 52px 22px;
+  }
+
+  .bm-page-content {
+    padding: 40px 22px;
+  }
+
+  .bm-estimate-form {
+    padding: 20px;
+  }
+
+  .bm-page-links {
+    flex-direction: column;
+  }
+
+  .footer-brand {
+    gap: 9px;
+  }
+
+  .footer-brand img {
+    width: 65px;
+    height: 56px;
+  }
+
+  .footer-brand-name strong {
+    font-size: 23px;
+  }
+
+  .footer-brand-name > span {
+    font-size: 8px;
+    letter-spacing: .14em;
+  }
+
+  .bm-contact-inline {
+    gap: 12px;
   }
 
   .footer-contact-icons {
@@ -742,5 +767,56 @@ footer.footer {
 
   .footer-spanish-link strong {
     font-size: 12px;
+  }
+
+  footer.footer {
+    padding: 22px 14px 16px;
+  }
+
+  .footer-logo img {
+    width: 185px;
+    height: 74px;
+  }
+
+  .footer-tagline {
+    font-size: 12px;
+    margin-bottom: 12px;
+  }
+}
+
+/* TABLET INFORMATION CARD LAYOUT */
+@media (max-width: 900px) {
+  .bm-content-grid,
+  .bm-page-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* PHONE INFORMATION CARD LAYOUT */
+@media (max-width: 600px) {
+  .bm-content-grid,
+  .bm-page-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* SMALL LANDSCAPE SCREENS */
+@media (orientation: landscape) and (max-height: 550px) {
+  .header .brand {
+    gap: 8px;
+  }
+
+  .header .brand img {
+    width: 125px;
+    height: 80px;
+  }
+
+  .header .brand-name strong {
+    font-size: 24px;
+  }
+
+  .header .brand-name > span {
+    font-size: 10px;
+    letter-spacing: .12em;
   }
 }
