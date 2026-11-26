@@ -5,10 +5,62 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Learn about Bull Moose Climate Systems LLC, residential heat pump installation and service in Maine.">
   <title>About Us | Bull Moose Climate Systems</title>
+
   <link rel="stylesheet" href="/styles.css">
   <link rel="stylesheet" href="/navigation.css">
   <link rel="stylesheet" href="/page-heroes.css">
+
+  <style>
+    /* Spanish service buttons */
+    .bm-spanish-note .bm-action,
+    .bm-page-links a[href="/espanol.html"] {
+      display: inline-block;
+      background: #f6f2e9 !important;
+      color: #245b80 !important;
+      border: 1px solid #d8d1c5;
+      border-radius: 5px;
+      padding: 13px 24px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background .2s ease, border-color .2s ease;
+    }
+
+    .bm-spanish-note .bm-action:hover,
+    .bm-page-links a[href="/espanol.html"]:hover {
+      background: #ebe5d9 !important;
+      border-color: #bdb3a3;
+      text-decoration: none;
+    }
+
+    /* Consistent About page contact text */
+    .bm-about-contact p {
+      font-size: 16px !important;
+      line-height: 1.8;
+      color: #69665f;
+      margin: 12px 0;
+    }
+
+    .bm-about-contact strong {
+      font-size: 16px !important;
+      font-weight: 700;
+      color: #282925;
+    }
+
+    .bm-about-contact a:not(.bm-action) {
+      font-size: 16px !important;
+      font-weight: 600;
+      color: #245b80;
+      text-decoration: none;
+      overflow-wrap: anywhere;
+    }
+
+    .bm-about-contact a:not(.bm-action):hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
+
 <body>
 
 <header class="header">
@@ -17,7 +69,9 @@
   </a>
 
   <button class="menu" type="button" aria-label="Open navigation menu">
-    <span></span><span></span><span></span>
+    <span></span>
+    <span></span>
+    <span></span>
   </button>
 
   <nav aria-label="Main navigation"></nav>
@@ -113,10 +167,12 @@
   <section class="bm-page-content">
     <div class="bm-page-intro bm-spanish-note">
       <h2>¿Habla español?</h2>
+
       <p>
         También ofrecemos atención completamente en español.
         Será un placer ayudarle con sus preguntas y su proyecto.
       </p>
+
       <a class="bm-action" href="/espanol.html">
         Servicios en español
       </a>
@@ -124,7 +180,7 @@
   </section>
 
   <section class="bm-page-content">
-    <div class="bm-page-intro">
+    <div class="bm-page-intro bm-about-contact">
       <h2>Contact Bull Moose Climate Systems</h2>
 
       <p>
@@ -157,8 +213,13 @@
       </p>
 
       <div class="bm-page-links">
-        <a class="bm-action" href="/contact.html">Request an Estimate</a>
-        <a class="bm-action" href="/espanol.html">Servicios en español</a>
+        <a class="bm-action" href="/contact.html">
+          Request an Estimate
+        </a>
+
+        <a class="bm-action" href="/espanol.html">
+          Servicios en español
+        </a>
       </div>
     </div>
   </section>
@@ -168,6 +229,7 @@
 <footer class="footer"></footer>
 
 <script src="/navigation.js"></script>
+
 <script>
   const menuButton = document.querySelector(".menu");
   const nav = document.querySelector(".header nav");
@@ -175,6 +237,7 @@
   if (menuButton && nav) {
     menuButton.addEventListener("click", () => {
       nav.classList.toggle("open");
+
       menuButton.setAttribute(
         "aria-expanded",
         String(nav.classList.contains("open"))
