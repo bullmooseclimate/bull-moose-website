@@ -1,4 +1,3 @@
-
 .header {
   position: relative;
   z-index: 100;
@@ -591,5 +590,157 @@ footer small {
   .bm-content-grid,
   .bm-page-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+/* REFINED SHARED FOOTER */
+
+footer.footer {
+  padding: 26px 20px 18px;
+  text-align: center;
+  background: #202220;
+  color: #ddd;
+}
+
+.footer-logo {
+  display: inline-block;
+  margin: 0 auto 8px;
+  line-height: 0;
+}
+
+.footer-logo img {
+  display: block;
+  width: 220px;
+  max-width: 78vw;
+  height: 86px;
+  object-fit: contain;
+  margin: 0 auto;
+  background: transparent;
+}
+
+.footer-tagline {
+  margin: 0 0 15px;
+  color: #d1d1cb;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.footer-contact-icons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 0 auto 13px;
+}
+
+.footer-contact-icons a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  min-height: 42px;
+  padding: 9px 15px;
+  border: 1px solid rgba(220, 230, 235, 0.55);
+  border-radius: 5px;
+  color: #e3e9ed;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+
+.footer-contact-icons a:hover {
+  background: rgba(255, 255, 255, 0.09);
+  border-color: #fff;
+  color: #fff;
+}
+
+.footer-contact-icons svg,
+.footer-contact-icons img {
+  display: block;
+  width: 19px;
+  height: 19px;
+  flex: 0 0 19px;
+  object-fit: contain;
+}
+
+.footer-contact-icons svg {
+  fill: none;
+  stroke: #8fc1e2;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.footer-spanish-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  margin: 2px auto 12px;
+  padding: 9px 15px;
+  max-width: 90%;
+  border: 1px solid #4c8db8;
+  border-radius: 5px;
+  background: #286b9b;
+  color: #fff !important;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.3;
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+
+.footer-spanish-link strong {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.footer-spanish-link:hover {
+  background: #1e557d;
+  text-decoration: none;
+}
+
+.footer-copyright {
+  display: block;
+  margin-top: 2px;
+  color: #aaa;
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+@media (max-width: 600px) {
+  footer.footer {
+    padding: 22px 14px 16px;
+  }
+
+  .footer-logo img {
+    width: 185px;
+    height: 74px;
+  }
+
+  .footer-tagline {
+    font-size: 12px;
+    margin-bottom: 12px;
+  }
+
+  .footer-contact-icons {
+    gap: 9px;
+  }
+
+  .footer-contact-icons a {
+    min-height: 39px;
+    padding: 8px 11px;
+    font-size: 12px;
+  }
+
+  .footer-spanish-link {
+    padding: 8px 12px;
+    font-size: 11px;
+  }
+
+  .footer-spanish-link strong {
+    font-size: 12px;
   }
 }
