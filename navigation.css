@@ -860,3 +860,14 @@ footer small {
   border-color: #fff;
   color: #fff !important;
 }
+/* Keep blue action buttons readable */
+.bm-page-links a.bm-action {
+  background: #245b80;
+  color: #fff !important;
+  border: 1px solid #245b80;
+}
+
+.bm-page-links a.bm-action:hover {
+  background: #183f5b;
+  color: #fff !important;
+}
